@@ -14,7 +14,9 @@
     },
     "dependencies": {
         "@vueuse/core": "^13.6.0",
+        "@vueuse/integrations": "^13.6.0",
         "axios": "^1.11.0",
+        "bcrypt": "^6.0.0",
         "i": "^0.3.7",
         "npm": "^11.4.2",
         "pinia": "^3.0.3",

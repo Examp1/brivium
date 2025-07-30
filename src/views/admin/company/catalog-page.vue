@@ -3,34 +3,20 @@ import saveSidebar from "@/components/sidebar/save-sidebar.vue";
 import { useFetch } from "@/composables/useFetch";
 import { APP_ENUM } from "@/enums/app_enums";
 import { useAuthStore } from "@/store/auth-store";
+import { useCompanyInfoStore } from "@/store/company-info-store";
 import { storeToRefs } from "pinia";
 import { onMounted, ref } from "vue";
+const companyInfoStore = useCompanyInfoStore();
 const userStore = useAuthStore();
 const { accessToken } = storeToRefs(userStore);
+const { companyCatalogInfo, selectedIds } = storeToRefs(companyInfoStore);
 
 const catalog = ref(null);
-const selectedIds = ref<number[]>([]);
-
-function save() {
-    useFetch(`${APP_ENUM.BASE_API_URL}/api/profile/company/catalog/update`, {
-        method: "POST",
-        headers: {
-            Authorization: `Bearer ${accessToken.value}`,
-        },
-        data: selectedIds.value,
-    });
-}
-
-const setId = (id: number) => {
-    if (selectedIds.value.includes(id)) {
-        const elIndex = selectedIds.value.indexOf(id);
-        selectedIds.value.splice(elIndex, 1);
-    } else {
-        selectedIds.value.push(id);
-    }
-};
 
 onMounted(async () => {
+    if (!companyCatalogInfo.value) {
+        companyInfoStore.fetchCompanyCatalogSelectedInfo();
+    }
     const { data } = await useFetch(
         `${APP_ENUM.BASE_API_URL}/api/catalog/group-list`,
         {
@@ -68,7 +54,14 @@ onMounted(async () => {
                                     :key="child.id"
                                 >
                                     <v-checkbox
-                                        @input="setId(child.id)"
+                                        @input="
+                                            companyInfoStore.setCatalogIds(
+                                                child.id,
+                                            )
+                                        "
+                                        :model-value="
+                                            selectedIds.includes(child.id)
+                                        "
                                         :label="child.name"
                                     ></v-checkbox>
                                 </v-list-item>
@@ -77,9 +70,8 @@ onMounted(async () => {
                     </v-expansion-panel>
                 </v-expansion-panels>
             </v-col>
-
             <v-col cols="2">
-                <saveSidebar @save="save" />
+                <saveSidebar @save="companyInfoStore.updateCompanyInfo" />
             </v-col>
         </v-row>
     </v-container>

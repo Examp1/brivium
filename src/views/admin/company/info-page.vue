@@ -1,24 +1,12 @@
 <script setup lang="ts">
-import { useFetch } from "@/composables/useFetch";
-import { APP_ENUM } from "@/enums/app_enums";
-import { useAuthStore } from "@/store/auth-store";
+import { onMounted } from "vue";
+import { useCompanyInfoStore } from "@/store/company-info-store";
 import { storeToRefs } from "pinia";
-import { onMounted, ref } from "vue";
-const companyInfo = ref(null);
-const userStore = useAuthStore();
-const { accessToken } = storeToRefs(userStore);
+const companyInfoStore = useCompanyInfoStore();
+const { companyInfo } = storeToRefs(companyInfoStore);
 
 onMounted(async () => {
-    const { data } = await useFetch(
-        `${APP_ENUM.BASE_API_URL}/api/profile/company`,
-        {
-            method: "POST",
-            headers: {
-                Authorization: `Bearer ${accessToken.value}`,
-            },
-        },
-    );
-    companyInfo.value = data.value;
+    companyInfoStore.fetchCompanyInfo();
 });
 </script>
 
