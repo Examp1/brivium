@@ -16,7 +16,12 @@ export default defineConfig({
                 enabled: true,
             },
             dts: "./auto-imports.d.ts",
-            dirs: ["./src/store/*", "./src/enums", "./src/interfaces"],
+            dirs: [
+                "./src/store/**",
+                "./src/enums",
+                "./src/interfaces",
+                "./src/utils",
+            ],
             vueTemplate: true,
             imports: [
                 "vue-router",

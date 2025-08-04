@@ -24,12 +24,11 @@ const menu = ref([
 </script>
 
 <template>
-    {{ companyInfo }}
     <v-app>
         <v-navigation-drawer rail expand-on-hover permanent>
             <v-list>
                 <v-list-item
-                    :prepend-avatar="companyInfo?.avatar"
+                    :prepend-avatar="getPath(companyInfo?.avatar)"
                     :title="companyInfo?.name"
                 >
                 </v-list-item>

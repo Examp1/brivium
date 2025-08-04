@@ -1,19 +1,16 @@
 <script setup lang="ts">
 import { BASE_URL } from "@/utils/constants";
 import { ref } from "vue";
-import { storeToRefs } from "pinia";
-import { useAuthStore } from "@/store/auth-store";
-import { useRouter } from "vue-router";
 import { useFetch } from "@/composables/useFetch";
+import { useCookies } from "@vueuse/integrations/useCookies";
+
 const router = useRouter();
+const cookies = useCookies(["accessToken"]);
 
 const loginInputs = ref({
     login: "budcraft@gmail.com",
     password: "00000000",
 });
-
-const userStore = useAuthStore();
-const { accessToken } = storeToRefs(userStore);
 
 const signIn = async () => {
     const { data, error } = await useFetch(
@@ -40,14 +37,13 @@ const checkToken = async (token: string) => {
             one_time_token: token,
         },
     });
-    console.log(data);
-    accessToken.value = data?.value?.token;
+
+    cookies.set("accessToken", data?.value?.token);
     router.push("/company/info");
 };
 </script>
 
 <template>
-    {{ accessToken }}
     <v-sheet class="mx-auto" width="300">
         <v-form fast-fail @submit.prevent="signIn">
             <v-text-field

@@ -8,9 +8,10 @@ import { useCookies } from "@vueuse/integrations/useCookies";
 
 export const useAuthStore = defineStore("auth-store", () => {
     const cookies = useCookies(["accessToken"]);
-    const accessToken = ref(null);
+    const accessToken = ref(cookies.get("accessToken") || null);
 
     watch(accessToken, (newVal, oldVal) => {
+        console.log(accessToken);
         if (newVal !== oldVal) {
             cookies.set("accessToken", newVal);
         }

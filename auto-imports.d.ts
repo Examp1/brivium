@@ -7,12 +7,15 @@
 export {}
 declare global {
   const APP_ENUM: typeof import('./src/enums/app_enums')['APP_ENUM']
-  const ERequestMethods: typeof import('./src/enums/request-method')['ERequestMethods']
+  const BASE_URL: typeof import('./src/utils/constants')['BASE_URL']
+  const EMediaPath: typeof import('./src/enums/EMediaPath')['EMediaPath']
+  const ERequestMethods: typeof import('./src/enums/ERequestMethod')['ERequestMethods']
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
   const computed: typeof import('vue')['computed']
   const createPinia: typeof import('pinia')['createPinia']
   const defineStore: typeof import('pinia')['defineStore']
   const getActivePinia: typeof import('pinia')['getActivePinia']
+  const getPath: typeof import('./src/utils/getPath')['getPath']
   const mapActions: typeof import('pinia')['mapActions']
   const mapGetters: typeof import('pinia')['mapGetters']
   const mapState: typeof import('pinia')['mapState']
@@ -24,8 +27,9 @@ declare global {
   const setActivePinia: typeof import('pinia')['setActivePinia']
   const setMapStoreSuffix: typeof import('pinia')['setMapStoreSuffix']
   const storeToRefs: typeof import('pinia')['storeToRefs']
-  const useAuthStore: typeof import('./src/store/auth-store')['useAuthStore']
-  const useCompanyInfoStore: typeof import('./src/store/company-info-store')['useCompanyInfoStore']
+  const useAuthStore: typeof import('./src/store/auth/auth-store')['useAuthStore']
+  const useCompanyCatalogStore: typeof import('./src/store/company/company-catalog-store')['useCompanyCatalogStore']
+  const useCompanyInfoStore: typeof import('./src/store/company/company-info-store')['useCompanyInfoStore']
   const useLink: typeof import('vue-router')['useLink']
   const useRoute: typeof import('vue-router')['useRoute']
   const useRouter: typeof import('vue-router')['useRouter']
@@ -33,11 +37,14 @@ declare global {
 // for type re-export
 declare global {
   // @ts-ignore
+  export type { EMediaPath } from './src/enums/EMediaPath'
+  import('./src/enums/EMediaPath')
+  // @ts-ignore
+  export type { ERequestMethods } from './src/enums/ERequestMethod'
+  import('./src/enums/ERequestMethod')
+  // @ts-ignore
   export type { APP_ENUM } from './src/enums/app_enums'
   import('./src/enums/app_enums')
-  // @ts-ignore
-  export type { ERequestMethods } from './src/enums/request-method'
-  import('./src/enums/request-method')
   // @ts-ignore
   export type { IRequest } from './src/interfaces/IRequest'
   import('./src/interfaces/IRequest')
@@ -49,12 +56,15 @@ declare module 'vue' {
   interface GlobalComponents {}
   interface ComponentCustomProperties {
     readonly APP_ENUM: UnwrapRef<typeof import('./src/enums/app_enums')['APP_ENUM']>
-    readonly ERequestMethods: UnwrapRef<typeof import('./src/enums/request-method')['ERequestMethods']>
+    readonly BASE_URL: UnwrapRef<typeof import('./src/utils/constants')['BASE_URL']>
+    readonly EMediaPath: UnwrapRef<typeof import('./src/enums/EMediaPath')['EMediaPath']>
+    readonly ERequestMethods: UnwrapRef<typeof import('./src/enums/ERequestMethod')['ERequestMethods']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly createPinia: UnwrapRef<typeof import('pinia')['createPinia']>
     readonly defineStore: UnwrapRef<typeof import('pinia')['defineStore']>
     readonly getActivePinia: UnwrapRef<typeof import('pinia')['getActivePinia']>
+    readonly getPath: UnwrapRef<typeof import('./src/utils/getPath')['getPath']>
     readonly mapActions: UnwrapRef<typeof import('pinia')['mapActions']>
     readonly mapGetters: UnwrapRef<typeof import('pinia')['mapGetters']>
     readonly mapState: UnwrapRef<typeof import('pinia')['mapState']>
@@ -66,8 +76,9 @@ declare module 'vue' {
     readonly setActivePinia: UnwrapRef<typeof import('pinia')['setActivePinia']>
     readonly setMapStoreSuffix: UnwrapRef<typeof import('pinia')['setMapStoreSuffix']>
     readonly storeToRefs: UnwrapRef<typeof import('pinia')['storeToRefs']>
-    readonly useAuthStore: UnwrapRef<typeof import('./src/store/auth-store')['useAuthStore']>
-    readonly useCompanyInfoStore: UnwrapRef<typeof import('./src/store/company-info-store')['useCompanyInfoStore']>
+    readonly useAuthStore: UnwrapRef<typeof import('./src/store/auth/auth-store')['useAuthStore']>
+    readonly useCompanyCatalogStore: UnwrapRef<typeof import('./src/store/company/company-catalog-store')['useCompanyCatalogStore']>
+    readonly useCompanyInfoStore: UnwrapRef<typeof import('./src/store/company/company-info-store')['useCompanyInfoStore']>
     readonly useLink: UnwrapRef<typeof import('vue-router')['useLink']>
     readonly useRoute: UnwrapRef<typeof import('vue-router')['useRoute']>
     readonly useRouter: UnwrapRef<typeof import('vue-router')['useRouter']>
