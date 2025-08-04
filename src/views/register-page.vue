@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { BASE_URL } from "@/utils/constants";
-import { EMethods } from "@/types/type";
 import { ref } from "vue";
 import { showError } from "@/composables/toast-notification";
 
@@ -17,7 +16,7 @@ const signupInputs = ref({
 
 const signUp = () => {
     fetch(`${BASE_URL}/api/auth/company/register`, {
-        method: EMethods.POST,
+        method: ERequestMethods.POST,
         headers: {
             "Content-type": "application/json",
         },

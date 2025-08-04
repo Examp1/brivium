@@ -15,7 +15,7 @@ export const useCompanyInfoStore = defineStore("company-info-store", () => {
         const { data } = await useFetch(
             `${APP_ENUM.BASE_API_URL}/api/profile/company/catalog/get-ids`,
             {
-                method: "POST",
+                method: ERequestMethods.POST,
                 headers: {
                     Authorization: `Bearer ${cookies.get("accessToken")}`,
                 },
@@ -29,7 +29,7 @@ export const useCompanyInfoStore = defineStore("company-info-store", () => {
         useFetch(
             `${APP_ENUM.BASE_API_URL}/api/profile/company/catalog/update`,
             {
-                method: "POST",
+                method: ERequestMethods.POST,
                 headers: {
                     Authorization: `Bearer ${cookies.get("accessToken")}`,
                 },
@@ -43,7 +43,7 @@ export const useCompanyInfoStore = defineStore("company-info-store", () => {
         const { data } = await useFetch(
             `${APP_ENUM.BASE_API_URL}/api/profile/company`,
             {
-                method: "POST",
+                method: ERequestMethods.POST,
                 headers: {
                     Authorization: `Bearer ${cookies.get("accessToken")}`,
                 },

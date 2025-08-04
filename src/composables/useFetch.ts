@@ -1,7 +1,7 @@
 import axios, { type AxiosResponse } from "axios";
 import { computed, ref } from "vue";
 import { showError, successMsg } from "@/composables/toast-notification";
-export const useFetch = async (url: string, config = {}) => {
+export const useFetch = async (url: string, config: IRequest) => {
     const data = ref(null);
     const response = ref<AxiosResponse>();
     const error = ref<unknown>(null);

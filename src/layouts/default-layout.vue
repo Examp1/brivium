@@ -1,11 +1,8 @@
 <script setup lang="ts">
-import { useAuthStore } from "@/store/auth-store";
-import { ref } from "vue";
 const userStore = useAuthStore();
+const companyInfoStore = useCompanyInfoStore();
 const { logout } = userStore;
-
-const drawer = ref(true);
-const rail = ref(false);
+const { companyInfo } = storeToRefs(companyInfoStore);
 
 const menu = ref([
     {
@@ -27,12 +24,13 @@ const menu = ref([
 </script>
 
 <template>
+    {{ companyInfo }}
     <v-app>
         <v-navigation-drawer rail expand-on-hover permanent>
             <v-list>
                 <v-list-item
-                    prepend-avatar="https://randomuser.me/api/portraits/men/85.jpg"
-                    title="Admin"
+                    :prepend-avatar="companyInfo?.avatar"
+                    :title="companyInfo?.name"
                 >
                 </v-list-item>
             </v-list>

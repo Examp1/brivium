@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { BASE_URL } from "@/utils/constants";
-import { EMethods } from "@/types/type";
 import { ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useAuthStore } from "@/store/auth-store";
@@ -20,7 +19,7 @@ const signIn = async () => {
     const { data, error } = await useFetch(
         `${BASE_URL}/api/auth/company/login`,
         {
-            method: EMethods.POST,
+            method: ERequestMethods.POST,
             headers: {
                 "Content-type": "application/json",
             },
@@ -33,7 +32,7 @@ const signIn = async () => {
 };
 const checkToken = async (token: string) => {
     const { data } = await useFetch(`${BASE_URL}/api/auth/company/get-token`, {
-        method: EMethods.POST,
+        method: ERequestMethods.POST,
         headers: {
             "Content-type": "application/json",
         },

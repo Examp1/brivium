@@ -1,11 +1,7 @@
 <script setup lang="ts">
 import saveSidebar from "@/components/sidebar/save-sidebar.vue";
 import { useFetch } from "@/composables/useFetch";
-import { APP_ENUM } from "@/enums/app_enums";
-import { useAuthStore } from "@/store/auth-store";
-import { useCompanyInfoStore } from "@/store/company-info-store";
-import { storeToRefs } from "pinia";
-import { onMounted, ref } from "vue";
+import { onMounted } from "vue";
 const companyInfoStore = useCompanyInfoStore();
 const userStore = useAuthStore();
 const { accessToken } = storeToRefs(userStore);
@@ -20,7 +16,7 @@ onMounted(async () => {
     const { data } = await useFetch(
         `${APP_ENUM.BASE_API_URL}/api/catalog/group-list`,
         {
-            method: "POST",
+            method: ERequestMethods.POST,
             headers: {
                 Authorization: `Bearer ${accessToken.value}`,
             },
@@ -31,8 +27,6 @@ onMounted(async () => {
     );
     catalog.value = data.value;
 });
-// при селекте api/profile/company/catalog/update
-// для подсветки айдишек api/profile/company/catalog/get-ids
 </script>
 
 <template>
