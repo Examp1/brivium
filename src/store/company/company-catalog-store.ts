@@ -7,11 +7,14 @@ import { useFetch } from "@/composables/useFetch";
 export const useCompanyCatalogStore = defineStore(
     "company-catalog-store",
     () => {
-        const cookies = useCookies(["accessToken", "selectedIds"]);
+        const authStore = useAuthStore();
+        const { accessToken } = storeToRefs(authStore);
 
-        const companyCatalogInfo = ref(null);
-
-        const selectedIds = ref<number[]>([]);
+        const cookies = useCookies(["compnaySelectedIds"]);
+        const compnaySelectedIds = ref<number[]>(
+            cookies.get("selectedIds") || [],
+        );
+        const companyCatalog = ref(null);
 
         async function fetchCompanyCatalogSelectedInfo() {
             const { data } = await useFetch(
@@ -19,46 +22,65 @@ export const useCompanyCatalogStore = defineStore(
                 {
                     method: ERequestMethods.POST,
                     headers: {
-                        Authorization: `Bearer ${cookies.get("accessToken")}`,
+                        Authorization: `Bearer ${accessToken.value}`,
                     },
                 },
             );
-            console.log(data.value);
-            companyCatalogInfo.value = data.value;
+            compnaySelectedIds.value = data.value.ids;
         }
 
-        function updateCompanyInfo() {
-            useFetch(
+        async function updateCompanyCatalogInfo() {
+            await useFetch(
                 `${APP_ENUM.BASE_API_URL}/api/profile/company/catalog/update`,
                 {
                     method: ERequestMethods.POST,
                     headers: {
-                        Authorization: `Bearer ${cookies.get("accessToken")}`,
+                        Authorization: `Bearer ${accessToken.value}`,
                     },
                     data: {
-                        catalog_ids: selectedIds.value,
+                        catalog_ids: compnaySelectedIds.value,
                     },
                 },
             );
-            fetchCompanyCatalogSelectedInfo();
+            await fetchCompanyCatalogSelectedInfo();
         }
 
         function setCatalogIds(id: number) {
-            if (selectedIds.value.includes(id)) {
-                const elIndex = selectedIds.value.indexOf(id);
-                selectedIds.value.splice(elIndex, 1);
+            if (compnaySelectedIds.value.includes(id)) {
+                const elIndex = compnaySelectedIds.value.indexOf(id);
+                compnaySelectedIds.value.splice(elIndex, 1);
             } else {
-                selectedIds.value.push(id);
+                compnaySelectedIds.value.push(id);
             }
-            cookies.set("selectedIds", selectedIds.value);
+            cookies.set("compnaySelectedIds", compnaySelectedIds.value);
+        }
+
+        async function fetchCompanyCatalog() {
+            if (!compnaySelectedIds.value) {
+                fetchCompanyCatalogSelectedInfo();
+            }
+            const { data } = await useFetch(
+                `${APP_ENUM.BASE_API_URL}/api/catalog/group-list`,
+                {
+                    method: ERequestMethods.POST,
+                    headers: {
+                        Authorization: `Bearer ${accessToken.value}`,
+                    },
+                    data: {
+                        lang: "uk",
+                    },
+                },
+            );
+            companyCatalog.value = data.value;
         }
 
         return {
-            selectedIds,
-            companyCatalogInfo,
+            companyCatalog,
+            compnaySelectedIds,
             fetchCompanyCatalogSelectedInfo,
-            updateCompanyInfo,
+            updateCompanyCatalogInfo,
             setCatalogIds,
+            fetchCompanyCatalog,
         };
     },
 );

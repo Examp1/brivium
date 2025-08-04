@@ -25,6 +25,7 @@
     "useAuthStore": true,
     "useCompanyCatalogStore": true,
     "useCompanyInfoStore": true,
+    "useCompanyPricesStore": true,
     "useLink": true,
     "useRoute": true,
     "useRouter": true

@@ -30,6 +30,7 @@ declare global {
   const useAuthStore: typeof import('./src/store/auth/auth-store')['useAuthStore']
   const useCompanyCatalogStore: typeof import('./src/store/company/company-catalog-store')['useCompanyCatalogStore']
   const useCompanyInfoStore: typeof import('./src/store/company/company-info-store')['useCompanyInfoStore']
+  const useCompanyPricesStore: typeof import('./src/store/company/company-prices-store')['useCompanyPricesStore']
   const useLink: typeof import('vue-router')['useLink']
   const useRoute: typeof import('vue-router')['useRoute']
   const useRouter: typeof import('vue-router')['useRouter']
@@ -79,6 +80,7 @@ declare module 'vue' {
     readonly useAuthStore: UnwrapRef<typeof import('./src/store/auth/auth-store')['useAuthStore']>
     readonly useCompanyCatalogStore: UnwrapRef<typeof import('./src/store/company/company-catalog-store')['useCompanyCatalogStore']>
     readonly useCompanyInfoStore: UnwrapRef<typeof import('./src/store/company/company-info-store')['useCompanyInfoStore']>
+    readonly useCompanyPricesStore: UnwrapRef<typeof import('./src/store/company/company-prices-store')['useCompanyPricesStore']>
     readonly useLink: UnwrapRef<typeof import('vue-router')['useLink']>
     readonly useRoute: UnwrapRef<typeof import('vue-router')['useRoute']>
     readonly useRouter: UnwrapRef<typeof import('vue-router')['useRouter']>
