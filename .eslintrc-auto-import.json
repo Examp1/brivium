@@ -5,6 +5,7 @@
     "EMediaPath": true,
     "ERequestMethods": true,
     "IRequest": true,
+    "_debounce": true,
     "acceptHMRUpdate": true,
     "computed": true,
     "createPinia": true,

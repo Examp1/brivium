@@ -10,6 +10,7 @@ declare global {
   const BASE_URL: typeof import('./src/utils/constants')['BASE_URL']
   const EMediaPath: typeof import('./src/enums/EMediaPath')['EMediaPath']
   const ERequestMethods: typeof import('./src/enums/ERequestMethod')['ERequestMethods']
+  const _debounce: typeof import('./src/utils/_debounce')['_debounce']
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
   const computed: typeof import('vue')['computed']
   const createPinia: typeof import('pinia')['createPinia']
@@ -60,6 +61,7 @@ declare module 'vue' {
     readonly BASE_URL: UnwrapRef<typeof import('./src/utils/constants')['BASE_URL']>
     readonly EMediaPath: UnwrapRef<typeof import('./src/enums/EMediaPath')['EMediaPath']>
     readonly ERequestMethods: UnwrapRef<typeof import('./src/enums/ERequestMethod')['ERequestMethods']>
+    readonly _debounce: UnwrapRef<typeof import('./src/utils/_debounce')['_debounce']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly createPinia: UnwrapRef<typeof import('pinia')['createPinia']>

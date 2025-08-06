@@ -1,0 +1,290 @@
+@use "../../mixinsAndVariables/mixins.scss" as *;
+@use "../../mixinsAndVariables/breakpoints.scss" as *;
+// displays
+// h1
+body {
+    font-family: "SFProDisplay", serif;
+}
+.page-title {
+    @include set-typography(
+        var(--typography-display-font-size-h1-md),
+        400,
+        var(--text-default),
+        120%
+    );
+    &.lg {
+        font-size: var(--typography-display-font-size-h1-lg);
+    }
+    &.sm {
+        font-size: var(--typography-display-font-size-h1-sm);
+    }
+}
+// h2
+.section-title {
+    @include set-typography(
+        var(--typography-display-font-size-h2-md),
+        400,
+        var(--text-default),
+        120%
+    );
+    padding-bottom: var(--block-title-padding-y-md);
+    &.lg {
+        font-size: var(--typography-display-font-size-h2-lg);
+        padding-bottom: var(--block-title-padding-y-lg);
+    }
+    &.sm {
+        font-size: var(--typography-display-font-size-h2-sm);
+        padding-bottom: var(--block-title-padding-y-sm);
+    }
+}
+.block-title {
+    color: var(--text-default);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+    &.xxxxl {
+        font-size: var(--typography-title-font-size-xxxxl);
+    }
+    &.xxxl {
+        font-size: var(--typography-title-font-size-xxxl);
+    }
+    &.xxl {
+        font-size: var(--typography-title-font-size-xxl);
+    }
+    &.xl {
+        font-size: var(--typography-title-font-size-xl);
+    }
+    &.lg {
+        font-size: var(--typography-title-font-size-lg);
+    }
+    &.md {
+        font-size: var(--typography-title-font-size-md);
+    }
+    &.sm {
+        font-size: var(--typography-title-font-size-sm);
+    }
+    &.sm-m {
+        font-size: var(--typography-title-font-size-sm-m);
+    }
+    &.lg-md {
+        font-size: var(--typography-title-font-size-lg);
+        @include bp-576 {
+            font-size: var(--typography-title-font-size-md);
+        }
+    }
+    &.sm-md {
+        font-size: var(--typography-title-font-size-sm);
+        @include bp-576 {
+            font-size: var(--typography-title-font-size-md);
+        }
+    }
+}
+.block-text {
+    color: var(--text-default);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    &.xl {
+        font-size: var(--typography-body-font-size-xl);
+    }
+    &.lg {
+        font-size: var(--typography-body-font-size-lg);
+    }
+    &.md {
+        font-size: var(--typography-body-font-size-md);
+    }
+    &.sm {
+        font-size: var(--typography-body-font-size-sm);
+    }
+    &.sm-m {
+        font-size: var(--typography-body-font-size-sm-m);
+    }
+}
+.nav-link {
+    color: var(--nav-link-label-default-light);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    &.xl {
+        font-size: var(--typography-nav-font-size-xl);
+        padding: var(--nav-link-padding-xl);
+    }
+    &.lg {
+        font-size: var(--typography-nav-font-size-lg);
+        padding: var(--nav-link-padding-lg);
+    }
+    &.md {
+        font-size: var(--typography-nav-font-size-md);
+        padding: var(--nav-link-padding-md);
+    }
+    &.sm {
+        font-size: var(--typography-nav-font-size-sm);
+        padding: var(--nav-link-padding-sm);
+    }
+    &.lg-sm {
+        font-size: var(--typography-nav-font-size-lg);
+        padding: var(--nav-link-padding-lg);
+
+        @include bp-576 {
+            font-size: var(--typography-nav-font-size-sm);
+            padding: var(--nav-link-padding-sm);
+        }
+    }
+}
+// text-editor
+.redactor {
+    img {
+        width: 100% !important;
+        max-width: 100%;
+        overflow: hidden;
+    }
+    // titles
+    h1 {
+        @include set-typography(
+            var(--typography-heading-font-size-h1),
+            400,
+            var(--text-default),
+            120%
+        );
+    }
+    h2 {
+        @include set-typography(
+            var(--typography-heading-font-size-h2),
+            400,
+            var(--text-default),
+            120%
+        );
+    }
+    h3 {
+        @include set-typography(
+            var(--typography-heading-font-size-h3),
+            400,
+            var(--text-default),
+            120%
+        );
+    }
+    h4 {
+        @include set-typography(
+            var(--typography-heading-font-size-h4),
+            400,
+            var(--text-default),
+            120%
+        );
+    }
+    h5 {
+        @include set-typography(
+            var(--typography-heading-font-size-h5),
+            400,
+            var(--text-default),
+            120%
+        );
+    }
+    h6 {
+        @include set-typography(
+            var(--typography-heading-font-size-h6),
+            400,
+            var(--text-default),
+            120%
+        );
+    }
+    // padding for all elements
+    *:not(ol, ul, b, i, strong, li, div) {
+        padding-top: var(--text-editor-body-padding-y-md);
+        margin-bottom: 0;
+    }
+    // global values for default text tags
+    *:first-child {
+        padding-top: 0;
+        margin-top: 0;
+    }
+    p,
+    p > span,
+    li {
+        font-weight: 400;
+        line-height: 150%;
+        a {
+            display: inline;
+        }
+    }
+    // link
+    a:not([class]) {
+        font-weight: 700;
+        text-decoration-line: underline;
+    }
+    // different text-editor options
+    &.md {
+        font-size: var(--typography-body-font-size-md);
+        p,
+        span,
+        li,
+        a {
+            font-size: inherit;
+        }
+    }
+    &.xl {
+        font-size: var(--typography-body-font-size-xl);
+        p,
+        span,
+        li,
+        a {
+            font-size: inherit;
+        }
+    }
+    &.lg {
+        font-size: var(--typography-body-font-size-lg);
+        p,
+        span,
+        li,
+        a {
+            font-size: inherit;
+        }
+    }
+    &.sm {
+        font-size: var(--typography-body-font-size-sm);
+        p,
+        span,
+        li,
+        a {
+            font-size: inherit;
+        }
+    }
+    // wordpress fix
+    p > span {
+        color: var(--text-default) !important;
+        background-color: unset !important;
+    }
+    ol,
+    ul {
+        padding-top: var(--text-editor-body-padding-y-md);
+        padding-left: 20px;
+        li {
+            position: relative;
+            padding-bottom: var(--text-editor-body-padding-y-md);
+        }
+    }
+    ul {
+        li::before {
+            content: "";
+            background-color: var(--text-accent);
+            height: 2px;
+            width: 12px;
+            position: absolute;
+            top: 10px;
+            transform: translateY(-50%);
+            left: -20px;
+        }
+    }
+    .cb-component {
+        display: inline-flex;
+    }
+}
+.italic {
+    font-style: italic;
+}
+.hr {
+    width: 100%;
+    height: 1px;
+    display: block;
+    border-bottom: 1px solid var(--border-light);
+    margin: var(--text-editor-body-padding-y-lg, 32px) 0px;
+}

@@ -17,6 +17,14 @@ watch(tab, (n) => {
         companyPricesStore.fetchPriceList();
     }
 });
+
+function save() {
+    if (tab.value !== "Prices") {
+        companyCatalogStore.updateCompanyCatalogInfo();
+    } else {
+        companyPricesStore.updateCompanyPricesInfo();
+    }
+}
 </script>
 
 <template>
@@ -37,9 +45,7 @@ watch(tab, (n) => {
                 </v-tabs-window>
             </v-col>
             <v-col cols="2">
-                <saveSidebar
-                    @save="companyCatalogStore.updateCompanyCatalogInfo"
-                />
+                <saveSidebar @save="save" />
             </v-col>
         </v-row>
     </v-container>

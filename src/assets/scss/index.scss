@@ -1,0 +1,11 @@
+// @use "./system/typography";
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+input {
+    border: 1px solid #dee2e6 !important;
+    // padding: 10px;
+    height: 32px;
+}
