@@ -2,9 +2,6 @@
 const companyPricesStore = useCompanyPricesStore();
 const { companyPricesList, filledPrices } = storeToRefs(companyPricesStore);
 
-// function setPrice(catalog_id: number, price_id: number, cost: number) {
-//     _debounce(companyPricesStore.setPrices({ catalog_id, price_id, cost }));
-// }
 const debouncedSetPrice = _debounce(
     (catalog_id: number, price_id: number, cost: number) => {
         companyPricesStore.setPrices({ catalog_id, price_id, cost });
@@ -39,7 +36,7 @@ const debouncedSetPrice = _debounce(
                                 debouncedSetPrice(
                                     companyPriceItem.id,
                                     item.id,
-                                    $event.target.value,
+                                    +($event.target as HTMLInputElement).value,
                                 )
                             "
                         />

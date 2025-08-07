@@ -11,19 +11,36 @@ interface IPriceObj {
     [key: number]: IPriceItem;
 }
 
+interface ICompanyCatalogPrices {
+    id: number;
+    name: string;
+    unit: string;
+}
+
+interface ICompanyCatalog {
+    full_name: string;
+    id: number;
+    name: string;
+    parent_name: string;
+    prices: ICompanyCatalogPrices[];
+}
+interface ICompanyCatalogResponse {
+    list: ICompanyCatalog[];
+}
+
 export const useCompanyPricesStore = defineStore("company-prices-store", () => {
     const authStore = useAuthStore();
     const { accessToken } = storeToRefs(authStore);
-
+    //TODO переделать на useLocalStorage
     const cookies = useCookies(["compnayfilledPrices"]);
 
-    const companyPricesList = ref(null);
+    const companyPricesList = ref<ICompanyCatalog[]>([]);
     const filledPrices = ref<IPriceObj>(
         cookies.get("compnayfilledPrices") || {},
     );
 
     async function fetchPriceList() {
-        const { data } = await useFetch(
+        const { data } = await useFetch<ICompanyCatalogResponse>(
             `${APP_ENUM.BASE_API_URL}/api/profile/company/price/list`,
             {
                 method: ERequestMethods.POST,
@@ -32,7 +49,9 @@ export const useCompanyPricesStore = defineStore("company-prices-store", () => {
                 },
             },
         );
-        companyPricesList.value = data.value.list;
+        if (data.value) {
+            companyPricesList.value = data.value?.list;
+        }
     }
     async function updateCompanyPricesInfo() {
         await useFetch(

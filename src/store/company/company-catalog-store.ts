@@ -4,20 +4,36 @@ import { ref } from "vue";
 import { useCookies } from "@vueuse/integrations/useCookies";
 import { useFetch } from "@/composables/useFetch";
 
+interface ICompanyCatalogChildren {
+    children?: ICompanyCatalogChildren[];
+    parent_id: number;
+    id: number;
+    name: string;
+}
+interface ICompanyCatalog {
+    children?: ICompanyCatalogChildren[];
+    id: number;
+    name: string;
+}
+
+interface ICompnaySelectedIds {
+    ids: number[];
+}
+
 export const useCompanyCatalogStore = defineStore(
     "company-catalog-store",
     () => {
         const authStore = useAuthStore();
         const { accessToken } = storeToRefs(authStore);
-
+        //TODO переделать на useLocalStorage
         const cookies = useCookies(["compnaySelectedIds"]);
         const compnaySelectedIds = ref<number[]>(
-            cookies.get("selectedIds") || [],
+            cookies.get("compnaySelectedIds") || [],
         );
-        const companyCatalog = ref(null);
+        const companyCatalog = ref<ICompanyCatalog[]>([]);
 
         async function fetchCompanyCatalogSelectedInfo() {
-            const { data } = await useFetch(
+            const { data } = await useFetch<ICompnaySelectedIds>(
                 `${APP_ENUM.BASE_API_URL}/api/profile/company/catalog/get-ids`,
                 {
                     method: ERequestMethods.POST,
@@ -26,7 +42,9 @@ export const useCompanyCatalogStore = defineStore(
                     },
                 },
             );
-            compnaySelectedIds.value = data.value.ids;
+            if (data.value) {
+                compnaySelectedIds.value = data.value.ids;
+            }
         }
 
         async function updateCompanyCatalogInfo() {
@@ -59,7 +77,7 @@ export const useCompanyCatalogStore = defineStore(
             if (!compnaySelectedIds.value) {
                 fetchCompanyCatalogSelectedInfo();
             }
-            const { data } = await useFetch(
+            const { data } = await useFetch<ICompanyCatalog[]>(
                 `${APP_ENUM.BASE_API_URL}/api/catalog/group-list`,
                 {
                     method: ERequestMethods.POST,
@@ -71,7 +89,9 @@ export const useCompanyCatalogStore = defineStore(
                     },
                 },
             );
-            companyCatalog.value = data.value;
+            if (data.value) {
+                companyCatalog.value = data.value;
+            }
         }
 
         return {

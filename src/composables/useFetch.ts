@@ -1,10 +1,9 @@
-import axios, { type AxiosResponse } from "axios";
-import { computed, ref } from "vue";
+import axios, { AxiosError, type AxiosResponse } from "axios";
 import { showError, successMsg } from "@/composables/toast-notification";
-export const useFetch = async (url: string, config: IRequest) => {
-    const data = ref(null);
+export const useFetch = async <T = unknown>(url: string, config: IRequest) => {
+    const data = ref<T | null>(null);
     const response = ref<AxiosResponse>();
-    const error = ref<unknown>(null);
+    const error = ref<AxiosError | unknown>(null);
     const loading = ref<boolean>(false);
 
     const fetch = async () => {
@@ -18,8 +17,21 @@ export const useFetch = async (url: string, config: IRequest) => {
             data.value = result.data;
             successMsg(`Success ${url}`);
         } catch (ex) {
+            if (axios.isAxiosError(ex)) {
+                error.value = ex;
+                showError(
+                    ex.response?.data?.message ||
+                        ex.message ||
+                        "Ошибка запроса",
+                );
+            } else if (ex instanceof Error) {
+                showError(ex.message);
+                error.value = ex;
+            } else {
+                showError("Что-то пошло не так");
+                error.value = null;
+            }
             error.value = ex;
-            showError(ex?.message || "что-то пошло не так");
         } finally {
             loading.value = false;
         }
@@ -29,24 +41,24 @@ export const useFetch = async (url: string, config: IRequest) => {
     return { response, error, data, loading, fetch };
 };
 
-export const useFetchCache = (key, url, config) => {
-    const info = useFetch(url, { skip: true, ...config });
+// export const useFetchCache = (key, url, config) => {
+//     const info = useFetch(url, { skip: true, ...config });
 
-    const update = () => cacheMap.set(key, info.response.value);
-    const clear = () => cacheMap.set(key, undefined);
+//     const update = () => cacheMap.set(key, info.response.value);
+//     const clear = () => cacheMap.set(key, undefined);
 
-    const fetch = async () => {
-        try {
-            await info.fetch();
-            update();
-        } catch {
-            clear();
-        }
-    };
+//     const fetch = async () => {
+//         try {
+//             await info.fetch();
+//             update();
+//         } catch {
+//             clear();
+//         }
+//     };
 
-    const responce = computed(() => cacheMap.get(key));
-    const data = computed(() => responce.value?.data);
+//     const responce = computed(() => cacheMap.get(key));
+//     const data = computed(() => responce.value?.data);
 
-    if (responce.value == null) fetch();
-    return { ...info, fetch, data, responce, clear };
-};
+//     if (responce.value == null) fetch();
+//     return { ...info, fetch, data, responce, clear };
+// };
