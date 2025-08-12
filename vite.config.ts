@@ -3,6 +3,7 @@ import { fileURLToPath, URL } from "node:url";
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import vueDevTools from "vite-plugin-vue-devtools";
+import tailwindcss from "@tailwindcss/vite";
 
 import AutoImport from "unplugin-auto-import/vite";
 
@@ -11,6 +12,7 @@ export default defineConfig({
     plugins: [
         vue(),
         vueDevTools(),
+        tailwindcss(),
         AutoImport({
             eslintrc: {
                 enabled: true,

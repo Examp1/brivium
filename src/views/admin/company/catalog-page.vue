@@ -6,20 +6,21 @@ import { onMounted, watch } from "vue";
 const companyCatalogStore = useCompanyCatalogStore();
 const companyPricesStore = useCompanyPricesStore();
 
-const tab = ref(null);
+const activeTab = ref<string>("Catalog");
+const tabs = ["Catalog", "Prices"];
 
 onMounted(async () => {
     companyCatalogStore.fetchCompanyCatalog();
 });
 
-watch(tab, (n) => {
+watch(activeTab, (n) => {
     if (n === "Prices") {
         companyPricesStore.fetchPriceList();
     }
 });
 
 function save() {
-    if (tab.value !== "Prices") {
+    if (activeTab.value !== "Prices") {
         companyCatalogStore.updateCompanyCatalogInfo();
     } else {
         companyPricesStore.updateCompanyPricesInfo();
@@ -28,34 +29,55 @@ function save() {
 </script>
 
 <template>
-    <v-container>
-        <v-row>
-            <v-col cols="10">
-                <v-tabs v-model="tab" bg-color="primary">
-                    <v-tab value="Catalog">Catalog</v-tab>
-                    <v-tab value="Prices">Prices</v-tab>
-                </v-tabs>
-                <v-tabs-window v-model="tab">
-                    <v-tabs-window-item value="Catalog">
-                        <CompanyCatalog />
-                    </v-tabs-window-item>
-                    <v-tabs-window-item value="Prices">
-                        <CompanyPriceList />
-                    </v-tabs-window-item>
-                </v-tabs-window>
-            </v-col>
-            <v-col cols="2">
-                <saveSidebar @save="save" />
-            </v-col>
-        </v-row>
-    </v-container>
+    <div class="p-4 border-t border-gray-100">
+        <div class="space-y-6">
+            <div>
+                <div class="p-3 border border-gray-200 rounded-t-xl">
+                    <nav
+                        class="flex overflow-x-auto rounded-lg bg-gray-100 p-1 gap-1"
+                    >
+                        <button
+                            v-for="tab in tabs"
+                            :key="tab"
+                            class="inline-flex items-center rounded-md px-3 py-2 text-sm font-medium transition-colors duration-200 ease-in-out text-gray-900"
+                            :class="
+                                activeTab === tab
+                                    ? 'bg-white'
+                                    : 'bg-transparent'
+                            "
+                            @click="activeTab = tab"
+                        >
+                            {{ tab }}
+                        </button>
+                    </nav>
+                </div>
+                <div
+                    class="p-6 pt-4 border border-t-0 border-gray-200 rounded-b-x overflow-hidden"
+                >
+                    <transition name="swapTab" mode="out-in">
+                        <CompanyCatalog
+                            v-if="activeTab === 'Catalog'"
+                            key="catalog"
+                        />
+                        <CompanyPriceList
+                            v-else-if="activeTab === 'Prices'"
+                            key="prices"
+                        />
+                    </transition>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <style scoped>
-.df {
-    display: flex;
+.swapTab-enter-active,
+.swapTab-leave-active {
+    transition: all 0.5s ease;
 }
-.jcsb {
-    justify-content: space-between;
+.swapTab-enter-from,
+.swapTab-leave-to {
+    opacity: 0;
+    transform: translateX(100px);
 }
 </style>

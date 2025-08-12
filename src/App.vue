@@ -1,15 +1,18 @@
 <script setup lang="ts">
 import { RouterView, useRoute } from "vue-router";
-import DefaultLayout from "./layouts/default-layout.vue";
+// import DefaultLayout from "./layouts/default-layout.vue";
 import { computed } from "vue";
 import EmptyLayout from "./layouts/empty-layout.vue";
+import CompanyLayout from "./layouts/company-layout.vue";
 const route = useRoute();
 const layout = computed(() => {
     let layoutComponent;
     if (route.path.includes("sign")) {
         layoutComponent = EmptyLayout;
+    } else if (route.path.includes("company")) {
+        layoutComponent = CompanyLayout;
     } else {
-        layoutComponent = DefaultLayout;
+        // layoutComponent = DefaultLayout;
     }
     return layoutComponent;
 });

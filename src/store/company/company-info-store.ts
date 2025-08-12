@@ -9,6 +9,7 @@ export const useCompanyInfoStore = defineStore("company-info-store", () => {
     const cookies = useCookies(["accessToken"]);
     const companyInfo = ref<ICompanyInfo>({});
     async function fetchCompanyInfo() {
+        console.log("start");
         const { data } = await useFetch<ICompanyInfo>(
             `${APP_ENUM.BASE_API_URL}/api/profile/company`,
             {
@@ -21,6 +22,7 @@ export const useCompanyInfoStore = defineStore("company-info-store", () => {
         if (data.value) {
             companyInfo.value = data.value;
         }
+        console.log(finish);
     }
     return {
         companyInfo,

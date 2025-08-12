@@ -44,26 +44,53 @@ const checkToken = async (token: string) => {
 </script>
 
 <template>
-    <v-sheet class="mx-auto" width="300">
-        <v-form fast-fail @submit.prevent="signIn">
-            <v-text-field
-                v-model="loginInputs.login"
-                label="Login"
-            ></v-text-field>
-            <v-text-field
-                v-model="loginInputs.password"
-                label="Password"
-                type="password"
-            ></v-text-field>
-
-            <v-btn class="mt-2" type="submit" block>Submit</v-btn>
-        </v-form>
-        <br />
-        <p>
+    <form
+        class="mx-auto w-full max-w-[400px] flex flex-col gap-3"
+        @submit.prevent="signIn"
+    >
+        <div>
+            <label
+                for="test"
+                class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
+                >login</label
+            >
+            <div class="relative">
+                <input
+                    v-model="loginInputs.login"
+                    id="test"
+                    class="h-11 w-full rounded-lg border appearance-none px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-hidden focus:ring-3 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 bg-transparent text-gray-800 border-gray-300 focus:border-brand-300 focus:ring-brand-500/20 dark:border-gray-700 dark:text-white/90 dark:focus:border-brand-800"
+                    type="text"
+                />
+            </div>
+        </div>
+        <div>
+            <label
+                for="test"
+                class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
+                >password</label
+            >
+            <div class="relative">
+                <input
+                    v-model="loginInputs.password"
+                    id="test"
+                    class="h-11 w-full rounded-lg border appearance-none px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-hidden focus:ring-3 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 bg-transparent text-gray-800 border-gray-300 focus:border-brand-300 focus:ring-brand-500/20 dark:border-gray-700 dark:text-white/90 dark:focus:border-brand-800"
+                    type="password"
+                />
+            </div>
+        </div>
+        <button
+            type="submit"
+            class="bg-blue-500 text-white py-3 px-10 inline w-fit rounded-xl"
+        >
+            sign in
+        </button>
+        <p class="text-sm font-medium">
             Dont have an account?
-            <router-link to="/signup">Sign up</router-link>
+            <router-link class="text-blue-400" to="/signup"
+                >Sign up</router-link
+            >
         </p>
-    </v-sheet>
+    </form>
 </template>
 
 <style scoped></style>

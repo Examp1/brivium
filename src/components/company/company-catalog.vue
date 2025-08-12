@@ -1,33 +1,18 @@
 <script setup lang="ts">
+import CatalogItem from "./catalog/catalog-item.vue";
+
 const companyInfoStore = useCompanyCatalogStore();
-const { compnaySelectedIds, companyCatalog } = storeToRefs(companyInfoStore);
+const { companyCatalog } = storeToRefs(companyInfoStore);
 </script>
 
 <template>
-    <v-expansion-panels multiple>
-        <v-expansion-panel
+    <div class="catalog-item-wrapper">
+        <CatalogItem
             v-for="category in companyCatalog"
-            :key="category.id"
-        >
-            <v-expansion-panel-title>{{
-                category.name
-            }}</v-expansion-panel-title>
-            <v-expansion-panel-text>
-                <v-list density="compact">
-                    <v-list-item
-                        v-for="child in category.children"
-                        :key="child.id"
-                    >
-                        <v-checkbox
-                            @input="companyInfoStore.setCatalogIds(child.id)"
-                            :model-value="compnaySelectedIds.includes(child.id)"
-                            :label="child.name"
-                        ></v-checkbox>
-                    </v-list-item>
-                </v-list>
-            </v-expansion-panel-text>
-        </v-expansion-panel>
-    </v-expansion-panels>
+            :key="category.name"
+            :category
+        />
+    </div>
 </template>
 
 <style lang="scss" scoped></style>
