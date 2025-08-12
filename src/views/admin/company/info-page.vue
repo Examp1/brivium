@@ -5,14 +5,17 @@ const companyInfoStore = useCompanyInfoStore();
 const { companyInfo } = storeToRefs(companyInfoStore);
 
 onMounted(async () => {
-    if (!companyInfo.value) {
-        companyInfoStore.fetchCompanyInfo();
-    }
+    // if (!companyInfo.value) {
+    console.log("start");
+    console.log(companyInfoStore.fetchCompanyInfo());
+    // }
 });
 </script>
 
 <template>
-    <pre>{{ companyInfo }}</pre>
+    <div>
+        <pre>{{ companyInfo }}</pre>
+    </div>
 </template>
 
 <style scoped></style>

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import CompanyCatalog from "@/components/company/company-catalog.vue";
 import CompanyPriceList from "@/components/company/company-price-list.vue";
-import saveSidebar from "@/components/sidebar/save-sidebar.vue";
 import { onMounted, watch } from "vue";
 const companyCatalogStore = useCompanyCatalogStore();
 const companyPricesStore = useCompanyPricesStore();
@@ -32,6 +31,14 @@ function save() {
     <div class="p-4 border-t border-gray-100">
         <div class="space-y-6">
             <div>
+                <div class="flex">
+                    <button
+                        class="h-11 px-10 bg-green-500 text-white rounded-lg mb-3 ml-auto"
+                        @click="save"
+                    >
+                        Save
+                    </button>
+                </div>
                 <div class="p-3 border border-gray-200 rounded-t-xl">
                     <nav
                         class="flex overflow-x-auto rounded-lg bg-gray-100 p-1 gap-1"

@@ -1,52 +1,17 @@
 <script setup lang="ts">
-const companyPricesStore = useCompanyPricesStore();
-const { companyPricesList, filledPrices } = storeToRefs(companyPricesStore);
+import PriceItem from "./catalog/price-item.vue";
 
-const debouncedSetPrice = _debounce(
-    (catalog_id: number, price_id: number, cost: number) => {
-        companyPricesStore.setPrices({ catalog_id, price_id, cost });
-    },
-    300, // или сколько нужно мс
-);
+const companyPricesStore = useCompanyPricesStore();
+const { companyPricesList } = storeToRefs(companyPricesStore);
 </script>
 
 <template>
-    <div class="table-wrapper">
-        <div
-            class="table"
+    <div class="services-item-wrapper">
+        <PriceItem
             v-for="companyPriceItem in companyPricesList"
             :key="companyPriceItem.id"
-        >
-            <div class="t-head">
-                <h3>{{ companyPriceItem.full_name }}</h3>
-            </div>
-            <div class="t-body">
-                <div
-                    class="t-body-item"
-                    v-for="item in companyPriceItem.prices"
-                    :key="item.id"
-                >
-                    <p>{{ item.name }}</p>
-                    <div class="group">
-                        <input
-                            type="text"
-                            :name="item.name"
-                            :value="filledPrices[item.id]?.cost"
-                            @input="
-                                debouncedSetPrice(
-                                    companyPriceItem.id,
-                                    item.id,
-                                    +($event.target as HTMLInputElement).value,
-                                )
-                            "
-                        />
-                        <div class="unit">
-                            {{ item.unit }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+            :price-info="companyPriceItem"
+        />
     </div>
 </template>
 

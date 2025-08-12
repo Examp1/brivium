@@ -85,15 +85,18 @@ const menu = ref([
                     <span class="mdi mdi-menu"></span>
                 </button>
 
-                <div>
+                <div class="flex items-center gap-3">
                     <img
                         class="h-[44px] w-[44px] rounded-full"
                         src="https://static.vecteezy.com/system/resources/thumbnails/000/439/863/small/Basic_Ui__28186_29.jpg"
                         alt=""
                     />
+                    <span class="font-medium text-sm">{{
+                        companyInfo.name
+                    }}</span>
                 </div>
             </menu>
-            <main class="bg-gray-100 h-full p-5">
+            <main class="bg-gray-100 min-h-screen h-fit p-5">
                 <div class="bg-white rounded-lg overflow-hidden">
                     <Transition name="fade" mode="out-in">
                         <slot />

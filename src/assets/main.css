@@ -5,7 +5,33 @@ html {
     font-optical-sizing: auto;
 }
 
+body {
+    overflow-x: hidden;
+}
+
 button,
 a {
     cursor: pointer;
+}
+
+/* Для WebKit-браузеров */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+/* Для Firefox */
+scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--color-gray-400);
+    cursor: grab;
+}
+
+scrollbar-thumb {
+    background-color: var(--color-gray-400);
+    cursor: grab;
 }
