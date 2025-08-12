@@ -7,11 +7,10 @@ import CompanyLayout from "./layouts/company-layout.vue";
 const route = useRoute();
 const layout = computed(() => {
     let layoutComponent;
-    if (route.path.includes("sign")) {
-        layoutComponent = EmptyLayout;
-    } else if (route.path.includes("company")) {
+    if (route.path.includes("company")) {
         layoutComponent = CompanyLayout;
     } else {
+        layoutComponent = EmptyLayout;
         // layoutComponent = DefaultLayout;
     }
     return layoutComponent;
