@@ -31,10 +31,13 @@ interface ICompanyCatalogResponse {
 export const useCompanyPricesStore = defineStore("company-prices-store", () => {
     const authStore = useAuthStore();
     const { accessToken } = storeToRefs(authStore);
+    const companyPricesList = ref<ICompanyCatalog[]>([]);
+
     const lsFilledPrices = useLocalStorage<IPriceObj>("filledPrices", {});
 
-    const companyPricesList = ref<ICompanyCatalog[]>([]);
-    const filledPrices = ref<IPriceObj>(lsFilledPrices.value || {});
+    const filledPrices = ref<IPriceObj>(
+        JSON.parse(JSON.stringify(lsFilledPrices.value)),
+    );
 
     async function fetchPriceList() {
         const { data } = await useFetch<ICompanyCatalogResponse>(
@@ -51,18 +54,22 @@ export const useCompanyPricesStore = defineStore("company-prices-store", () => {
         }
     }
     async function updateCompanyPricesInfo() {
-        await useFetch(
+        const payload = {
+            list: Object.values(filledPrices.value),
+        };
+        const { error } = await useFetch(
             `${APP_ENUM.BASE_API_URL}/api/profile/company/price/update`,
             {
                 method: ERequestMethods.POST,
                 headers: {
                     Authorization: `Bearer ${accessToken.value}`,
                 },
-                data: {
-                    list: Object.values(filledPrices.value),
-                },
+                data: payload,
             },
         );
+        if (!error.value) {
+            lsFilledPrices.value = filledPrices.value;
+        }
     }
 
     function setPrices(obj: IPriceItem) {
@@ -81,8 +88,6 @@ export const useCompanyPricesStore = defineStore("company-prices-store", () => {
         } else {
             filledPrices.value[obj.price_id] = obj;
         }
-
-        lsFilledPrices.value = filledPrices.value;
     }
 
     return {

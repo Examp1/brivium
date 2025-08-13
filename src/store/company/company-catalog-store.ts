@@ -24,11 +24,12 @@ export const useCompanyCatalogStore = defineStore(
     () => {
         const authStore = useAuthStore();
         const { accessToken } = storeToRefs(authStore);
-        const lsSelectedId = useLocalStorage<number[]>(
+
+        const companySelectedIds = useLocalStorage<number[]>(
             "companySelectedIds",
             [],
         );
-        const companySelectedIds = ref<number[]>(lsSelectedId.value || []);
+
         const companyCatalog = ref<ICompanyCatalog[]>([]);
 
         async function fetchCompanyCatalogSelectedInfo() {
@@ -69,7 +70,7 @@ export const useCompanyCatalogStore = defineStore(
             } else {
                 companySelectedIds.value.push(id);
             }
-            lsSelectedId.value = companySelectedIds.value;
+            // lsSelectedId.value = companySelectedIds.value;
         }
 
         async function fetchCompanyCatalog() {
