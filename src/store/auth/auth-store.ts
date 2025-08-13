@@ -24,7 +24,7 @@ export const useAuthStore = defineStore("auth-store", () => {
                 Authorization: `Bearer ${accessToken.value}`,
             },
         });
-        window.location.href = "/signin";
+        window.location.href = "/";
     };
     return {
         accessToken,

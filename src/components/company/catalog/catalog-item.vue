@@ -2,7 +2,7 @@
 defineProps(["category"]);
 
 const companyInfoStore = useCompanyCatalogStore();
-const { compnaySelectedIds } = storeToRefs(companyInfoStore);
+const { companySelectedIds } = storeToRefs(companyInfoStore);
 
 const isItemOpen = ref<boolean>(false);
 </script>
@@ -32,7 +32,7 @@ const isItemOpen = ref<boolean>(false);
                                 @input="
                                     companyInfoStore.setCatalogIds(child.id)
                                 "
-                                :checked="compnaySelectedIds.includes(child.id)"
+                                :checked="companySelectedIds.includes(child.id)"
                                 type="checkbox"
                                 class="w-5 h-5 appearance-none cursor-pointer border border-gray-300 text-transparent checked:text-white checked:border-transparent rounded-md checked:bg-blue-500 mdi mdi-check flex items-center text-sm justify-center"
                             />

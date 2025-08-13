@@ -1,8 +1,7 @@
 import { APP_ENUM } from "@/enums/app_enums";
 import { defineStore } from "pinia";
-import { ref } from "vue";
-import { useCookies } from "@vueuse/integrations/useCookies";
 import { useFetch } from "@/composables/useFetch";
+import { useLocalStorage } from "@vueuse/core";
 
 interface ICompanyCatalogChildren {
     children?: ICompanyCatalogChildren[];
@@ -16,7 +15,7 @@ interface ICompanyCatalog {
     name: string;
 }
 
-interface ICompnaySelectedIds {
+interface ICompanySelectedIds {
     ids: number[];
 }
 
@@ -25,15 +24,15 @@ export const useCompanyCatalogStore = defineStore(
     () => {
         const authStore = useAuthStore();
         const { accessToken } = storeToRefs(authStore);
-        //TODO переделать на useLocalStorage
-        const cookies = useCookies(["compnaySelectedIds"]);
-        const compnaySelectedIds = ref<number[]>(
-            cookies.get("compnaySelectedIds") || [],
+        const lsSelectedId = useLocalStorage<number[]>(
+            "companySelectedIds",
+            [],
         );
+        const companySelectedIds = ref<number[]>(lsSelectedId.value || []);
         const companyCatalog = ref<ICompanyCatalog[]>([]);
 
         async function fetchCompanyCatalogSelectedInfo() {
-            const { data } = await useFetch<ICompnaySelectedIds>(
+            const { data } = await useFetch<ICompanySelectedIds>(
                 `${APP_ENUM.BASE_API_URL}/api/profile/company/catalog/get-ids`,
                 {
                     method: ERequestMethods.POST,
@@ -43,7 +42,7 @@ export const useCompanyCatalogStore = defineStore(
                 },
             );
             if (data.value) {
-                compnaySelectedIds.value = data.value.ids;
+                companySelectedIds.value = data.value.ids;
             }
         }
 
@@ -56,7 +55,7 @@ export const useCompanyCatalogStore = defineStore(
                         Authorization: `Bearer ${accessToken.value}`,
                     },
                     data: {
-                        catalog_ids: compnaySelectedIds.value,
+                        catalog_ids: companySelectedIds.value,
                     },
                 },
             );
@@ -64,17 +63,17 @@ export const useCompanyCatalogStore = defineStore(
         }
 
         function setCatalogIds(id: number) {
-            if (compnaySelectedIds.value.includes(id)) {
-                const elIndex = compnaySelectedIds.value.indexOf(id);
-                compnaySelectedIds.value.splice(elIndex, 1);
+            if (companySelectedIds.value.includes(id)) {
+                const elIndex = companySelectedIds.value.indexOf(id);
+                companySelectedIds.value.splice(elIndex, 1);
             } else {
-                compnaySelectedIds.value.push(id);
+                companySelectedIds.value.push(id);
             }
-            cookies.set("compnaySelectedIds", compnaySelectedIds.value);
+            lsSelectedId.value = companySelectedIds.value;
         }
 
         async function fetchCompanyCatalog() {
-            if (!compnaySelectedIds.value) {
+            if (!companySelectedIds.value) {
                 fetchCompanyCatalogSelectedInfo();
             }
             const { data } = await useFetch<ICompanyCatalog[]>(
@@ -96,7 +95,7 @@ export const useCompanyCatalogStore = defineStore(
 
         return {
             companyCatalog,
-            compnaySelectedIds,
+            companySelectedIds,
             fetchCompanyCatalogSelectedInfo,
             updateCompanyCatalogInfo,
             setCatalogIds,

@@ -1,6 +1,6 @@
 import { useFetch } from "@/composables/useFetch";
 import { defineStore } from "pinia";
-import { useCookies } from "@vueuse/integrations/useCookies";
+import { useLocalStorage } from "@vueuse/core";
 interface IPriceItem {
     catalog_id: number;
     price_id: number;
@@ -31,13 +31,10 @@ interface ICompanyCatalogResponse {
 export const useCompanyPricesStore = defineStore("company-prices-store", () => {
     const authStore = useAuthStore();
     const { accessToken } = storeToRefs(authStore);
-    //TODO переделать на useLocalStorage
-    const cookies = useCookies(["compnayfilledPrices"]);
+    const lsFilledPrices = useLocalStorage<IPriceObj>("filledPrices", {});
 
     const companyPricesList = ref<ICompanyCatalog[]>([]);
-    const filledPrices = ref<IPriceObj>(
-        cookies.get("compnayfilledPrices") || {},
-    );
+    const filledPrices = ref<IPriceObj>(lsFilledPrices.value || {});
 
     async function fetchPriceList() {
         const { data } = await useFetch<ICompanyCatalogResponse>(
@@ -85,7 +82,7 @@ export const useCompanyPricesStore = defineStore("company-prices-store", () => {
             filledPrices.value[obj.price_id] = obj;
         }
 
-        cookies.set("compnayfilledPrices", filledPrices.value);
+        lsFilledPrices.value = filledPrices.value;
     }
 
     return {
