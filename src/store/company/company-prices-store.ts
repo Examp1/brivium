@@ -68,25 +68,24 @@ export const useCompanyPricesStore = defineStore("company-prices-store", () => {
             },
         );
         if (!error.value) {
-            lsFilledPrices.value = filledPrices.value;
+            lsFilledPrices.value = JSON.parse(
+                JSON.stringify(filledPrices.value),
+            );
         }
     }
 
     function setPrices(obj: IPriceItem) {
-        if (!obj.cost) return;
+        if (obj.cost === 0 || !obj.cost) {
+            delete filledPrices.value[obj.price_id];
+            return;
+        }
 
         const elExist = filledPrices.value[obj.price_id];
 
-        //TODO
-        // if (obj.cost === 0) {
-        //     delete filledPrices.value[obj.price_id];
-        //     return;
-        // }
-
         if (elExist) {
-            elExist.cost = obj.cost;
+            filledPrices.value[obj.price_id] = { ...elExist, cost: obj.cost };
         } else {
-            filledPrices.value[obj.price_id] = obj;
+            filledPrices.value[obj.price_id] = { ...obj };
         }
     }
 
