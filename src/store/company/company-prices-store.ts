@@ -1,6 +1,7 @@
 import { useFetch } from "@/composables/useFetch";
 import { defineStore } from "pinia";
 import { useLocalStorage } from "@vueuse/core";
+import { toRaw } from "vue";
 interface IPriceItem {
     catalog_id: number;
     price_id: number;
@@ -36,7 +37,7 @@ export const useCompanyPricesStore = defineStore("company-prices-store", () => {
     const lsFilledPrices = useLocalStorage<IPriceObj>("filledPrices", {});
 
     const filledPrices = ref<IPriceObj>(
-        JSON.parse(JSON.stringify(lsFilledPrices.value)),
+        structuredClone(toRaw(lsFilledPrices.value)),
     );
 
     async function fetchPriceList() {
@@ -68,9 +69,7 @@ export const useCompanyPricesStore = defineStore("company-prices-store", () => {
             },
         );
         if (!error.value) {
-            lsFilledPrices.value = JSON.parse(
-                JSON.stringify(filledPrices.value),
-            );
+            lsFilledPrices.value = structuredClone(toRaw(filledPrices.value));
         }
     }
 
