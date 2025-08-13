@@ -35,6 +35,8 @@ declare global {
   const useLink: typeof import('vue-router')['useLink']
   const useRoute: typeof import('vue-router')['useRoute']
   const useRouter: typeof import('vue-router')['useRouter']
+  const withAtuh: typeof import('./src/utils/withAuth')['withAtuh']
+  const withAuth: typeof import('./src/utils/withAuth')['withAuth']
 }
 // for type re-export
 declare global {
@@ -86,5 +88,6 @@ declare module 'vue' {
     readonly useLink: UnwrapRef<typeof import('vue-router')['useLink']>
     readonly useRoute: UnwrapRef<typeof import('vue-router')['useRoute']>
     readonly useRouter: UnwrapRef<typeof import('vue-router')['useRouter']>
+    readonly withAuth: UnwrapRef<typeof import('./src/utils/withAuth')['withAuth']>
   }
 }

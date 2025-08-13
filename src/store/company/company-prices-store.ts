@@ -2,6 +2,7 @@ import { useFetch } from "@/composables/useFetch";
 import { defineStore } from "pinia";
 import { useLocalStorage } from "@vueuse/core";
 import { toRaw } from "vue";
+import { withAuth } from "@/utils/withAuth";
 interface IPriceItem {
     catalog_id: number;
     price_id: number;
@@ -41,18 +42,20 @@ export const useCompanyPricesStore = defineStore("company-prices-store", () => {
     );
 
     async function fetchPriceList() {
-        const { data } = await useFetch<ICompanyCatalogResponse>(
-            `${APP_ENUM.BASE_API_URL}/api/profile/company/price/list`,
-            {
-                method: ERequestMethods.POST,
-                headers: {
-                    Authorization: `Bearer ${accessToken.value}`,
+        return withAuth(async () => {
+            const { data } = await useFetch<ICompanyCatalogResponse>(
+                `${APP_ENUM.BASE_API_URL}/api/profile/company/price/list`,
+                {
+                    method: ERequestMethods.POST,
+                    headers: {
+                        Authorization: `Bearer ${accessToken.value}`,
+                    },
                 },
-            },
-        );
-        if (data.value) {
-            companyPricesList.value = data.value?.list;
-        }
+            );
+            if (data.value) {
+                companyPricesList.value = data.value?.list;
+            }
+        });
     }
     async function updateCompanyPricesInfo() {
         const payload = {
@@ -88,10 +91,15 @@ export const useCompanyPricesStore = defineStore("company-prices-store", () => {
         }
     }
 
+    function resetPrices() {
+        filledPrices.value = structuredClone(toRaw(lsFilledPrices.value));
+    }
+
     return {
         companyPricesList,
         filledPrices,
         fetchPriceList,
+        resetPrices,
         updateCompanyPricesInfo,
         setPrices,
     };

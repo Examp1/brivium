@@ -24,6 +24,7 @@ export const useAuthStore = defineStore("auth-store", () => {
                 Authorization: `Bearer ${accessToken.value}`,
             },
         });
+        cookies.remove("accessToken");
         window.location.href = "/";
     };
     return {

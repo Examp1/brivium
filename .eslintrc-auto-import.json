@@ -29,6 +29,7 @@
     "useCompanyPricesStore": true,
     "useLink": true,
     "useRoute": true,
-    "useRouter": true
+    "useRouter": true,
+    "withAuth": true
   }
 }
