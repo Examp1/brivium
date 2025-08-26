@@ -38,7 +38,7 @@ export const useFetch = async <T = unknown>(url: string, config: IRequest) => {
     };
     // !config?.skip &&
     await fetch();
-    return { response, error, data, loading, fetch };
+    return { response, error, data, loading, refresh: fetch };
 };
 
 // export const useFetchCache = (key, url, config) => {

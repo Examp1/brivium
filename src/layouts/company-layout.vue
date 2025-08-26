@@ -1,8 +1,7 @@
 <script setup lang="ts">
+import AppTopbar from "@/components/navigations/app-topbar.vue";
 const userStore = useAuthStore();
-const companyInfoStore = useCompanyInfoStore();
 const { logout } = userStore;
-const { companyInfo } = storeToRefs(companyInfoStore);
 
 const menu = ref([
     {
@@ -76,26 +75,7 @@ const menu = ref([
             </nav>
         </aside>
         <div class="ml-[290px] flex-1 transition-all duration-300 ease-in-out">
-            <menu
-                class="sticky top-0 bg-white w-full p-4 border-b border-gray-200 flex justify-between"
-            >
-                <button
-                    class="flex items-center justify-center w-10 h-10 text-gray-500 border-gray-200 rounded-lg border"
-                >
-                    <span class="mdi mdi-menu"></span>
-                </button>
-
-                <div class="flex items-center gap-3">
-                    <img
-                        class="h-[44px] w-[44px] rounded-full"
-                        src="https://static.vecteezy.com/system/resources/thumbnails/000/439/863/small/Basic_Ui__28186_29.jpg"
-                        alt=""
-                    />
-                    <span class="font-medium text-sm">{{
-                        companyInfo.name
-                    }}</span>
-                </div>
-            </menu>
+            <AppTopbar />
             <main class="bg-gray-100 min-h-screen h-fit p-5">
                 <div class="bg-white rounded-lg overflow-hidden">
                     <Transition name="fade" mode="out-in">

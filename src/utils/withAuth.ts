@@ -8,7 +8,6 @@ const router = useRouter();
 export const withAuth = async <T>(
     callback: () => Promise<T> | T,
 ): Promise<T | void> => {
-    console.log("123", accessToken.value);
     if (!accessToken.value) {
         showError("Проблемы с токеном авторизации");
         router.push("/");

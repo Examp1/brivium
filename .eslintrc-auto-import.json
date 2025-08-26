@@ -28,6 +28,7 @@
     "useCompanyInfoStore": true,
     "useCompanyPricesStore": true,
     "useLink": true,
+    "useNotificationStore": true,
     "useRoute": true,
     "useRouter": true,
     "withAuth": true

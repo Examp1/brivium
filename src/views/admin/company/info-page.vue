@@ -6,8 +6,7 @@ const { companyInfo } = storeToRefs(companyInfoStore);
 
 onMounted(async () => {
     // if (!companyInfo.value) {
-    console.log("start");
-    console.log(companyInfoStore.fetchCompanyInfo());
+    await companyInfoStore.fetchCompanyInfo();
     // }
 });
 </script>
