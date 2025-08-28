@@ -21,25 +21,31 @@ const router = createRouter({
         },
         {
             path: "/company",
-            name: "comapny-page",
+            name: "company-page",
             children: [
                 {
                     path: "info",
-                    name: "comapny-info",
+                    name: "info-page",
                     component: () =>
                         import("../views/admin/company/info-page.vue"),
                 },
                 {
                     path: "tariff",
-                    name: "tariff-info",
+                    name: "tariff-page",
                     component: () =>
                         import("../views/admin/company/tariff-page.vue"),
                 },
                 {
                     path: "catalog",
-                    name: "catalog-info",
+                    name: "catalog-page",
                     component: () =>
                         import("../views/admin/company/catalog-page.vue"),
+                },
+                {
+                    path: "notifications",
+                    name: "notifications-page",
+                    component: () =>
+                        import("../views/admin/company/notifications-page.vue"),
                 },
             ],
             component: () => import("../views/company-page.vue"),
