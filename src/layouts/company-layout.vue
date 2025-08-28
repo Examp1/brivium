@@ -49,7 +49,7 @@ const menu = ref([
                         :key="item.title"
                         class="transition-colors duration-300 hover:bg-gray-300 rounded text-gray-700"
                     >
-                        <router-link
+                        <RouterLink
                             :to="item.url"
                             class="flex items-center gap-2 py-1 px-2 text-base cursor-pointer whitespace-nowrap"
                         >
@@ -58,7 +58,7 @@ const menu = ref([
                                 :class="item.icon"
                             ></span>
                             <span>{{ item.title }}</span>
-                        </router-link>
+                        </RouterLink>
                     </li>
                     <li
                         class="transition-colors duration-300 hover:bg-gray-300 rounded text-red-700"
