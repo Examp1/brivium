@@ -36,8 +36,11 @@ export const useFetch = async <T = unknown>(url: string, config: IRequest) => {
             loading.value = false;
         }
     };
+
     // !config?.skip &&
+
     await fetch();
+
     return { response, error, data, loading, refresh: fetch };
 };
 
