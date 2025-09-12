@@ -7,13 +7,16 @@ export const useGalleryStore = defineStore("gallery-store", () => {
     const cookies = useCookies(["accessToken"]);
 
     const fetchAlbums = async () => {
-        const { data } = await useFetch("/api/profile/company/gallery/list", {
-            method: ERequestMethods.POST,
-            data: {},
-            headers: {
-                Authorization: `Bearer ${cookies.get("accessToken") || null}`,
+        const { data } = await useFetch(
+            `${APP_ENUM.BASE_API_URL}/api/profile/company/gallery/list`,
+            {
+                method: ERequestMethods.POST,
+                data: {},
+                headers: {
+                    Authorization: `Bearer ${cookies.get("accessToken") || null}`,
+                },
             },
-        });
+        );
         galleryAlbums.value = data.value;
     };
 

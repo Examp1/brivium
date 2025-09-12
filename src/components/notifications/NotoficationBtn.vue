@@ -35,7 +35,7 @@ onMounted(async () => {
         <NotificationPopup
             ref="notifications"
             :notifications="notificationTypesLength"
-            :class="{ 'scale-100 opacity-100 ': isDropOpen }"
+            :class="isDropOpen ? 'scale-100 opacity-100 block' : 'hidden'"
         />
     </div>
 </template>

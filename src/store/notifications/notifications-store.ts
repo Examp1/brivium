@@ -2,7 +2,7 @@ export const useNotificationStore = defineStore("notifications-store", () => {
     const notifications = ref();
 
     const notificationCount = computed(
-        () => notifications.value?.items.length || 0,
+        () => notifications.value?.items?.length || 0,
     );
 
     const notificationTypesLength = computed(() => {
@@ -23,22 +23,24 @@ export const useNotificationStore = defineStore("notifications-store", () => {
                 lastNotification: {},
             },
         };
-        notifications.value?.items.forEach((el) => {
-            switch (el.type_code) {
-                case 1:
-                    startObj.info.lng++;
-                    startObj.info.lastNotification = el;
-                    break;
-                case 2:
-                    startObj.chat.lng++;
-                    startObj.chat.lastNotification = el;
-                    break;
-                case 3:
-                    startObj.lid.lng++;
-                    startObj.lid.lastNotification = el;
-                    break;
-            }
-        });
+        if (notifications.value?.items?.length) {
+            notifications.value?.items.forEach((el) => {
+                switch (el.type_code) {
+                    case 1:
+                        startObj.info.lng++;
+                        startObj.info.lastNotification = el;
+                        break;
+                    case 2:
+                        startObj.chat.lng++;
+                        startObj.chat.lastNotification = el;
+                        break;
+                    case 3:
+                        startObj.lid.lng++;
+                        startObj.lid.lastNotification = el;
+                        break;
+                }
+            });
+        }
         return startObj;
     });
 

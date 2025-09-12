@@ -43,9 +43,9 @@ const showMenu = ref<boolean>(false);
             <AppHeader @toggleView="showMenu = !showMenu" />
             <main class="bg-gray-100 min-h-screen h-fit p-5">
                 <div class="bg-white rounded-lg overflow-hidden">
-                    <Transition name="fade" mode="out-in">
-                        <slot />
-                    </Transition>
+                    <!-- <Transition name="fade" mode="out-in"> -->
+                    <slot />
+                    <!-- </Transition> -->
                 </div>
             </main>
         </div>
