@@ -19,6 +19,11 @@ const menu = ref([
         icon: "mdi-format-list-bulleted-square",
     },
     {
+        title: "Gallery",
+        url: "/company/gallery",
+        icon: "mdi mdi-image-area",
+    },
+    {
         title: "Notification",
         url: "/company/notifications",
         icon: "mdi mdi-bell",

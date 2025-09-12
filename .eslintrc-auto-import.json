@@ -27,6 +27,7 @@
     "useCompanyCatalogStore": true,
     "useCompanyInfoStore": true,
     "useCompanyPricesStore": true,
+    "useGalleryStore": true,
     "useLink": true,
     "useNotificationStore": true,
     "useRoute": true,

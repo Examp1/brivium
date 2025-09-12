@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import PriceItem from "./catalog/price-item.vue";
+import PriceItem from "./catalog/PriceItem.vue";
 
 const companyPricesStore = useCompanyPricesStore();
 const { companyPricesList } = storeToRefs(companyPricesStore);

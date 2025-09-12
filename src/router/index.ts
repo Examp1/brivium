@@ -47,6 +47,12 @@ const router = createRouter({
                     component: () =>
                         import("../views/admin/company/NotificationsPage.vue"),
                 },
+                {
+                    path: "gallery",
+                    name: "gallery-page",
+                    component: () =>
+                        import("../views/admin/company/GalleryPage.vue"),
+                },
             ],
             component: () => import("../views/CompanyPage.vue"),
         },

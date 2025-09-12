@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import CatalogItem from "./catalog/catalog-item.vue";
+import CatalogItem from "./catalog/CatalogItem.vue";
 
 const companyInfoStore = useCompanyCatalogStore();
 const { companyCatalog } = storeToRefs(companyInfoStore);

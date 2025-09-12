@@ -14,7 +14,7 @@ const { companyInfo } = storeToRefs(companyInfoStore);
         >
             <button
                 @click="emit('toggleView')"
-                class="flex items-center justify-center w-10 h-10 text-gray-500 border-gray-200 rounded-lg border"
+                class="xl:opacity-0 flex items-center justify-center w-10 h-10 text-gray-500 border-gray-200 rounded-lg border"
             >
                 <span class="mdi mdi-menu"></span>
             </button>
