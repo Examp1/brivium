@@ -1,13 +1,19 @@
 <script setup lang="ts">
 import loadNotifications from "@/composables/notifications/load-notifications";
 import { onMounted } from "vue";
-import NotificationPopup from "./notification-popup.vue";
+import { onClickOutside } from "@vueuse/core";
+import { useTemplateRef } from "vue";
+
+import NotificationPopup from "./NotificationPopup.vue";
+
+const isDropOpen = ref(false);
+
+const target = useTemplateRef<HTMLElement>("notifications");
+onClickOutside(target, () => (isDropOpen.value = false));
 
 const notificationStore = useNotificationStore();
 const { notificationCount, notifications, notificationTypesLength } =
     storeToRefs(notificationStore);
-
-const isDropOpen = ref(false);
 
 onMounted(async () => {
     const { data } = await loadNotifications();
@@ -27,8 +33,9 @@ onMounted(async () => {
             >
         </div>
         <NotificationPopup
+            ref="notifications"
             :notifications="notificationTypesLength"
-            :class="{ 'scale-100 opacity-100': isDropOpen }"
+            :class="{ 'scale-100 opacity-100 ': isDropOpen }"
         />
     </div>
 </template>

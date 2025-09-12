@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { RouterLink } from "vue-router";
-
 defineProps(["notifications"]);
 </script>
 
@@ -9,14 +7,14 @@ defineProps(["notifications"]);
         class="notifications absolute w-[300px] left-[50%] translate-x-[-50%] bg-white shadow-2xl p-4 rounded-lg transition-all duration-200 ease-out scale-95 opacity-0"
     >
         <RouterLink
-            to="#"
+            to="/company/notifications"
             class="flex justify-end text-base text-gray-400 mb-3"
         >
             Переглянути всі
             <span class="mdi mdi-chevron-right"></span>
         </RouterLink>
         <RouterLink
-            to="#"
+            to="/company/notifications"
             class="py-2 block"
             v-for="notification in notifications"
             :key="notification.id"

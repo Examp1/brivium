@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import CompanyCatalog from "@/components/company/company-catalog.vue";
-import CompanyPriceList from "@/components/company/company-price-list.vue";
+import CompanyCatalog from "@/components/company/CompanyCatalog.vue";
+import CompanyPriceList from "@/components/company/CompanyPriceList.vue";
 import { onMounted, watch } from "vue";
 const companyCatalogStore = useCompanyCatalogStore();
 const companyPricesStore = useCompanyPricesStore();

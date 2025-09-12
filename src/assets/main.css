@@ -1,5 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
 @import "tailwindcss";
+
+.base-transition {
+    @apply transition-all duration-300 ease-in-out;
+}
+
 html {
     font-family: "Outfit", sans-serif !important;
     font-optical-sizing: auto;

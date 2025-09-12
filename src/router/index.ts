@@ -12,12 +12,12 @@ const router = createRouter({
         {
             path: "/",
             name: "login-page",
-            component: () => import("../views/login-page.vue"),
+            component: () => import("../views/LoginPage.vue"),
         },
         {
             path: "/signup",
             name: "register-page",
-            component: () => import("../views/register-page.vue"),
+            component: () => import("../views/RegisterPage.vue"),
         },
         {
             path: "/company",
@@ -27,28 +27,28 @@ const router = createRouter({
                     path: "info",
                     name: "info-page",
                     component: () =>
-                        import("../views/admin/company/info-page.vue"),
+                        import("../views/admin/company/InfoPage.vue"),
                 },
                 {
                     path: "tariff",
                     name: "tariff-page",
                     component: () =>
-                        import("../views/admin/company/tariff-page.vue"),
+                        import("../views/admin/company/TariffPage.vue"),
                 },
                 {
                     path: "catalog",
                     name: "catalog-page",
                     component: () =>
-                        import("../views/admin/company/catalog-page.vue"),
+                        import("../views/admin/company/CatalogPage.vue"),
                 },
                 {
                     path: "notifications",
                     name: "notifications-page",
                     component: () =>
-                        import("../views/admin/company/notifications-page.vue"),
+                        import("../views/admin/company/NotificationsPage.vue"),
                 },
             ],
-            component: () => import("../views/company-page.vue"),
+            component: () => import("../views/CompanyPage.vue"),
         },
     ],
 });

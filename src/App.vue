@@ -2,8 +2,8 @@
 import { RouterView, useRoute } from "vue-router";
 // import DefaultLayout from "./layouts/default-layout.vue";
 import { computed } from "vue";
-import EmptyLayout from "./layouts/empty-layout.vue";
-import CompanyLayout from "./layouts/company-layout.vue";
+import EmptyLayout from "./layouts/EmptyLayout.vue";
+import CompanyLayout from "./layouts/CompanyLayout.vue";
 const route = useRoute();
 const layout = computed(() => {
     let layoutComponent;
