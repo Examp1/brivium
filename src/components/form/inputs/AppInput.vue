@@ -20,11 +20,22 @@ const props = defineProps({
     },
     iconPosition: {
         type: String,
-        default: "left",
     },
 });
 
 const { value } = useField(props.name as string);
+const paddingClasses = ref("");
+switch (props.iconPosition) {
+    case "right":
+        paddingClasses.value = "pr-11 pl-4";
+        break;
+    case "left":
+        paddingClasses.value = "pr-4 pl-10";
+        break;
+    default:
+        paddingClasses.value = "px-4";
+        break;
+}
 </script>
 
 <template>
@@ -43,10 +54,7 @@ const { value } = useField(props.name as string);
             ></span>
             <input
                 class="w-full h-[48px] border border-gray-400 outline-0 rounded-lg placeholder:text-gray-400"
-                :class="[
-                    icon ? 'py-3.5' : 'py-3.5 px-4',
-                    iconPosition === 'right' ? 'pr-11 pl-4' : 'pr-4 pl-10',
-                ]"
+                :class="[icon ? 'py-3.5' : 'py-3.5 px-4', paddingClasses]"
                 :type="type"
                 :name="name"
                 :placeholder="placeholder"

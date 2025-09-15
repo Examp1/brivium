@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import GalleryAlbum from "@/components/gallery/GalleryAlbum.vue";
+import GalleryAlbumsList from "@/components/gallery/GalleryAlbumsList.vue";
 import GalleryModal from "@/components/gallery/GalleryModal.vue";
 import AppModal from "@/components/ui/AppModal.vue";
 import { onMounted } from "vue";
@@ -7,7 +7,7 @@ import { onMounted } from "vue";
 const galleryStore = useGalleryStore();
 const { galleryAlbums } = storeToRefs(galleryStore);
 
-const showModal = ref<boolean>(true);
+const showModal = ref<boolean>(false);
 
 onMounted(() => {
     galleryStore.fetchAlbums();
@@ -16,13 +16,9 @@ onMounted(() => {
 
 <template>
     <AppModal v-if="showModal" @close="showModal = false">
-        <GalleryModal />
+        <GalleryModal @close="showModal = false" />
     </AppModal>
     <div class="p-4 border-t border-gray-100">
-        <!-- <pre>
-            {{ galleryAlbums }}
-        </pre> -->
-        {{ showModal }}
         <div class="flex border-b border-gray-100">
             <div></div>
             <button
@@ -32,7 +28,7 @@ onMounted(() => {
                 Добавить альбом
             </button>
         </div>
-        <GalleryAlbum />
+        <GalleryAlbumsList :albums="galleryAlbums?.items" />
     </div>
 </template>
 

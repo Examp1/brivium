@@ -3,10 +3,10 @@ import * as zod from "zod";
 import { toTypedSchema } from "@vee-validate/zod";
 import { useForm } from "vee-validate";
 import AppInput from "../form/inputs/AppInput.vue";
-import { useFetch } from "@/composables/useFetch";
 
-import { useCookies } from "@vueuse/integrations/useCookies";
-const cookies = useCookies(["accessToken"]);
+const emit = defineEmits(["close"]);
+
+const galleryStore = useGalleryStore();
 
 const validationSchema = toTypedSchema(
     zod.object({
@@ -22,14 +22,9 @@ const { handleSubmit, errors } = useForm({
     validationSchema,
 });
 
-const onSubmit = handleSubmit((values) => {
-    useFetch(`${APP_ENUM.BASE_API_URL}/api/profile/company/gallery/add`, {
-        method: ERequestMethods.POST,
-        data: values,
-        headers: {
-            Authorization: `Bearer ${cookies.get("accessToken")}`,
-        },
-    });
+const onSubmit = handleSubmit(async (values) => {
+    await galleryStore.addNewAlbum(values);
+    emit("close");
 });
 </script>
 
@@ -39,16 +34,12 @@ const onSubmit = handleSubmit((values) => {
         <form @submit="onSubmit" class="flex flex-col gap-5">
             <AppInput
                 label="Name"
-                placeholder="placeholder"
-                icon="mdi mdi-phone"
-                icon-position="right"
+                placeholder="enter name of album"
                 name="title"
             />
             <AppInput
                 label="Description"
-                placeholder="placeholder"
-                icon="mdi mdi-phone"
-                icon-position="right"
+                placeholder="enter description of album"
                 name="description"
             />
             <button
