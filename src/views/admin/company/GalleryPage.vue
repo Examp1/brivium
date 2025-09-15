@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import GalleryAlbum from "@/components/gallery/GalleryAlbum.vue";
+import GalleryModal from "@/components/gallery/GalleryModal.vue";
 import AppModal from "@/components/ui/AppModal.vue";
 import { onMounted } from "vue";
 
 const galleryStore = useGalleryStore();
 const { galleryAlbums } = storeToRefs(galleryStore);
 
-const showModal = ref<boolean>(false);
+const showModal = ref<boolean>(true);
 
 onMounted(() => {
     galleryStore.fetchAlbums();
@@ -14,7 +15,9 @@ onMounted(() => {
 </script>
 
 <template>
-    <AppModal v-if="showModal" @close="showModal = false"> 123 </AppModal>
+    <AppModal v-if="showModal" @close="showModal = false">
+        <GalleryModal />
+    </AppModal>
     <div class="p-4 border-t border-gray-100">
         <!-- <pre>
             {{ galleryAlbums }}
