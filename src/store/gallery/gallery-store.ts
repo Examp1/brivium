@@ -2,7 +2,7 @@ import { useFetch } from "@/composables/useFetch";
 import { useCookies } from "@vueuse/integrations/useCookies.mjs";
 
 export const useGalleryStore = defineStore("gallery-store", () => {
-    const galleryListData = ref();
+    const albumData = ref();
     const galleryAlbums = ref();
     const cookies = useCookies(["accessToken"]);
 
@@ -46,11 +46,28 @@ export const useGalleryStore = defineStore("gallery-store", () => {
         fetchAlbums();
     };
 
+    const getAlbumInfoById = async (albumId: number) => {
+        const { data } = await useFetch(
+            `${APP_ENUM.BASE_API_URL}/api/profile/company/gallery/get-by-id`,
+            {
+                method: ERequestMethods.POST,
+                data: {
+                    id: albumId,
+                },
+                headers: {
+                    Authorization: `Bearer ${cookies.get("accessToken")}`,
+                },
+            },
+        );
+        albumData.value = data.value;
+    };
+
     return {
         galleryAlbums,
-        galleryListData,
+        albumData,
         fetchAlbums,
         deleteAlbumById,
         addNewAlbum,
+        getAlbumInfoById,
     };
 });

@@ -6,7 +6,7 @@ const openDropdown = ref<boolean>(false);
 </script>
 
 <template>
-    <div class="border border-gray-400 rounded-lg relative">
+    <div class="border border-gray-400 rounded-lg relative cursor-pointer">
         <div
             class="action-menu absolute top-[10px] right-[10px] cursor-pointer"
         >
