@@ -22,6 +22,7 @@ const uploadType = [
 ];
 
 const selectedMedia = ref();
+const mediaLink = ref();
 const selectMedia = (event) => {
     selectedMedia.value = Array.from(event.target.files);
 };
@@ -77,7 +78,21 @@ const fetchMedia = (file: File, uploadApi: string) => {
     });
 };
 
-const uploadVideoUrl = () => {};
+const uploadVideoUrl = () => {
+    useFetch(
+        `${APP_ENUM.BASE_API_URL}/api/profile/company/gallery/items/upload-video-link`,
+        {
+            method: ERequestMethods.POST,
+            data: {
+                gallery_id: props.albumId,
+                url: mediaLink,
+            },
+            headers: {
+                Authorization: `Bearer ${cookies.get("accessToken")}`,
+            },
+        },
+    );
+};
 </script>
 
 <template>
@@ -156,6 +171,7 @@ const uploadVideoUrl = () => {};
         </div>
         <div v-else-if="currentType === 'video_url'" class="mt-3">
             <input
+                v-model="mediaLink"
                 type="text"
                 placeholder="Введіть посилання на відео (youtube)"
                 class="p-2.5 w-full h-[48px] border border-gray-400 outline-0 rounded-lg placeholder:text-gray-400"
