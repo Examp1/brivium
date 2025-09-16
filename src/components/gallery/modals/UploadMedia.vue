@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { useFetch } from "@/composables/useFetch";
 import { useCookies } from "@vueuse/integrations/useCookies.mjs";
-const emit = defineEmits(["refresh"]);
-
+const galleryStore = useGalleryStore();
 const cookies = useCookies(["accessToken"]);
 
 const props = defineProps(["albumId"]);
@@ -46,6 +45,10 @@ const uploadFilter = computed(() => {
     return temp;
 });
 
+const syncAlbumWithStore = () => {
+    galleryStore.getAlbumInfoById(props.albumId);
+};
+
 const uploadMedia = async () => {
     const uploadApi =
         currentType.value === "image"
@@ -55,7 +58,7 @@ const uploadMedia = async () => {
     for (const file of selectedMedia.value) {
         await fetchMedia(file, uploadApi);
     }
-    emit("refresh");
+    syncAlbumWithStore();
 };
 
 const fetchMedia = (file: File, uploadApi: string) => {
@@ -92,6 +95,7 @@ const uploadVideoUrl = () => {
             },
         },
     );
+    syncAlbumWithStore();
 };
 </script>
 

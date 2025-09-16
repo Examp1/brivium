@@ -61,6 +61,22 @@ export const useGalleryStore = defineStore("gallery-store", () => {
         );
         albumData.value = data.value;
     };
+    const getMediaFileById = async (albumId: number, mediaId: number) => {
+        await useFetch(
+            `${APP_ENUM.BASE_API_URL}/api/profile/company/gallery/items/delete`,
+            {
+                method: ERequestMethods.POST,
+                data: {
+                    gallery_id: albumId,
+                    id: mediaId,
+                },
+                headers: {
+                    Authorization: `Bearer ${cookies.get("accessToken")}`,
+                },
+            },
+        );
+        getAlbumInfoById(albumId);
+    };
 
     return {
         galleryAlbums,
@@ -69,5 +85,6 @@ export const useGalleryStore = defineStore("gallery-store", () => {
         deleteAlbumById,
         addNewAlbum,
         getAlbumInfoById,
+        getMediaFileById,
     };
 });

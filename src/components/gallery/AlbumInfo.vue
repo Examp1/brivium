@@ -34,7 +34,7 @@ const openModal = ref<boolean>(false);
                 </button>
             </div>
         </div>
-        <ImageListItem :mediaData="albumData.items" />
+        <ImageListItem :mediaData="albumData" />
     </div>
 </template>
 

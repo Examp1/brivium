@@ -16,10 +16,7 @@ onMounted(() => {
 
 <template>
     <AppModal v-if="showModal" @close="showModal = false">
-        <GalleryModal
-            @close="showModal = false"
-            @refresh="galleryStore.fetchAlbums()"
-        />
+        <GalleryModal @close="showModal = false" />
     </AppModal>
     <div class="p-4 border-t border-gray-100">
         <div class="flex border-b border-gray-100">
