@@ -2,7 +2,7 @@
 import * as zod from "zod";
 import { toTypedSchema } from "@vee-validate/zod";
 import { useForm } from "vee-validate";
-import AppInput from "../form/inputs/AppInput.vue";
+import AppInput from "../../form/inputs/AppInput.vue";
 
 const emit = defineEmits(["close"]);
 

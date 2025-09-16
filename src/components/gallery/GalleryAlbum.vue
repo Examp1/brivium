@@ -12,7 +12,7 @@ const openDropdown = ref<boolean>(false);
         >
             <span
                 class="mdi mdi-dots-vertical text-xl"
-                @click="openDropdown = !openDropdown"
+                @click.stop="openDropdown = !openDropdown"
             ></span>
             <div
                 v-if="openDropdown"

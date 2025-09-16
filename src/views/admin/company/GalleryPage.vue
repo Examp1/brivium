@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import GalleryAlbumsList from "@/components/gallery/GalleryAlbumsList.vue";
-import GalleryModal from "@/components/gallery/GalleryModal.vue";
+import GalleryModal from "@/components/gallery/modals/GalleryModal.vue";
 import AppModal from "@/components/ui/AppModal.vue";
 import { onMounted } from "vue";
 
@@ -16,7 +16,10 @@ onMounted(() => {
 
 <template>
     <AppModal v-if="showModal" @close="showModal = false">
-        <GalleryModal @close="showModal = false" />
+        <GalleryModal
+            @close="showModal = false"
+            @refresh="galleryStore.fetchAlbums()"
+        />
     </AppModal>
     <div class="p-4 border-t border-gray-100">
         <div class="flex border-b border-gray-100">
