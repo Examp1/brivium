@@ -21,7 +21,7 @@ export const useGalleryStore = defineStore("gallery-store", () => {
     };
 
     const deleteAlbumById = async (albumId: number) => {
-        await useFetch(
+        useFetch(
             `${APP_ENUM.BASE_API_URL}/api/profile/company/gallery/delete`,
             {
                 method: ERequestMethods.POST,
@@ -35,14 +35,17 @@ export const useGalleryStore = defineStore("gallery-store", () => {
         );
         fetchAlbums();
     };
-    const addNewAlbum = async (albumAata) => {
-        useFetch(`${APP_ENUM.BASE_API_URL}/api/profile/company/gallery/add`, {
-            method: ERequestMethods.POST,
-            data: albumAata,
-            headers: {
-                Authorization: `Bearer ${cookies.get("accessToken")}`,
+    const addNewAlbum = async (albumData) => {
+        await useFetch(
+            `${APP_ENUM.BASE_API_URL}/api/profile/company/gallery/add`,
+            {
+                method: ERequestMethods.POST,
+                data: albumData,
+                headers: {
+                    Authorization: `Bearer ${cookies.get("accessToken")}`,
+                },
             },
-        });
+        );
         fetchAlbums();
     };
 

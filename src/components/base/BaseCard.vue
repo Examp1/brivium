@@ -98,7 +98,7 @@ const openDropdown = ref<boolean>(false);
                 class="aspect-4/3 object-cover w-full rounded-lg"
             />
         </a>
-        <div v-if="descrition">
+        <div v-if="descrition" class="pt-2">
             {{ descrition }}
         </div>
     </div>
