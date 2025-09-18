@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import AppHeader from "@/components/layout/AppHeader.vue";
 import AppSidebar from "@/components/layout/AppSidebar.vue";
+import { onMounted } from "vue";
+
+const companyInfoStore = useCompanyInfoStore();
 
 const menu = ref([
     {
@@ -31,6 +34,11 @@ const menu = ref([
 ]);
 
 const showMenu = ref<boolean>(false);
+onMounted(async () => {
+    // if (!companyInfo.value) {
+    await companyInfoStore.fetchCompanyInfo();
+    // }
+});
 </script>
 
 <template>
