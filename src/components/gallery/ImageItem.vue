@@ -1,10 +1,63 @@
 <script setup lang="ts">
-defineProps(["mediaItem"]);
-const emit = defineEmits(["deleteMedia"]);
+import BaseCard from "../base/BaseCard.vue";
+const props = defineProps(["mediaItem"]);
+const loading = ref<boolean>(false);
+const galleryStore = useGalleryStore();
+
+const deleteFile = async () => {
+    loading.value = true;
+    galleryStore.deleteMediaFileById(props.mediaItem.id);
+};
+
+function getYouTubeThumbnail(url: string, quality = "hqdefault") {
+    const videoId = url.match(
+        /(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&?#]+)/,
+    )?.[1];
+
+    if (!videoId) {
+        console.error("Не удалось извлечь ID видео");
+        return null;
+    }
+    return `https://img.youtube.com/vi/${videoId}/${quality}.jpg`;
+}
+const cardData = computed(() => {
+    switch (props.mediaItem.type_code) {
+        case 1:
+            return {
+                type: "image",
+                src: props.mediaItem.image_url,
+            };
+        case 2:
+            return {
+                type: "video",
+                src: props.mediaItem.video_url,
+            };
+        case 3:
+            return {
+                type: "video_url",
+                link: props.mediaItem.video_link,
+                src: getYouTubeThumbnail(props.mediaItem.video_link),
+            };
+        default:
+            return {
+                type: "undefined",
+                src: "",
+            };
+    }
+});
 </script>
 
 <template>
-    <div
+    <!-- {{ mediaItem }} -->
+    <BaseCard
+        :type="cardData.type"
+        :src="cardData.src"
+        :link="cardData.link"
+        :title="mediaItem.type_text"
+        :loading
+        @delete="deleteFile"
+    />
+    <!-- <div
         v-if="mediaItem.type_code === 1"
         class="cursor-pointer relative overflow-hidden group"
     >
@@ -33,7 +86,7 @@ const emit = defineEmits(["deleteMedia"]);
             <source :src="mediaItem.video_url" type="video/mp4" />
             Ваш браузер не поддерживает тег видео.
         </video>
-    </div>
+    </div> -->
 </template>
 
 <style scoped></style>

@@ -1,25 +1,20 @@
 <script setup lang="ts">
 import ImageItem from "./ImageItem.vue";
-const galleryStore = useGalleryStore();
-const props = defineProps(["mediaData"]);
-
-const deleteMedia = (mediaId: number) => {
-    galleryStore.getMediaFileById(props.mediaData.model.id, mediaId);
-};
+defineProps(["mediaData"]);
 </script>
 
 <template>
-    <div class="grid grid-cols-6 gap-5 mt-5">
+    <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-5 mt-5">
         <transition-group name="shrink" mode="in-out">
             <ImageItem
                 v-for="mediaitem in mediaData.items"
                 :key="mediaitem.id"
                 :mediaItem="mediaitem"
-                @deleteMedia="deleteMedia"
             />
         </transition-group>
     </div>
 </template>
+!
 
 <style scoped lang="scss">
 .shrink-move {

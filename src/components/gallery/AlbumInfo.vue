@@ -8,6 +8,10 @@ const { albumData } = storeToRefs(galleryStore);
 const emit = defineEmits(["close"]);
 
 const openModal = ref<boolean>(false);
+
+const selectMedia = (event, type: "video" | "image") => {
+    galleryStore.uploadMedia(event.target.files, type);
+};
 </script>
 
 <template>
@@ -26,14 +30,42 @@ const openModal = ref<boolean>(false);
                 Альбом: {{ albumData.model.title }}
             </h2>
             <div class="ml-auto flex gap-4">
+                <label
+                    class="h-11 px-10 bg-blue-500 text-white rounded-lg cursor-pointer flex items-center"
+                    for="image_upload"
+                >
+                    Додати зображення
+                </label>
+                <label
+                    class="h-11 px-10 bg-blue-500 text-white rounded-lg cursor-pointer flex items-center"
+                    for="video_upload"
+                >
+                    Додати відео файл
+                </label>
                 <button
                     class="h-11 px-10 bg-green-500 text-white rounded-lg"
                     @click="openModal = true"
                 >
-                    Додати медіа
+                    Додати відео за посиланням
                 </button>
             </div>
         </div>
+        <input
+            class="hidden"
+            @change="selectMedia($event, 'image')"
+            type="file"
+            id="image_upload"
+            multiple
+            accept="image/*,.png,.SVG,.jpg,.jpeg,.gif"
+        />
+        <input
+            class="hidden"
+            @change="selectMedia($event, 'video')"
+            type="file"
+            id="video_upload"
+            multiple
+            accept="video/*,.mp4,.webm,.avi,.mov,.mkv"
+        />
         <ImageListItem :mediaData="albumData" />
     </div>
 </template>

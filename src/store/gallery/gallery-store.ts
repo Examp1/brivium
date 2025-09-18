@@ -61,13 +61,13 @@ export const useGalleryStore = defineStore("gallery-store", () => {
         );
         albumData.value = data.value;
     };
-    const getMediaFileById = async (albumId: number, mediaId: number) => {
+    const deleteMediaFileById = async (mediaId: number) => {
         await useFetch(
             `${APP_ENUM.BASE_API_URL}/api/profile/company/gallery/items/delete`,
             {
                 method: ERequestMethods.POST,
                 data: {
-                    gallery_id: albumId,
+                    gallery_id: albumData.value.model.id,
                     id: mediaId,
                 },
                 headers: {
@@ -75,7 +75,41 @@ export const useGalleryStore = defineStore("gallery-store", () => {
                 },
             },
         );
-        getAlbumInfoById(albumId);
+        getAlbumInfoById(albumData.value.model.id);
+    };
+
+    const uploadMedia = async (
+        selectedMedia: FileList,
+        mediaType: "video" | "image",
+    ) => {
+        const uploadApi =
+            mediaType === "image"
+                ? "/api/profile/company/gallery/items/upload-image"
+                : "/api/profile/company/gallery/items/upload-video";
+        const selectedMediaArray = Array.from(selectedMedia);
+        for (const file of selectedMediaArray) {
+            await fetchMedia(file, uploadApi);
+        }
+    };
+
+    const fetchMedia = (file: File, uploadApi: string) => {
+        return new Promise(async (resolve, reject) => {
+            const formData = new FormData();
+            formData.append("gallery_id", albumData.value.model.id);
+            formData.append("file", file);
+            try {
+                useFetch(`${APP_ENUM.BASE_API_URL}${uploadApi}`, {
+                    method: ERequestMethods.POST,
+                    data: formData,
+                    headers: {
+                        Authorization: `Bearer ${cookies.get("accessToken")}`,
+                    },
+                });
+                resolve(`${file.name} uploaded`);
+            } catch (error) {
+                reject(error);
+            }
+        });
     };
 
     return {
@@ -85,6 +119,7 @@ export const useGalleryStore = defineStore("gallery-store", () => {
         deleteAlbumById,
         addNewAlbum,
         getAlbumInfoById,
-        getMediaFileById,
+        deleteMediaFileById,
+        uploadMedia,
     };
 });
