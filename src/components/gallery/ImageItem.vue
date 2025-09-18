@@ -51,6 +51,7 @@ const cardData = computed(() => {
     <!-- {{ mediaItem }} -->
     <BaseCard
         :type="cardData.type"
+        :src_type="cardData.type"
         :src="cardData.src"
         :link="cardData.link"
         :title="mediaItem.type_text"

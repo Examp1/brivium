@@ -5,7 +5,7 @@ defineProps(["mediaData"]);
 
 <template>
     <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-5 mt-5">
-        <transition-group name="shrink" mode="in-out">
+        <transition-group name="shrink">
             <ImageItem
                 v-for="mediaitem in mediaData.items"
                 :key="mediaitem.id"
@@ -14,7 +14,6 @@ defineProps(["mediaData"]);
         </transition-group>
     </div>
 </template>
-!
 
 <style scoped lang="scss">
 .shrink-move {
@@ -34,9 +33,8 @@ defineProps(["mediaData"]);
     will-change: opacity, transform;
 }
 
-.shrink-enter,
-.shrink-leave-to,
-.shrink-enter-from {
+.shrink-enter-from,
+.shrink-leave-to {
     opacity: 0;
     transform: scale(0.75) translateY(25%);
 }

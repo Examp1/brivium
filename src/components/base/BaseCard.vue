@@ -1,9 +1,12 @@
 <script setup lang="ts">
+import placeholderImage from "@/assets/images/placeholder.jpg";
+
 const props = defineProps([
     "type",
     "link",
     "title",
     "src",
+    "src_type",
     "descrition",
     "loading",
 ]);
@@ -19,6 +22,10 @@ const icon = computed(() => {
             return "mdi-youtube";
     }
 });
+
+const change = () => {
+    console.log("change");
+};
 
 const openDropdown = ref<boolean>(false);
 </script>
@@ -45,11 +52,14 @@ const openDropdown = ref<boolean>(false);
                 v-if="openDropdown"
                 class="dropdown absolute border border-gray-400 bg-white z-1 rounded-sm right-full"
             >
-                <div class="text-sm flex gap-2 py-1 px-3 hover:bg-gray-300">
+                <div
+                    class="text-sm flex gap-2 py-1 px-3 hover:bg-gray-300"
+                    @click.stop="change"
+                >
                     <span class="mdi mdi-pen"></span> Change
                 </div>
                 <div
-                    @click="emit('delete')"
+                    @click.stop="emit('delete')"
                     class="text-sm flex gap-2 text-red-400 py-1 px-3 hover:bg-gray-300"
                 >
                     <span class="mdi mdi-delete"></span> Delete
@@ -62,12 +72,12 @@ const openDropdown = ref<boolean>(false);
             <h3 class="font-medium text-lg">{{ title }}</h3>
         </div>
         <img
-            v-if="type === 'image'"
+            v-if="src_type === 'image'"
             class="aspect-4/3 object-cover w-full rounded-lg"
-            :src="src"
+            :src="src || placeholderImage"
             alt=""
         />
-        <div v-if="type === 'video'" class="relative">
+        <div v-if="src_type === 'video'" class="relative">
             <span
                 class="absolute top-[50%] left-[50%] -translate-y-[50%] -translate-x-[50%] mdi mdi-play-box text-white text-7xl"
             ></span>
@@ -81,7 +91,7 @@ const openDropdown = ref<boolean>(false);
                 Ваш браузер не поддерживает тег видео.
             </video>
         </div>
-        <a v-if="type === 'video_url'" :href="link" target="_blank">
+        <a v-if="src_type === 'video_url'" :href="link" target="_blank">
             <img
                 :src="src"
                 alt=""

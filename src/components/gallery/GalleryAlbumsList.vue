@@ -13,7 +13,6 @@ const openAlbumInfo = (albumId: number) => {
 </script>
 
 <template>
-    <pre>тут есть баг, при переключении туда сюда </pre>
     <transition name="slide" mode="out-in">
         <div class="mt-5" v-if="!isOpenAlbumInfo">
             <div class="grid grid-cols-4 gap-5">
@@ -27,7 +26,9 @@ const openAlbumInfo = (albumId: number) => {
                 </transition-group>
             </div>
         </div>
-        <AlbumInfo v-else @close="isOpenAlbumInfo = false" />
+        <div v-else>
+            <AlbumInfo @close="isOpenAlbumInfo = false" />
+        </div>
     </transition>
 </template>
 

@@ -90,6 +90,8 @@ export const useGalleryStore = defineStore("gallery-store", () => {
         for (const file of selectedMediaArray) {
             await fetchMedia(file, uploadApi);
         }
+
+        getAlbumInfoById(albumData.value.model.id);
     };
 
     const fetchMedia = (file: File, uploadApi: string) => {

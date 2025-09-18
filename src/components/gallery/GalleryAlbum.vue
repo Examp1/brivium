@@ -1,12 +1,25 @@
 <script setup lang="ts">
-const galleryStore = useGalleryStore();
+import BaseCard from "../base/BaseCard.vue";
+const props = defineProps(["album"]);
 
-defineProps(["album"]);
-const openDropdown = ref<boolean>(false);
+const galleryStore = useGalleryStore();
+const loading = ref<boolean>(false);
+const deleteAlbum = async () => {
+    loading.value = true;
+    galleryStore.deleteAlbumById(props.album.id);
+};
 </script>
 
 <template>
-    <div class="border border-gray-400 rounded-lg relative cursor-pointer">
+    <BaseCard
+        :title="album.title"
+        :descrition="album.description"
+        :src="album.cover_image"
+        src_type="image"
+        :loading
+        @delete="deleteAlbum"
+    />
+    <!-- <div class="border border-gray-400 rounded-lg relative cursor-pointer">
         <div
             class="action-menu absolute top-[10px] right-[10px] cursor-pointer"
         >
@@ -44,7 +57,7 @@ const openDropdown = ref<boolean>(false);
         >
             {{ album.description }}
         </p>
-    </div>
+    </div> -->
 </template>
 
 <style scoped></style>
