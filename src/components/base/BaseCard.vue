@@ -32,11 +32,11 @@ const openDropdown = ref<boolean>(false);
 
 <template>
     <div
-        class="bg-gray-200 hover:bg-gray-300 base-transition p-2 cursor-pointer rounded-xl relative"
+        class="bg-gray-200 hover:bg-gray-300 base-transition p-2 rounded-xl relative"
     >
         <div
             v-if="loading"
-            class="absolute inset-0 bg-white/70 rounded-xl z-1 flex items-center justify-center"
+            class="absolute inset-0 bg-white/70 rounded-xl z-1 flex items-center justify-center pointer-events-none"
         >
             <span class="mdi mdi-loading text-6xl animate-spin"></span>
         </div>
@@ -77,7 +77,7 @@ const openDropdown = ref<boolean>(false);
             :src="src || placeholderImage"
             alt=""
         />
-        <div v-if="src_type === 'video'" class="relative">
+        <div v-if="src_type === 'video'" class="relative cursor-pointer">
             <span
                 class="absolute top-[50%] left-[50%] -translate-y-[50%] -translate-x-[50%] mdi mdi-play-box text-white text-7xl"
             ></span>

@@ -18,7 +18,7 @@ const selectMedia = (event, type: "video" | "image") => {
     <AppModal v-if="openModal" @close="openModal = false">
         <UploadMedia @close="openModal = false" :albumId="albumData.model.id" />
     </AppModal>
-    <div>
+    <div v-if="albumData">
         <div class="border-b border-gray-100 py-2.5 flex items-center gap-5">
             <button
                 class="bg-gray-200 py-2 px-3 rounded-lg"
@@ -27,7 +27,7 @@ const selectMedia = (event, type: "video" | "image") => {
                 Назад
             </button>
             <h2 class="text-2xl font-medium">
-                Альбом: {{ albumData.model.title }}
+                Альбом: {{ albumData?.model.title }}
             </h2>
             <div class="ml-auto flex gap-4">
                 <label
