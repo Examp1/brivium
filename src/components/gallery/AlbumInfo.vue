@@ -11,6 +11,7 @@ const openModal = ref<boolean>(false);
 
 const selectMedia = (event, type: "video" | "image") => {
     galleryStore.uploadMedia(event.target.files, type);
+    event.target.value = null;
 };
 </script>
 

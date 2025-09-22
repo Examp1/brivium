@@ -85,44 +85,35 @@ export const useGalleryStore = defineStore("gallery-store", () => {
         selectedMedia: FileList,
         mediaType: "video" | "image",
     ) => {
+        console.log("123");
         const uploadApi =
             mediaType === "image"
                 ? "/api/profile/company/gallery/items/upload-image"
                 : "/api/profile/company/gallery/items/upload-video";
+
         const selectedMediaArray = Array.from(selectedMedia);
-        const uploadPromises = selectedMediaArray.map(
-            (file) =>
-                new Promise(async (resolve, reject) => {
-                    try {
-                        await fetchMedia(file, uploadApi);
-                        resolve(`${file.name} uploaded`);
-                    } catch (error) {
-                        reject(error);
-                    }
-                }),
+
+        const uploadPromises = selectedMediaArray.map((file) =>
+            fetchMedia(file, uploadApi),
         );
+
         await Promise.all(uploadPromises);
+
         await getAlbumInfoById(albumData.value.model.id);
     };
 
-    const fetchMedia = (file: File, uploadApi: string) => {
-        return new Promise(async (resolve, reject) => {
-            const formData = new FormData();
-            formData.append("gallery_id", albumData.value.model.id);
-            formData.append("file", file);
-            try {
-                await useFetch(`${APP_ENUM.BASE_API_URL}${uploadApi}`, {
-                    method: ERequestMethods.POST,
-                    data: formData,
-                    headers: {
-                        Authorization: `Bearer ${cookies.get("accessToken")}`,
-                    },
-                });
-                resolve(`${file.name} uploaded`);
-            } catch (error) {
-                reject(error);
-            }
+    const fetchMedia = async (file: File, uploadApi: string) => {
+        const formData = new FormData();
+        formData.append("gallery_id", albumData.value.model.id);
+        formData.append("file", file);
+        await useFetch(`${APP_ENUM.BASE_API_URL}${uploadApi}`, {
+            method: ERequestMethods.POST,
+            data: formData,
+            headers: {
+                Authorization: `Bearer ${cookies.get("accessToken")}`,
+            },
         });
+        return `${file.name} uploaded`;
     };
 
     return {

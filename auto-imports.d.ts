@@ -15,6 +15,7 @@ declare global {
   const computed: typeof import('vue')['computed']
   const createPinia: typeof import('pinia')['createPinia']
   const defineStore: typeof import('pinia')['defineStore']
+  const delay: typeof import('./src/utils/helpers')['delay']
   const getActivePinia: typeof import('pinia')['getActivePinia']
   const getPath: typeof import('./src/utils/getPath')['getPath']
   const mapActions: typeof import('pinia')['mapActions']
@@ -25,6 +26,7 @@ declare global {
   const onBeforeRouteLeave: typeof import('vue-router')['onBeforeRouteLeave']
   const onBeforeRouteUpdate: typeof import('vue-router')['onBeforeRouteUpdate']
   const ref: typeof import('vue')['ref']
+  const retry: typeof import('./src/utils/_retry')['retry']
   const setActivePinia: typeof import('pinia')['setActivePinia']
   const setMapStoreSuffix: typeof import('pinia')['setMapStoreSuffix']
   const storeToRefs: typeof import('pinia')['storeToRefs']
@@ -70,6 +72,7 @@ declare module 'vue' {
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly createPinia: UnwrapRef<typeof import('pinia')['createPinia']>
     readonly defineStore: UnwrapRef<typeof import('pinia')['defineStore']>
+    readonly delay: UnwrapRef<typeof import('./src/utils/helpers')['delay']>
     readonly getActivePinia: UnwrapRef<typeof import('pinia')['getActivePinia']>
     readonly getPath: UnwrapRef<typeof import('./src/utils/getPath')['getPath']>
     readonly mapActions: UnwrapRef<typeof import('pinia')['mapActions']>
@@ -80,6 +83,7 @@ declare module 'vue' {
     readonly onBeforeRouteLeave: UnwrapRef<typeof import('vue-router')['onBeforeRouteLeave']>
     readonly onBeforeRouteUpdate: UnwrapRef<typeof import('vue-router')['onBeforeRouteUpdate']>
     readonly ref: UnwrapRef<typeof import('vue')['ref']>
+    readonly retry: UnwrapRef<typeof import('./src/utils/_retry')['retry']>
     readonly setActivePinia: UnwrapRef<typeof import('pinia')['setActivePinia']>
     readonly setMapStoreSuffix: UnwrapRef<typeof import('pinia')['setMapStoreSuffix']>
     readonly storeToRefs: UnwrapRef<typeof import('pinia')['storeToRefs']>
