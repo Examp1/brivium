@@ -90,11 +90,19 @@ export const useGalleryStore = defineStore("gallery-store", () => {
                 ? "/api/profile/company/gallery/items/upload-image"
                 : "/api/profile/company/gallery/items/upload-video";
         const selectedMediaArray = Array.from(selectedMedia);
-        for (const file of selectedMediaArray) {
-            await fetchMedia(file, uploadApi);
-        }
-
-        getAlbumInfoById(albumData.value.model.id);
+        const uploadPromises = selectedMediaArray.map(
+            (file) =>
+                new Promise(async (resolve, reject) => {
+                    try {
+                        await fetchMedia(file, uploadApi);
+                        resolve(`${file.name} uploaded`);
+                    } catch (error) {
+                        reject(error);
+                    }
+                }),
+        );
+        await Promise.all(uploadPromises);
+        await getAlbumInfoById(albumData.value.model.id);
     };
 
     const fetchMedia = (file: File, uploadApi: string) => {
@@ -103,7 +111,7 @@ export const useGalleryStore = defineStore("gallery-store", () => {
             formData.append("gallery_id", albumData.value.model.id);
             formData.append("file", file);
             try {
-                useFetch(`${APP_ENUM.BASE_API_URL}${uploadApi}`, {
+                await useFetch(`${APP_ENUM.BASE_API_URL}${uploadApi}`, {
                     method: ERequestMethods.POST,
                     data: formData,
                     headers: {

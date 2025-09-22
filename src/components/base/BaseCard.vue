@@ -10,7 +10,6 @@ const props = defineProps([
     "descrition",
     "loading",
 ]);
-const emit = defineEmits(["delete", "change"]);
 
 const icon = computed(() => {
     switch (props.type) {
@@ -22,12 +21,6 @@ const icon = computed(() => {
             return "mdi-youtube";
     }
 });
-
-const change = () => {
-    console.log("change");
-};
-
-const openDropdown = ref<boolean>(false);
 </script>
 
 <template>
@@ -41,31 +34,8 @@ const openDropdown = ref<boolean>(false);
             <span class="mdi mdi-loading text-6xl animate-spin"></span>
         </div>
         <!-- dropdown -->
-        <div
-            class="action-menu absolute top-[10px] right-[10px] cursor-pointer"
-        >
-            <span
-                class="mdi mdi-dots-vertical flex items-center justify-center text-xl w-[30px] h-[30px] rounded-full hover:bg-gray-200 base-transition"
-                @click.stop="openDropdown = !openDropdown"
-            ></span>
-            <div
-                v-if="openDropdown"
-                class="dropdown absolute border border-gray-400 bg-white z-1 rounded-sm right-full"
-            >
-                <div
-                    class="text-sm flex gap-2 py-1 px-3 hover:bg-gray-300"
-                    @click.stop="change"
-                >
-                    <span class="mdi mdi-pen"></span> Change
-                </div>
-                <div
-                    @click.stop="emit('delete')"
-                    class="text-sm flex gap-2 text-red-400 py-1 px-3 hover:bg-gray-300"
-                >
-                    <span class="mdi mdi-delete"></span> Delete
-                </div>
-            </div>
-        </div>
+        <slot name="dropdown" />
+
         <!-- main component -->
         <div class="px-2 pt-1 pb-2 flex items-center gap-3">
             <span class="mdi text-xl" :class="icon"></span>
