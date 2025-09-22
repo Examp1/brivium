@@ -43,7 +43,7 @@ const icon = computed(() => {
         </div>
         <img
             v-if="src_type === 'image'"
-            class="aspect-4/3 object-cover w-full rounded-lg"
+            class="aspect-4/3 object-cover w-full rounded-lg cursor-pointer"
             :src="src || placeholderImage"
             alt=""
         />

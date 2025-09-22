@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import BaseCard from "../base/BaseCard.vue";
 import BaseCardDropdown from "../base/BaseCardDropdown.vue";
+import AppModal from "../ui/AppModal.vue";
 const props = defineProps(["mediaItem"]);
 const loading = ref<boolean>(false);
 const galleryStore = useGalleryStore();
@@ -47,16 +48,45 @@ const cardData = computed(() => {
             };
     }
 });
+
+const showModal = ref<boolean>(false);
+
+const openModal = () => {
+    if (cardData.value.type === "video_url") return;
+    showModal.value = true;
+};
 </script>
 
 <template>
+    <AppModal v-if="showModal" @close="showModal = false">
+        <img
+            v-if="cardData.type === 'image'"
+            class="aspect-4/3 object-cover w-full rounded-lg"
+            :src="cardData.src"
+            alt=""
+        />
+
+        <video
+            v-if="cardData.type === 'video'"
+            class="aspect-16/9 object-cover w-full rounded-lg"
+            autoplay
+            muted
+            playsinline
+            loop
+            controls
+        >
+            <source :src="cardData.src" type="video/mp4" />
+            Ваш браузер не поддерживает тег видео.
+        </video>
+    </AppModal>
     <BaseCard
         :type="cardData.type"
         :src_type="cardData.type"
         :src="cardData.src"
         :link="cardData.link"
-        :title="mediaItem.type_text"
+        :title="mediaItem.title || mediaItem.type_text"
         :loading
+        @click="openModal"
     >
         <template #dropdown>
             <BaseCardDropdown @delete="deleteFile" />
