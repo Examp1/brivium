@@ -21,15 +21,23 @@ const selectMedia = (event, type: "video" | "image") => {
     </AppModal>
     <div v-if="albumData">
         <div class="border-b border-gray-100 py-2.5 flex items-center gap-5">
-            <button
-                class="bg-gray-200 py-2 px-3 rounded-lg"
-                @click="emit('close')"
-            >
-                Назад
-            </button>
-            <h2 class="text-2xl font-medium">
-                Альбом: {{ albumData?.model.title }}
-            </h2>
+            <div class="mr-auto flex items-center gap-4">
+                <button
+                    class="bg-gray-200 py-2 px-3 rounded-lg"
+                    @click="emit('close')"
+                >
+                    Назад
+                </button>
+                <h2 class="text-2xl font-medium">
+                    Альбом: {{ albumData?.model.title }}
+                </h2>
+                <button
+                    class="h-11 px-10 bg-green-500 text-white rounded-lg"
+                    @click="openModal = true"
+                >
+                    Додати категорію
+                </button>
+            </div>
             <div class="ml-auto flex gap-4">
                 <label
                     class="h-11 px-10 bg-blue-500 text-white rounded-lg cursor-pointer flex items-center"
@@ -44,7 +52,7 @@ const selectMedia = (event, type: "video" | "image") => {
                     Додати відео файл
                 </label>
                 <button
-                    class="h-11 px-10 bg-green-500 text-white rounded-lg"
+                    class="h-11 px-10 bg-blue-500 text-white rounded-lg"
                     @click="openModal = true"
                 >
                     Додати відео за посиланням
