@@ -2,6 +2,7 @@
 import BaseCard from "../base/BaseCard.vue";
 import BaseCardDropdown from "../base/BaseCardDropdown.vue";
 import AppModal from "../ui/AppModal.vue";
+import UpdateMediaModal from "./modals/UpdateMediaModal.vue";
 const props = defineProps(["mediaItem"]);
 const loading = ref<boolean>(false);
 const galleryStore = useGalleryStore();
@@ -50,6 +51,7 @@ const cardData = computed(() => {
 });
 
 const showModal = ref<boolean>(false);
+const showUpdModal = ref<boolean>(false);
 
 const openModal = () => {
     if (cardData.value.type === "video_url") return;
@@ -79,6 +81,9 @@ const openModal = () => {
             Ваш браузер не поддерживает тег видео.
         </video>
     </AppModal>
+    <AppModal v-if="showUpdModal" @close="showUpdModal = false">
+        <UpdateMediaModal :mediaId="mediaItem.id" />
+    </AppModal>
     <BaseCard
         :type="cardData.type"
         :src_type="cardData.type"
@@ -89,7 +94,10 @@ const openModal = () => {
         @click="openModal"
     >
         <template #dropdown>
-            <BaseCardDropdown @delete="deleteFile" />
+            <BaseCardDropdown
+                @delete="deleteFile"
+                @change="showUpdModal = true"
+            />
         </template>
     </BaseCard>
 </template>

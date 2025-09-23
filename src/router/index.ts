@@ -24,10 +24,10 @@ const router = createRouter({
             name: "company-page",
             children: [
                 {
-                    path: "info",
-                    name: "info-page",
+                    path: "profile",
+                    name: "profile-page",
                     component: () =>
-                        import("../views/admin/company/InfoPage.vue"),
+                        import("../views/admin/company/ProfilePage.vue"),
                 },
                 {
                     path: "tariff",
@@ -50,6 +50,32 @@ const router = createRouter({
                 {
                     path: "gallery",
                     name: "gallery-page",
+                    component: () =>
+                        import("../views/admin/company/GalleryPage.vue"),
+                },
+            ],
+            component: () => import("../views/CompanyPage.vue"),
+        },
+        // client
+        {
+            path: "/client",
+            name: "client-page",
+            children: [
+                {
+                    path: "profile",
+                    name: "profile-page",
+                    component: () =>
+                        import("../views/admin/company/ProfilePage.vue"),
+                },
+                {
+                    path: "notifications",
+                    name: "notifications-page",
+                    component: () =>
+                        import("../views/admin/company/NotificationsPage.vue"),
+                },
+                {
+                    path: "projects",
+                    name: "projects-page",
                     component: () =>
                         import("../views/admin/company/GalleryPage.vue"),
                 },

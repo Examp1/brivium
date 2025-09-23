@@ -31,12 +31,6 @@ const selectMedia = (event, type: "video" | "image") => {
                 <h2 class="text-2xl font-medium">
                     Альбом: {{ albumData?.model.title }}
                 </h2>
-                <button
-                    class="h-11 px-10 bg-green-500 text-white rounded-lg"
-                    @click="openModal = true"
-                >
-                    Додати категорію
-                </button>
             </div>
             <div class="ml-auto flex gap-4">
                 <label

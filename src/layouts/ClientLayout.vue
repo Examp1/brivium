@@ -8,32 +8,23 @@ const companyInfoStore = useCompanyInfoStore();
 const menu = ref([
     {
         title: "Профіль",
-        url: "/company/profile",
+        url: "/client/info",
         icon: "mdi-home-city",
     },
     {
-        title: "Тариф",
-        url: "/company/tariff",
-        icon: "mdi-account",
-    },
-    {
-        title: "Каталог",
-        url: "/company/catalog",
-        icon: "mdi-format-list-bulleted-square",
-    },
-    {
-        title: "Галерея",
-        url: "/company/gallery",
+        title: "Мої проекти",
+        url: "/client/gallery",
         icon: "mdi mdi-image-area",
     },
     {
         title: "Сповіщення",
-        url: "/company/notifications",
+        url: "/client/notifications",
         icon: "mdi mdi-bell",
     },
 ]);
 
 const showMenu = ref<boolean>(false);
+
 onMounted(async () => {
     // if (!companyInfo.value) {
     await companyInfoStore.fetchCompanyInfo();

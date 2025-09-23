@@ -2,9 +2,6 @@
 import { onClickOutside } from "@vueuse/core";
 import { useTemplateRef } from "vue";
 const emit = defineEmits(["delete", "change"]);
-const change = () => {
-    console.log("change");
-};
 
 const openDropdown = ref<boolean>(false);
 
@@ -28,15 +25,15 @@ onClickOutside(target, () => (openDropdown.value = false));
         >
             <div
                 class="text-sm flex gap-2 py-1 px-3 hover:bg-gray-300"
-                @click.stop="change"
+                @click.stop="emit('change')"
             >
-                <span class="mdi mdi-pen"></span> Change
+                <span class="mdi mdi-pen"></span> Змінити
             </div>
             <div
                 @click.stop="emit('delete')"
                 class="text-sm flex gap-2 text-red-400 py-1 px-3 hover:bg-gray-300"
             >
-                <span class="mdi mdi-delete"></span> Delete
+                <span class="mdi mdi-delete"></span> Видалити
             </div>
         </div>
     </div>

@@ -64,6 +64,7 @@ export const useGalleryStore = defineStore("gallery-store", () => {
         );
         albumData.value = data.value;
     };
+
     const deleteMediaFileById = async (mediaId: number) => {
         await useFetch(
             `${APP_ENUM.BASE_API_URL}/api/profile/company/gallery/items/delete`,
@@ -85,7 +86,6 @@ export const useGalleryStore = defineStore("gallery-store", () => {
         selectedMedia: FileList,
         mediaType: "video" | "image",
     ) => {
-        console.log("123");
         const uploadApi =
             mediaType === "image"
                 ? "/api/profile/company/gallery/items/upload-image"
@@ -116,6 +116,36 @@ export const useGalleryStore = defineStore("gallery-store", () => {
         return `${file.name} uploaded`;
     };
 
+    const updateMediaTitle = async (updData: { id: number; val: string }) => {
+        await useFetch(
+            `${APP_ENUM.BASE_API_URL}/api/profile/company/gallery/items/edit-title`,
+            {
+                method: ERequestMethods.POST,
+                data: {
+                    gallery_id: albumData.value.model.id,
+                    ...updData,
+                },
+                headers: {
+                    Authorization: `Bearer ${cookies.get("accessToken")}`,
+                },
+            },
+        );
+        getAlbumInfoById(albumData.value.model.id);
+    };
+    const updateAlbumInfo = async (updData: FormData) => {
+        await useFetch(
+            `${APP_ENUM.BASE_API_URL}/api/profile/company/gallery/update`,
+            {
+                method: ERequestMethods.POST,
+                data: updData,
+                headers: {
+                    Authorization: `Bearer ${cookies.get("accessToken")}`,
+                },
+            },
+        );
+        fetchAlbums();
+    };
+
     return {
         galleryAlbums,
         albumData,
@@ -125,5 +155,7 @@ export const useGalleryStore = defineStore("gallery-store", () => {
         getAlbumInfoById,
         deleteMediaFileById,
         uploadMedia,
+        updateMediaTitle,
+        updateAlbumInfo,
     };
 });

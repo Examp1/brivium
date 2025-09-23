@@ -24,6 +24,7 @@ const props = defineProps({
 });
 
 const { value } = useField(props.name as string);
+
 const paddingClasses = ref("");
 switch (props.iconPosition) {
     case "right":

@@ -2,7 +2,7 @@
 import * as zod from "zod";
 import { toTypedSchema } from "@vee-validate/zod";
 import { useForm } from "vee-validate";
-import AppInput from "../../form/inputs/AppInput.vue";
+import FormInput from "../../form/inputs/FormInput.vue";
 
 const emit = defineEmits(["close"]);
 
@@ -32,12 +32,12 @@ const onSubmit = handleSubmit(async (values) => {
     <div class="p-5 rounded-lg bg-white w-[540px]">
         {{ errors }}
         <form @submit="onSubmit" class="flex flex-col gap-5">
-            <AppInput
+            <FormInput
                 label="Name"
                 placeholder="enter name of album"
                 name="title"
             />
-            <AppInput
+            <FormInput
                 label="Description"
                 placeholder="enter description of album"
                 name="description"
