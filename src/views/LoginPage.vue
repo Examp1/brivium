@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { BASE_URL } from "@/utils/constants";
 import { ref } from "vue";
 import { useFetch } from "@/composables/useFetch";
 import { useCookies } from "@vueuse/integrations/useCookies";
@@ -14,7 +13,7 @@ const loginInputs = ref({
 
 const signIn = async () => {
     const { data, error } = await useFetch(
-        `${BASE_URL}/api/auth/company/login`,
+        `${APP_ENUM.BASE_API_URL}/api/auth/company/login`,
         {
             method: ERequestMethods.POST,
             headers: {
@@ -28,15 +27,18 @@ const signIn = async () => {
     }
 };
 const checkToken = async (token: string) => {
-    const { data } = await useFetch(`${BASE_URL}/api/auth/company/get-token`, {
-        method: ERequestMethods.POST,
-        headers: {
-            "Content-type": "application/json",
+    const { data } = await useFetch(
+        `${APP_ENUM.BASE_API_URL}/api/auth/company/get-token`,
+        {
+            method: ERequestMethods.POST,
+            headers: {
+                "Content-type": "application/json",
+            },
+            data: {
+                one_time_token: token,
+            },
         },
-        data: {
-            one_time_token: token,
-        },
-    });
+    );
 
     cookies.set("accessToken", data?.value?.token);
     router.push("/company/info");

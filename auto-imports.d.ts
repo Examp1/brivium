@@ -7,7 +7,7 @@
 export {}
 declare global {
   const APP_ENUM: typeof import('./src/enums/app_enums')['APP_ENUM']
-  const BASE_URL: typeof import('./src/utils/constants')['BASE_URL']
+  const BASE_URL: (typeof import("./src/utils/constants"))["BASE_URL"]
   const EMediaPath: typeof import('./src/enums/EMediaPath')['EMediaPath']
   const ERequestMethods: typeof import('./src/enums/ERequestMethod')['ERequestMethods']
   const _debounce: typeof import('./src/utils/_debounce')['_debounce']
@@ -16,7 +16,9 @@ declare global {
   const createPinia: typeof import('pinia')['createPinia']
   const defineStore: typeof import('pinia')['defineStore']
   const delay: typeof import('./src/utils/helpers')['delay']
+  const fetchWrapper: typeof import('./src/utils/api/fetchWrapper')['fetchWrapper']
   const getActivePinia: typeof import('pinia')['getActivePinia']
+  const getBearer: typeof import('./src/utils/api/getBearer')['getBearer']
   const getPath: typeof import('./src/utils/getPath')['getPath']
   const mapActions: typeof import('pinia')['mapActions']
   const mapGetters: typeof import('pinia')['mapGetters']
@@ -39,7 +41,7 @@ declare global {
   const useNotificationStore: typeof import('./src/store/notifications/notifications-store')['useNotificationStore']
   const useRoute: typeof import('vue-router')['useRoute']
   const useRouter: typeof import('vue-router')['useRouter']
-  const withAtuh: typeof import('./src/utils/withAuth')['withAtuh']
+  const withAtuh: (typeof import("./src/utils/withAuth"))["withAtuh"]
   const withAuth: typeof import('./src/utils/withAuth')['withAuth']
 }
 // for type re-export
@@ -64,7 +66,6 @@ declare module 'vue' {
   interface GlobalComponents {}
   interface ComponentCustomProperties {
     readonly APP_ENUM: UnwrapRef<typeof import('./src/enums/app_enums')['APP_ENUM']>
-    readonly BASE_URL: UnwrapRef<typeof import('./src/utils/constants')['BASE_URL']>
     readonly EMediaPath: UnwrapRef<typeof import('./src/enums/EMediaPath')['EMediaPath']>
     readonly ERequestMethods: UnwrapRef<typeof import('./src/enums/ERequestMethod')['ERequestMethods']>
     readonly _debounce: UnwrapRef<typeof import('./src/utils/_debounce')['_debounce']>
@@ -73,7 +74,9 @@ declare module 'vue' {
     readonly createPinia: UnwrapRef<typeof import('pinia')['createPinia']>
     readonly defineStore: UnwrapRef<typeof import('pinia')['defineStore']>
     readonly delay: UnwrapRef<typeof import('./src/utils/helpers')['delay']>
+    readonly fetchWrapper: UnwrapRef<typeof import('./src/utils/api/fetchWrapper')['fetchWrapper']>
     readonly getActivePinia: UnwrapRef<typeof import('pinia')['getActivePinia']>
+    readonly getBearer: UnwrapRef<typeof import('./src/utils/api/getBearer')['getBearer']>
     readonly getPath: UnwrapRef<typeof import('./src/utils/getPath')['getPath']>
     readonly mapActions: UnwrapRef<typeof import('pinia')['mapActions']>
     readonly mapGetters: UnwrapRef<typeof import('pinia')['mapGetters']>

@@ -1,7 +1,6 @@
 {
   "globals": {
     "APP_ENUM": true,
-    "BASE_URL": true,
     "EMediaPath": true,
     "ERequestMethods": true,
     "IRequest": true,
@@ -11,7 +10,9 @@
     "createPinia": true,
     "defineStore": true,
     "delay": true,
+    "fetchWrapper": true,
     "getActivePinia": true,
+    "getBearer": true,
     "getPath": true,
     "mapActions": true,
     "mapGetters": true,

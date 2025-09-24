@@ -15,23 +15,29 @@ const showUpdModal = ref<boolean>(false);
 </script>
 
 <template>
-    <AppModal v-if="showUpdModal" @close="showUpdModal = false">
-        <UpdateAlbumModal :albumData="album" @close="showUpdModal = false" />
-    </AppModal>
-    <BaseCard
-        :title="album.title"
-        :descrition="album.description"
-        :src="album.cover_image"
-        src_type="image"
-        :loading
-        @delete="deleteAlbum"
-    >
-        <template #dropdown>
-            <BaseCardDropdown
-                @delete="deleteAlbum"
-                @change="showUpdModal = true"
-            /> </template
-    ></BaseCard>
+    <div>
+        <BaseCard
+            :title="album.title"
+            :descrition="album.description"
+            :src="album.cover_image"
+            src_type="image"
+            type="album"
+            :loading
+            @delete="deleteAlbum"
+        >
+            <template #dropdown>
+                <BaseCardDropdown
+                    @delete="deleteAlbum"
+                    @change="showUpdModal = true"
+                /> </template
+        ></BaseCard>
+        <AppModal v-if="showUpdModal" @close="showUpdModal = false">
+            <UpdateAlbumModal
+                :albumData="album"
+                @close="showUpdModal = false"
+            />
+        </AppModal>
+    </div>
 </template>
 
 <style scoped></style>

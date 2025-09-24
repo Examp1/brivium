@@ -19,6 +19,8 @@ const icon = computed(() => {
             return "mdi-video";
         case "video_url":
             return "mdi-youtube";
+        case "album":
+            return "mdi-image-multiple";
     }
 });
 </script>

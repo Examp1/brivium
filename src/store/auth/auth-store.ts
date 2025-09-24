@@ -1,7 +1,6 @@
 import { ref, watch } from "vue";
 import { useFetch } from "@vueuse/core";
 import { defineStore } from "pinia";
-import { BASE_URL } from "@/utils/constants";
 import { useCookies } from "@vueuse/integrations/useCookies";
 // TODO
 // import { hashStr } from "@/composables/bcrypt";
@@ -17,7 +16,7 @@ export const useAuthStore = defineStore("auth-store", () => {
     });
 
     const logout = () => {
-        useFetch(`${BASE_URL}/api/profile/company/logout`, {
+        useFetch(`${APP_ENUM.BASE_API_URL}/api/profile/company/logout`, {
             method: ERequestMethods.POST,
             headers: {
                 Authorization: `Bearer ${accessToken.value}`,

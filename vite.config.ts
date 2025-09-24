@@ -22,7 +22,7 @@ export default defineConfig({
                 "./src/store/**",
                 "./src/enums",
                 "./src/interfaces",
-                "./src/utils",
+                "./src/utils/**",
             ],
             vueTemplate: true,
             imports: [

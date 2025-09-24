@@ -82,7 +82,10 @@ const openModal = () => {
         </video>
     </AppModal>
     <AppModal v-if="showUpdModal" @close="showUpdModal = false">
-        <UpdateMediaModal :mediaId="mediaItem.id" />
+        <UpdateMediaModal
+            :mediaId="mediaItem.id"
+            @close="showUpdModal = false"
+        />
     </AppModal>
     <BaseCard
         :type="cardData.type"
