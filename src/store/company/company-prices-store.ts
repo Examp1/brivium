@@ -1,8 +1,7 @@
-import { useFetch } from "@/composables/useFetch";
-import { defineStore } from "pinia";
 import { useLocalStorage } from "@vueuse/core";
 import { toRaw } from "vue";
 import { withAuth } from "@/utils/withAuth";
+import { ERequestMethods } from "@/enums/ERequestMethod";
 interface IPriceItem {
     catalog_id: number;
     price_id: number;
@@ -31,8 +30,6 @@ interface ICompanyCatalogResponse {
 }
 
 export const useCompanyPricesStore = defineStore("company-prices-store", () => {
-    const authStore = useAuthStore();
-    const { accessToken } = storeToRefs(authStore);
     const companyPricesList = ref<ICompanyCatalog[]>([]);
 
     const lsFilledPrices = useLocalStorage<IPriceObj>("filledPrices", {});
@@ -43,14 +40,9 @@ export const useCompanyPricesStore = defineStore("company-prices-store", () => {
 
     async function fetchPriceList() {
         return withAuth(async () => {
-            const { data } = await useFetch<ICompanyCatalogResponse>(
-                `${APP_ENUM.BASE_API_URL}/api/profile/company/price/list`,
-                {
-                    method: ERequestMethods.POST,
-                    headers: {
-                        Authorization: `Bearer ${accessToken.value}`,
-                    },
-                },
+            const { data } = await fetchWrapper<ICompanyCatalogResponse>(
+                "api/profile/company/price/list",
+                ERequestMethods.POST,
             );
             if (data.value) {
                 companyPricesList.value = data.value?.list;
@@ -61,15 +53,10 @@ export const useCompanyPricesStore = defineStore("company-prices-store", () => {
         const payload = {
             list: Object.values(filledPrices.value),
         };
-        const { error } = await useFetch(
-            `${APP_ENUM.BASE_API_URL}/api/profile/company/price/update`,
-            {
-                method: ERequestMethods.POST,
-                headers: {
-                    Authorization: `Bearer ${accessToken.value}`,
-                },
-                data: payload,
-            },
+        const { error } = await fetchWrapper(
+            "api/profile/company/price/update",
+            ERequestMethods.POST,
+            payload,
         );
         if (!error.value) {
             lsFilledPrices.value = structuredClone(toRaw(filledPrices.value));
@@ -81,9 +68,7 @@ export const useCompanyPricesStore = defineStore("company-prices-store", () => {
             delete filledPrices.value[obj.price_id];
             return;
         }
-
         const elExist = filledPrices.value[obj.price_id];
-
         if (elExist) {
             filledPrices.value[obj.price_id] = { ...elExist, cost: obj.cost };
         } else {

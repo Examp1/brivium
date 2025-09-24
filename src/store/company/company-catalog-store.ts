@@ -1,7 +1,6 @@
-import { APP_ENUM } from "@/enums/app_enums";
 import { defineStore } from "pinia";
-import { useFetch } from "@/composables/useFetch";
 import { useLocalStorage } from "@vueuse/core";
+import { ERequestMethods } from "@/enums/ERequestMethod";
 
 interface ICompanyCatalogChildren {
     children?: ICompanyCatalogChildren[];
@@ -22,9 +21,6 @@ interface ICompanySelectedIds {
 export const useCompanyCatalogStore = defineStore(
     "company-catalog-store",
     () => {
-        const authStore = useAuthStore();
-        const { accessToken } = storeToRefs(authStore);
-
         const companySelectedIds = useLocalStorage<number[]>(
             "companySelectedIds",
             [],
@@ -33,14 +29,9 @@ export const useCompanyCatalogStore = defineStore(
         const companyCatalog = ref<ICompanyCatalog[]>([]);
 
         async function fetchCompanyCatalogSelectedInfo() {
-            const { data } = await useFetch<ICompanySelectedIds>(
-                `${APP_ENUM.BASE_API_URL}/api/profile/company/catalog/get-ids`,
-                {
-                    method: ERequestMethods.POST,
-                    headers: {
-                        Authorization: `Bearer ${accessToken.value}`,
-                    },
-                },
+            const { data } = await fetchWrapper<ICompanySelectedIds>(
+                "api/profile/company/catalog/get-ids",
+                ERequestMethods.POST,
             );
             if (data.value) {
                 companySelectedIds.value = data.value.ids;
@@ -48,17 +39,10 @@ export const useCompanyCatalogStore = defineStore(
         }
 
         async function updateCompanyCatalogInfo() {
-            await useFetch(
-                `${APP_ENUM.BASE_API_URL}/api/profile/company/catalog/update`,
-                {
-                    method: ERequestMethods.POST,
-                    headers: {
-                        Authorization: `Bearer ${accessToken.value}`,
-                    },
-                    data: {
-                        catalog_ids: companySelectedIds.value,
-                    },
-                },
+            await fetchWrapper(
+                "api/profile/company/catalog/update",
+                ERequestMethods.POST,
+                { catalog_ids: companySelectedIds.value },
             );
             await fetchCompanyCatalogSelectedInfo();
         }
@@ -77,17 +61,10 @@ export const useCompanyCatalogStore = defineStore(
             if (!companySelectedIds.value) {
                 fetchCompanyCatalogSelectedInfo();
             }
-            const { data } = await useFetch<ICompanyCatalog[]>(
-                `${APP_ENUM.BASE_API_URL}/api/catalog/group-list`,
-                {
-                    method: ERequestMethods.POST,
-                    headers: {
-                        Authorization: `Bearer ${accessToken.value}`,
-                    },
-                    data: {
-                        lang: "uk",
-                    },
-                },
+            const { data } = await fetchWrapper<ICompanyCatalog[]>(
+                "api/catalog/group-list",
+                ERequestMethods.POST,
+                { lang: "uk" },
             );
             if (data.value) {
                 companyCatalog.value = data.value;

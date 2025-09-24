@@ -25,7 +25,7 @@ const router = createRouter({
             children: [
                 {
                     path: "profile",
-                    name: "profile-page",
+                    name: "company-profile-page",
                     component: () =>
                         import("../views/admin/company/ProfilePage.vue"),
                 },
@@ -43,7 +43,7 @@ const router = createRouter({
                 },
                 {
                     path: "notifications",
-                    name: "notifications-page",
+                    name: "company-notifications-page",
                     component: () =>
                         import("../views/admin/company/NotificationsPage.vue"),
                 },
@@ -63,22 +63,22 @@ const router = createRouter({
             children: [
                 {
                     path: "profile",
-                    name: "profile-page",
+                    name: "client-profile-page",
                     component: () =>
-                        import("../views/admin/company/ProfilePage.vue"),
+                        import("../views/admin/client/ProfilePage.vue"),
                 },
-                {
-                    path: "notifications",
-                    name: "notifications-page",
-                    component: () =>
-                        import("../views/admin/company/NotificationsPage.vue"),
-                },
-                {
-                    path: "projects",
-                    name: "projects-page",
-                    component: () =>
-                        import("../views/admin/company/GalleryPage.vue"),
-                },
+                // {
+                //     path: "notifications",
+                //     name: "client-notifications-page",
+                //     component: () =>
+                //         import("../views/admin/company/NotificationsPage.vue"),
+                // },
+                // {
+                //     path: "projects",
+                //     name: "projects-page",
+                //     component: () =>
+                //         import("../views/admin/company/GalleryPage.vue"),
+                // },
             ],
             component: () => import("../views/CompanyPage.vue"),
         },

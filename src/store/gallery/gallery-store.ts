@@ -1,4 +1,3 @@
-import { useFetch } from "@/composables/useFetch";
 import { fetchWrapper } from "@/utils/api/fetchWrapper";
 
 export const useGalleryStore = defineStore("gallery-store", () => {
@@ -9,7 +8,6 @@ export const useGalleryStore = defineStore("gallery-store", () => {
         const { data } = await fetchWrapper(
             "api/profile/company/gallery/list",
             ERequestMethods.POST,
-            {},
         );
         galleryAlbums.value = data.value;
     };
@@ -22,7 +20,7 @@ export const useGalleryStore = defineStore("gallery-store", () => {
                 id: albumId,
             },
         );
-        fetchAlbums();
+        await fetchAlbums();
     };
     const addNewAlbum = async (albumData) => {
         await fetchWrapper(
@@ -30,7 +28,7 @@ export const useGalleryStore = defineStore("gallery-store", () => {
             ERequestMethods.POST,
             albumData,
         );
-        fetchAlbums();
+        await fetchAlbums();
     };
 
     const getAlbumInfoById = async (albumId: number) => {
@@ -53,7 +51,7 @@ export const useGalleryStore = defineStore("gallery-store", () => {
                 id: mediaId,
             },
         );
-        getAlbumInfoById(albumData.value.model.id);
+        await getAlbumInfoById(albumData.value.model.id);
     };
 
     const uploadMedia = async (
@@ -62,8 +60,8 @@ export const useGalleryStore = defineStore("gallery-store", () => {
     ) => {
         const uploadApi =
             mediaType === "image"
-                ? "/api/profile/company/gallery/items/upload-image"
-                : "/api/profile/company/gallery/items/upload-video";
+                ? "api/profile/company/gallery/items/upload-image"
+                : "api/profile/company/gallery/items/upload-video";
         const selectedMediaArray = Array.from(selectedMedia);
         const uploadPromises = selectedMediaArray.map((file) =>
             fetchMedia(file, uploadApi),
@@ -88,7 +86,7 @@ export const useGalleryStore = defineStore("gallery-store", () => {
                 ...updData,
             },
         );
-        getAlbumInfoById(albumData.value.model.id);
+        await getAlbumInfoById(albumData.value.model.id);
     };
 
     const updateAlbumInfo = async (updData: FormData) => {
@@ -97,7 +95,7 @@ export const useGalleryStore = defineStore("gallery-store", () => {
             ERequestMethods.POST,
             updData,
         );
-        fetchAlbums();
+        await fetchAlbums();
     };
 
     return {

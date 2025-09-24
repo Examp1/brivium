@@ -1,5 +1,4 @@
 import { ref, watch } from "vue";
-import { useFetch } from "@vueuse/core";
 import { defineStore } from "pinia";
 import { useCookies } from "@vueuse/integrations/useCookies";
 // TODO
@@ -15,13 +14,8 @@ export const useAuthStore = defineStore("auth-store", () => {
         }
     });
 
-    const logout = () => {
-        useFetch(`${APP_ENUM.BASE_API_URL}/api/profile/company/logout`, {
-            method: ERequestMethods.POST,
-            headers: {
-                Authorization: `Bearer ${accessToken.value}`,
-            },
-        });
+    const logout = async () => {
+        await fetchWrapper("api/profile/company/logout", ERequestMethods.POST);
         cookies.remove("accessToken");
         window.location.href = "/";
     };
