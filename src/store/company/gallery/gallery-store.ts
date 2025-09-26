@@ -1,5 +1,3 @@
-import { fetchWrapper } from "@/utils/api/fetchWrapper";
-
 export const useGalleryStore = defineStore("gallery-store", () => {
     const albumData = ref();
     const galleryAlbums = ref();

@@ -30,6 +30,7 @@
     "useCompanyCatalogStore": true,
     "useCompanyInfoStore": true,
     "useCompanyPricesStore": true,
+    "useCompanyReviewsStore": true,
     "useGalleryStore": true,
     "useLink": true,
     "useNotificationStore": true,

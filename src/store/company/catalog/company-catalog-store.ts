@@ -59,7 +59,7 @@ export const useCompanyCatalogStore = defineStore(
 
         async function fetchCompanyCatalog() {
             if (!companySelectedIds.value) {
-                fetchCompanyCatalogSelectedInfo();
+                await fetchCompanyCatalogSelectedInfo();
             }
             const { data } = await fetchWrapper<ICompanyCatalog[]>(
                 "api/catalog/group-list",

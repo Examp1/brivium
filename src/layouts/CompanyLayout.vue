@@ -27,6 +27,11 @@ const menu = ref([
         icon: "mdi mdi-image-area",
     },
     {
+        title: "Відгуки",
+        url: "/company/reviews",
+        icon: "mdi-book-open-variant",
+    },
+    {
         title: "Сповіщення",
         url: "/company/notifications",
         icon: "mdi mdi-bell",

@@ -33,10 +33,11 @@ declare global {
   const setMapStoreSuffix: typeof import('pinia')['setMapStoreSuffix']
   const storeToRefs: typeof import('pinia')['storeToRefs']
   const useAuthStore: typeof import('./src/store/auth/auth-store')['useAuthStore']
-  const useCompanyCatalogStore: typeof import('./src/store/company/company-catalog-store')['useCompanyCatalogStore']
-  const useCompanyInfoStore: typeof import('./src/store/company/company-info-store')['useCompanyInfoStore']
-  const useCompanyPricesStore: typeof import('./src/store/company/company-prices-store')['useCompanyPricesStore']
-  const useGalleryStore: typeof import('./src/store/gallery/gallery-store')['useGalleryStore']
+  const useCompanyCatalogStore: typeof import('./src/store/company/catalog/company-catalog-store')['useCompanyCatalogStore']
+  const useCompanyInfoStore: typeof import('./src/store/company/profile/company-info-store')['useCompanyInfoStore']
+  const useCompanyPricesStore: typeof import('./src/store/company/catalog/company-prices-store')['useCompanyPricesStore']
+  const useCompanyReviewsStore: typeof import('./src/store/company/reviews/reviews-store')['useCompanyReviewsStore']
+  const useGalleryStore: typeof import('./src/store/company/gallery/gallery-store')['useGalleryStore']
   const useLink: typeof import('vue-router')['useLink']
   const useNotificationStore: typeof import('./src/store/notifications/notifications-store')['useNotificationStore']
   const useRoute: typeof import('vue-router')['useRoute']
@@ -91,10 +92,11 @@ declare module 'vue' {
     readonly setMapStoreSuffix: UnwrapRef<typeof import('pinia')['setMapStoreSuffix']>
     readonly storeToRefs: UnwrapRef<typeof import('pinia')['storeToRefs']>
     readonly useAuthStore: UnwrapRef<typeof import('./src/store/auth/auth-store')['useAuthStore']>
-    readonly useCompanyCatalogStore: UnwrapRef<typeof import('./src/store/company/company-catalog-store')['useCompanyCatalogStore']>
-    readonly useCompanyInfoStore: UnwrapRef<typeof import('./src/store/company/company-info-store')['useCompanyInfoStore']>
-    readonly useCompanyPricesStore: UnwrapRef<typeof import('./src/store/company/company-prices-store')['useCompanyPricesStore']>
-    readonly useGalleryStore: UnwrapRef<typeof import('./src/store/gallery/gallery-store')['useGalleryStore']>
+    readonly useCompanyCatalogStore: UnwrapRef<typeof import('./src/store/company/catalog/company-catalog-store')['useCompanyCatalogStore']>
+    readonly useCompanyInfoStore: UnwrapRef<typeof import('./src/store/company/profile/company-info-store')['useCompanyInfoStore']>
+    readonly useCompanyPricesStore: UnwrapRef<typeof import('./src/store/company/catalog/company-prices-store')['useCompanyPricesStore']>
+    readonly useCompanyReviewsStore: UnwrapRef<typeof import('./src/store/company/reviews/reviews-store')['useCompanyReviewsStore']>
+    readonly useGalleryStore: UnwrapRef<typeof import('./src/store/company/gallery/gallery-store')['useGalleryStore']>
     readonly useLink: UnwrapRef<typeof import('vue-router')['useLink']>
     readonly useNotificationStore: UnwrapRef<typeof import('./src/store/notifications/notifications-store')['useNotificationStore']>
     readonly useRoute: UnwrapRef<typeof import('vue-router')['useRoute']>
