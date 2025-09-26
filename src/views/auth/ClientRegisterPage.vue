@@ -27,33 +27,10 @@ const signUp = () => {
 </script>
 
 <template>
-    <v-sheet class="mx-auto" width="300">
-        <v-form fast-fail @submit.prevent="signUp">
-            <v-text-field
-                v-model="signupInputs.name"
-                label="Name"
-            ></v-text-field>
-            <v-text-field
-                v-model="signupInputs.email"
-                label="email"
-            ></v-text-field>
-            <v-text-field
-                v-model="signupInputs.phone"
-                label="phone"
-            ></v-text-field>
-            <v-text-field
-                v-model="signupInputs.password"
-                label="Password"
-            ></v-text-field>
-
-            <v-btn class="mt-2" type="submit" block>Sign up</v-btn>
-        </v-form>
-        <br />
-        <p>
-            Already have an account?
-            <router-link to="/signin">Sign in</router-link>
-        </p>
-    </v-sheet>
+    <div class="grid grid-cols-2">
+        <div class="left"></div>
+        <div class="right"></div>
+    </div>
 </template>
 
 <style scoped></style>

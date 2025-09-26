@@ -1,29 +1,16 @@
 <script setup lang="ts">
 import { useField } from "vee-validate";
 
-const props = defineProps({
-    label: {
-        type: String,
-    },
-    type: {
-        type: String,
-        default: "text",
-    },
-    placeholder: {
-        type: String,
-    },
-    name: {
-        type: String,
-    },
-    icon: {
-        type: String,
-    },
-    iconPosition: {
-        type: String,
-    },
-});
+const props = defineProps<{
+    label?: string;
+    placeholder?: string;
+    type?: string;
+    name: string;
+    icon?: string;
+    iconPosition?: string;
+}>();
 
-const { value } = useField(props.name as string);
+const { value, errors } = useField(props.name as string);
 
 const paddingClasses = ref("");
 switch (props.iconPosition) {
@@ -40,10 +27,13 @@ switch (props.iconPosition) {
 </script>
 
 <template>
-    <div class="form-field flex flex-col">
-        <label v-if="label" class="text-gray-600 mb-2 font-medium text-sm">{{
-            label
-        }}</label>
+    <div class="form-field flex flex-col relative">
+        <label
+            v-if="label"
+            :class="errors.length ? 'text-red-400' : 'text-gray-600'"
+            class="mb-2 font-medium text-sm"
+            >{{ label }}</label
+        >
         <div class="relative flex">
             <span
                 v-if="icon"
@@ -54,13 +44,20 @@ switch (props.iconPosition) {
                 ]"
             ></span>
             <input
-                class="w-full h-[48px] border border-gray-400 outline-0 rounded-lg placeholder:text-gray-400"
-                :class="[icon ? 'py-3.5' : 'py-3.5 px-4', paddingClasses]"
+                class="w-full h-[48px] border border-gray-400 outline-0 rounded-lg"
+                :class="[
+                    icon ? 'py-3.5' : 'py-3.5 px-4',
+                    paddingClasses,
+                    errors.length
+                        ? 'border-red-400 placeholder:text-red-400'
+                        : 'border-gray-400 placeholder:text-gray-400',
+                ]"
                 :type="type"
                 :name="name"
                 :placeholder="placeholder"
                 v-model="value"
             />
         </div>
+        <span v-if="errors" class="text-red-400">{{ errors[0] }}</span>
     </div>
 </template>

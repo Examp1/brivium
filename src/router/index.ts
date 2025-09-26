@@ -4,24 +4,51 @@ import { createRouter, createWebHistory } from "vue-router";
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
-        // {
-        //     path: "/",
-        //     name: "home",
-        //     component: HomeView,
-        // },
         {
             path: "/",
-            name: "login-page",
-            component: () => import("../views/LoginPage.vue"),
+            name: "home",
+            component: () => import("../views/auth/ClientLoginPage.vue"),
         },
         {
-            path: "/signup",
-            name: "register-page",
-            component: () => import("../views/RegisterPage.vue"),
+            path: "/auth",
+            name: "auth",
+            meta: {
+                layout: "auth",
+            },
+            children: [
+                {
+                    path: "client-signin",
+                    name: "client-login-page",
+                    component: () =>
+                        import("../views/auth/ClientLoginPage.vue"),
+                },
+                {
+                    path: "client-signup",
+                    name: "client-register-page",
+                    component: () =>
+                        import("../views/auth/ClientRegisterPage.vue"),
+                },
+                {
+                    path: "company-signin",
+                    name: "company-login-page",
+                    component: () =>
+                        import("../views/auth/CompanyLoginPage.vue"),
+                },
+                {
+                    path: "company-signup",
+                    name: "company-register-page",
+                    component: () =>
+                        import("../views/auth/CompanyRegisterPage.vue"),
+                },
+            ],
         },
+
         {
             path: "/company",
             name: "company-page",
+            meta: {
+                layout: "company",
+            },
             children: [
                 {
                     path: "profile",
