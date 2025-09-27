@@ -1,7 +1,7 @@
 import { toTypedSchema } from "@vee-validate/zod";
 import { z } from "zod";
 
-export const companyValidateSheme = toTypedSchema(
+export const companyValidateScheme = toTypedSchema(
     z.object({
         email: z.string().email("Некоректний формат email"),
         name: z.string().min(1, "Ім'я є обов'язковим для заповнення"),
@@ -15,7 +15,7 @@ export const companyValidateSheme = toTypedSchema(
     }),
 );
 
-export const clientValidateSheme = toTypedSchema(
+export const clientValidateScheme = toTypedSchema(
     z.object({
         email: z.string().email("Некоректний формат email"),
         name: z.string().min(1, "Ім'я є обов'язковим для заповнення"),

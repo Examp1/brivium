@@ -18,7 +18,7 @@ const routeParams = computed(() => {
         case "company-login-page":
             return {
                 link: "client-signin",
-                linkText: "Зареєструватись як клієнт",
+                linkText: "Увійти як клієнт",
                 formLink: "company-signup",
             };
         case "company-register-page":

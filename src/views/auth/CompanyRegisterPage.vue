@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { companyValidateSheme } from "@/zod/auth/shemes";
+import { companyValidateScheme } from "@/zod/auth/shemes";
 import FormInput from "@/components/form/inputs/FormInput.vue";
 import FormSelect from "@/components/form/inputs/FormSelect.vue";
 import { useForm } from "vee-validate";
@@ -24,11 +24,10 @@ const companyType = [
 ];
 
 const { handleSubmit } = useForm({
-    validationSchema: companyValidateSheme,
+    validationSchema: companyValidateScheme,
 });
 
 const onSubmit = handleSubmit(async (values) => {
-    console.log(values);
     const companyData = {
         ...values,
         country_id: 1,

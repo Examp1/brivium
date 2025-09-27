@@ -4,7 +4,7 @@ import { useFetch } from "@/composables/useFetch";
 import { useCookies } from "@vueuse/integrations/useCookies";
 
 const router = useRouter();
-const cookies = useCookies(["accessToken"]);
+const cookies = useCookies(["ClientAccessToken"]);
 
 const loginInputs = ref({
     login: "budcraft@gmail.com",

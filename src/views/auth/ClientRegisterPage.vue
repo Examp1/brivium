@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { clientValidateSheme } from "@/zod/auth/shemes";
+import { clientValidateScheme } from "@/zod/auth/shemes";
 import FormInput from "@/components/form/inputs/FormInput.vue";
 import { useForm } from "vee-validate";
 import BaseBtn from "@/components/base/BaseBtn.vue";
@@ -7,12 +7,11 @@ import FormLocationSearch from "@/components/form/inputs/FormLocationSearch.vue"
 import { showError } from "@/composables/toast-notification";
 import { useFetch } from "@/composables/useFetch";
 
-const { handleSubmit, errors } = useForm({
-    validationSchema: clientValidateSheme,
+const { handleSubmit } = useForm({
+    validationSchema: clientValidateScheme,
 });
 
 const onSubmit = handleSubmit(async (values) => {
-    console.log(values);
     const companyData = {
         ...values,
         country_id: 1,
