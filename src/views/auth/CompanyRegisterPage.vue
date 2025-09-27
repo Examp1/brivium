@@ -34,7 +34,6 @@ const onSubmit = handleSubmit(async (values) => {
         country_id: 1,
         _subscription_id: 4,
     };
-    console.log(companyData);
     useFetch(`${APP_ENUM.BASE_API_URL}/api/auth/company/register`, {
         method: ERequestMethods.POST,
         data: companyData,

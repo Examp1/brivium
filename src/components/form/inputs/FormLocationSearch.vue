@@ -94,7 +94,7 @@ const changeValue = (item: ILocationSearchResponse) => {
                     @input="debouncedSearch"
                 />
                 <div
-                    class="base-transition absolute top-[100%] left-0 w-full border border-gray-400 rounded-lg bg-white overflow-hidden opacity-0 max-h-0 group-hover:opacity-100 group-hover:max-h-[1000px]"
+                    class="base-transition absolute top-[100%] left-0 w-full border border-gray-400 rounded-lg bg-white z-1 overflow-hidden opacity-0 max-h-0 group-hover:opacity-100 group-hover:max-h-[1000px]"
                 >
                     <div
                         v-for="item in searchResult"

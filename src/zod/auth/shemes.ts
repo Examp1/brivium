@@ -3,25 +3,27 @@ import { z } from "zod";
 
 export const companyValidateSheme = toTypedSchema(
     z.object({
-        email: z.string().email("Некорректный формат email"),
-        name: z.string().min(1, "Имя обязательно для заполнения"),
-        phone: z.string().min(1, "Телефон обязателен для заполнения"),
-        password: z
-            .string()
-            .min(6, "Пароль должен содержать минимум 6 символов"),
-        city_id: z
+        email: z.string().email("Некоректний формат email"),
+        name: z.string().min(1, "Ім'я є обов'язковим для заповнення"),
+        phone: z.string().min(1, "Телефон є обов'язковим для заповнення"),
+        password: z.string().min(6, "Пароль має містити щонайменше 6 символів"),
+        city_id: z.number().int().positive("ID міста має бути додатним числом"),
+        type: z
             .number()
             .int()
-            .positive("ID города должен быть положительным числом"),
-        type: z.number().int().min(1, "Тип компании обязателен для заполнения"),
+            .min(1, "Тип компанії є обов'язковим для заповнення"),
     }),
 );
 
-// email: "",
-//     name: "",
-//     phone: "",
-//     password: "",
-//     country_id: "1",
-//     city_id: 24702,
-//     type: 1,
-//     _subscription_id: "4",
+export const clientValidateSheme = toTypedSchema(
+    z.object({
+        email: z.string().email("Некоректний формат email"),
+        name: z.string().min(1, "Ім'я є обов'язковим для заповнення"),
+        lastname: z.string().min(1, "Прізвище є обов'язковим для заповнення"),
+        surname: z.string().min(1, "По батькові є обов'язковим для заповнення"),
+        phone: z.string().min(1, "Телефон є обов'язковим для заповнення"),
+        password: z.string().min(6, "Пароль має містити щонайменше 6 символів"),
+        position: z.string().min(6, "Посада має містити щонайменше 6 символів"),
+        city_id: z.number().int().positive("ID міста має бути додатним числом"),
+    }),
+);

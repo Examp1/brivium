@@ -86,12 +86,6 @@ const checkToken = async (token: string) => {
         >
             sign in
         </button>
-        <p class="text-sm font-medium">
-            Dont have an account?
-            <router-link class="text-blue-400" to="/signup"
-                >Sign up</router-link
-            >
-        </p>
     </form>
 </template>
 
