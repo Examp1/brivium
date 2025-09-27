@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import { useFetch } from "@/composables/useFetch";
-import { useCookies } from "@vueuse/integrations/useCookies.mjs";
+import { ERequestMethods } from "@/enums/ERequestMethod";
 const galleryStore = useGalleryStore();
-const cookies = useCookies(["accessToken"]);
 
 const props = defineProps(["albumId"]);
 
@@ -14,17 +12,12 @@ const syncAlbumWithStore = () => {
 
 const uploadVideoUrl = () => {
     try {
-        useFetch(
-            `${APP_ENUM.BASE_API_URL}/api/profile/company/gallery/items/upload-video-link`,
+        fetchWrapper(
+            "api/profile/company/gallery/items/upload-video-link",
+            ERequestMethods.POST,
             {
-                method: ERequestMethods.POST,
-                data: {
-                    gallery_id: props.albumId,
-                    url: mediaLink.value,
-                },
-                headers: {
-                    Authorization: `Bearer ${cookies.get("accessToken")}`,
-                },
+                gallery_id: props.albumId,
+                url: mediaLink.value,
             },
         );
 

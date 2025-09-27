@@ -5,22 +5,22 @@ import { useCookies } from "@vueuse/integrations/useCookies";
 // import { hashStr } from "@/composables/bcrypt";
 
 export const useAuthStore = defineStore("auth-store", () => {
-    const cookies = useCookies(["accessToken"]);
-    const accessToken = ref(cookies.get("accessToken") || null);
+    const cookies = useCookies(["ComapnyAccessToken"]);
+    const ComapnyAccessToken = ref(cookies.get("ComapnyAccessToken") || null);
 
-    watch(accessToken, (newVal, oldVal) => {
+    watch(ComapnyAccessToken, (newVal, oldVal) => {
         if (newVal !== oldVal) {
-            cookies.set("accessToken", newVal);
+            cookies.set("ComapnyAccessToken", newVal);
         }
     });
 
     const logout = async () => {
         await fetchWrapper("api/profile/company/logout", ERequestMethods.POST);
-        cookies.remove("accessToken");
+        cookies.remove("ComapnyAccessToken");
         window.location.href = "/";
     };
     return {
-        accessToken,
+        ComapnyAccessToken,
         logout,
     };
 });
