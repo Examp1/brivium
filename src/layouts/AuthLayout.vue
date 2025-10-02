@@ -29,9 +29,9 @@ const routeParams = computed(() => {
             };
         default:
             return {
-                link: "/",
-                linkText: "На головну",
-                formLink: "/",
+                link: "auth/client-signin",
+                linkText: "Увійти як клієнт",
+                formLink: "company-signup",
             };
     }
 });
@@ -60,7 +60,12 @@ const routeParams = computed(() => {
                 </router-link>
             </div>
         </div>
-        <div class="bg-green-200 p-5 text-lg">
+        <div
+            class="p-5 text-lg"
+            :class="
+                route.path.includes('client') ? 'bg-blue-200' : 'bg-green-200'
+            "
+        >
             <router-link :to="routeParams.link">{{
                 routeParams.linkText
             }}</router-link>

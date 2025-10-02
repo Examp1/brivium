@@ -14,11 +14,12 @@ export async function fetchWrapper<T>(
     method: ERequestMethods,
     data?: Record<string, unknown> | FormData,
 ): Promise<FetchResponse<T>> {
+    const endpointType = apiEndpoint.includes("client") ? "client" : "company";
     try {
         const res = await useFetch(`${APP_ENUM.BASE_API_URL}/${apiEndpoint}`, {
             method,
             data,
-            headers: getBearer(),
+            headers: getBearer(endpointType),
         });
 
         return res;

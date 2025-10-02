@@ -33,6 +33,7 @@ declare global {
   const setMapStoreSuffix: typeof import('pinia')['setMapStoreSuffix']
   const storeToRefs: typeof import('pinia')['storeToRefs']
   const useAuthStore: typeof import('./src/store/auth/auth-store')['useAuthStore']
+  const useClientInfoStore: typeof import('./src/store/client/profile/client-info-store')['useClientInfoStore']
   const useCompanyCatalogStore: typeof import('./src/store/company/catalog/company-catalog-store')['useCompanyCatalogStore']
   const useCompanyInfoStore: typeof import('./src/store/company/profile/company-info-store')['useCompanyInfoStore']
   const useCompanyPricesStore: typeof import('./src/store/company/catalog/company-prices-store')['useCompanyPricesStore']
@@ -42,6 +43,8 @@ declare global {
   const useNotificationStore: typeof import('./src/store/notifications/notifications-store')['useNotificationStore']
   const useRoute: typeof import('vue-router')['useRoute']
   const useRouter: typeof import('vue-router')['useRouter']
+  const useclientInfo: typeof import('./src/store/client/profile/client-info-store')['useclientInfo']
+  const useclientInfoStore: typeof import('./src/store/client/profile/client-info-store')['useclientInfoStore']
   const withAtuh: (typeof import("./src/utils/withAuth"))["withAtuh"]
   const withAuth: typeof import('./src/utils/withAuth')['withAuth']
 }
@@ -92,6 +95,7 @@ declare module 'vue' {
     readonly setMapStoreSuffix: UnwrapRef<typeof import('pinia')['setMapStoreSuffix']>
     readonly storeToRefs: UnwrapRef<typeof import('pinia')['storeToRefs']>
     readonly useAuthStore: UnwrapRef<typeof import('./src/store/auth/auth-store')['useAuthStore']>
+    readonly useClientInfoStore: UnwrapRef<typeof import('./src/store/client/profile/client-info-store')['useClientInfoStore']>
     readonly useCompanyCatalogStore: UnwrapRef<typeof import('./src/store/company/catalog/company-catalog-store')['useCompanyCatalogStore']>
     readonly useCompanyInfoStore: UnwrapRef<typeof import('./src/store/company/profile/company-info-store')['useCompanyInfoStore']>
     readonly useCompanyPricesStore: UnwrapRef<typeof import('./src/store/company/catalog/company-prices-store')['useCompanyPricesStore']>

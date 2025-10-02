@@ -40,9 +40,7 @@ const menu = ref([
 
 const showMenu = ref<boolean>(false);
 onMounted(async () => {
-    // if (!companyInfo.value) {
     await companyInfoStore.fetchCompanyInfo();
-    // }
 });
 </script>
 
@@ -50,10 +48,14 @@ onMounted(async () => {
     <div class="flex h-[100vh]">
         <AppSidebar
             :menu="menu"
+            userType="company"
             :class="showMenu ? '-translate-x-0' : '-translate-x-full'"
         />
         <div class="xl:ml-[290px] flex-1 base-transition">
-            <AppHeader @toggleView="showMenu = !showMenu" />
+            <AppHeader
+                @toggleView="showMenu = !showMenu"
+                :name="companyInfoStore.companyInfo.name || 'user name'"
+            />
             <main class="bg-gray-100 min-h-screen h-fit p-5">
                 <div class="bg-white rounded-lg overflow-hidden">
                     <!-- <Transition name="fade" mode="out-in"> -->

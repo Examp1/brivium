@@ -4,7 +4,7 @@ import { useFetch } from "@/composables/useFetch";
 import { useCookies } from "@vueuse/integrations/useCookies";
 
 const router = useRouter();
-const cookies = useCookies(["ComapnyComapnyAccessToken"]);
+const cookies = useCookies(["ComapnyAccessToken"]);
 
 const loginInputs = ref({
     login: "budcraft@gmail.com",
@@ -41,7 +41,7 @@ const checkToken = async (token: string) => {
     );
 
     cookies.set("ComapnyAccessToken", data?.value?.token);
-    router.push("/company/info");
+    router.push("/company/profile");
 };
 </script>
 

@@ -1,7 +1,13 @@
 <script setup lang="ts">
-defineProps(["menu"]);
+defineProps<{
+    menu: Array<{
+        title: string;
+        icon: string;
+        url: string;
+    }>;
+    userType: "company" | "client";
+}>();
 
-// TODO сделать провайд в nuxtApp
 const userStore = useAuthStore();
 const { logout } = userStore;
 </script>
@@ -42,7 +48,7 @@ const { logout } = userStore;
                 >
                     <div
                         class="flex items-center gap-2 py-1 px-2 text-base cursor-pointer whitespace-nowrap"
-                        @click="logout"
+                        @click="logout(userType)"
                     >
                         <span class="mdi mdi-logout text-2xl"></span>
                         <span>logout</span>

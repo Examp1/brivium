@@ -14,9 +14,16 @@ export const useAuthStore = defineStore("auth-store", () => {
         }
     });
 
-    const logout = async () => {
-        await fetchWrapper("api/profile/company/logout", ERequestMethods.POST);
-        cookies.remove("ComapnyAccessToken");
+    const logout = async (userType: "client" | "company") => {
+        await fetchWrapper(
+            `api/profile/${userType}/logout`,
+            ERequestMethods.POST,
+        );
+        if (userType === "client") {
+            cookies.remove("ClientAccessToken");
+        } else {
+            cookies.remove("ComapnyAccessToken");
+        }
         window.location.href = "/";
     };
     return {

@@ -27,6 +27,7 @@
     "setMapStoreSuffix": true,
     "storeToRefs": true,
     "useAuthStore": true,
+    "useClientInfoStore": true,
     "useCompanyCatalogStore": true,
     "useCompanyInfoStore": true,
     "useCompanyPricesStore": true,

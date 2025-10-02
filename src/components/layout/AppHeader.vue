@@ -1,10 +1,8 @@
 <script setup lang="ts">
+defineProps(["name"]);
 import NotoficationBtn from "../notifications/NotoficationBtn.vue";
 
 const emit = defineEmits(["toggleView"]);
-
-const companyInfoStore = useCompanyInfoStore();
-const { companyInfo } = storeToRefs(companyInfoStore);
 </script>
 
 <template>
@@ -26,7 +24,7 @@ const { companyInfo } = storeToRefs(companyInfoStore);
                     src="https://static.vecteezy.com/system/resources/thumbnails/000/439/863/small/Basic_Ui__28186_29.jpg"
                     alt=""
                 />
-                <span class="font-medium text-sm">{{ companyInfo.name }}</span>
+                <span class="font-medium text-sm">{{ name }}</span>
             </div>
         </menu>
     </header>

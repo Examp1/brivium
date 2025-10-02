@@ -4,16 +4,16 @@ import { useFetch } from "@/composables/useFetch";
 import { useCookies } from "@vueuse/integrations/useCookies";
 
 const router = useRouter();
-const cookies = useCookies(["ClientComapnyAccessToken"]);
+const cookies = useCookies(["ClientAccessToken"]);
 
 const loginInputs = ref({
-    login: "budcraft@gmail.com",
-    password: "00000000",
+    login: "testuser@email.com",
+    password: "123123123",
 });
 
 const signIn = async () => {
     const { data, error } = await useFetch(
-        `${APP_ENUM.BASE_API_URL}/api/auth/company/login`,
+        `${APP_ENUM.BASE_API_URL}/api/auth/client/login`,
         {
             method: ERequestMethods.POST,
             headers: {
@@ -28,7 +28,7 @@ const signIn = async () => {
 };
 const checkToken = async (token: string) => {
     const { data } = await useFetch(
-        `${APP_ENUM.BASE_API_URL}/api/auth/company/get-token`,
+        `${APP_ENUM.BASE_API_URL}/api/auth/client/get-token`,
         {
             method: ERequestMethods.POST,
             headers: {
@@ -40,8 +40,10 @@ const checkToken = async (token: string) => {
         },
     );
 
-    cookies.set("ComapnyAccessToken", data?.value?.token);
-    router.push("/company/profile");
+    console.log(data?.value);
+
+    cookies.set("ClientAccessToken", data?.value?.token);
+    router.push("/client/profile");
 };
 </script>
 
@@ -86,12 +88,6 @@ const checkToken = async (token: string) => {
         >
             sign in
         </button>
-        <p class="text-sm font-medium">
-            Dont have an account?
-            <router-link class="text-blue-400" to="/signup"
-                >Sign up</router-link
-            >
-        </p>
     </form>
 </template>
 

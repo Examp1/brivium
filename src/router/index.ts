@@ -7,7 +7,10 @@ const router = createRouter({
         {
             path: "/",
             name: "home",
-            component: () => import("../views/auth/ClientLoginPage.vue"),
+            component: () => import("../views/auth/CompanyLoginPage.vue"),
+            meta: {
+                layout: "auth",
+            },
         },
         {
             path: "/auth",
@@ -93,6 +96,9 @@ const router = createRouter({
         {
             path: "/client",
             name: "client-page",
+            meta: {
+                layout: "client",
+            },
             children: [
                 {
                     path: "profile",
@@ -106,14 +112,14 @@ const router = createRouter({
                 //     component: () =>
                 //         import("../views/admin/company/NotificationsPage.vue"),
                 // },
-                // {
-                //     path: "projects",
-                //     name: "projects-page",
-                //     component: () =>
-                //         import("../views/admin/company/GalleryPage.vue"),
-                // },
+                {
+                    path: "projects",
+                    name: "projects-page",
+                    component: () =>
+                        import("../views/admin/client/ProjectPage.vue"),
+                },
             ],
-            component: () => import("../views/CompanyPage.vue"),
+            component: () => import("../views/ClientPage.vue"),
         },
     ],
 });

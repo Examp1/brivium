@@ -3,7 +3,7 @@ import AppHeader from "@/components/layout/AppHeader.vue";
 import AppSidebar from "@/components/layout/AppSidebar.vue";
 import { onMounted } from "vue";
 
-const companyInfoStore = useCompanyInfoStore();
+const clientInfoStore = useClientInfoStore();
 
 const menu = ref([
     {
@@ -13,7 +13,7 @@ const menu = ref([
     },
     {
         title: "Мої проекти",
-        url: "/client/gallery",
+        url: "/client/projects",
         icon: "mdi mdi-image-area",
     },
     {
@@ -26,9 +26,7 @@ const menu = ref([
 const showMenu = ref<boolean>(false);
 
 onMounted(async () => {
-    // if (!companyInfo.value) {
-    await companyInfoStore.fetchCompanyInfo();
-    // }
+    await clientInfoStore.fetchClientInfo();
 });
 </script>
 
@@ -36,10 +34,14 @@ onMounted(async () => {
     <div class="flex h-[100vh]">
         <AppSidebar
             :menu="menu"
+            userType="client"
             :class="showMenu ? '-translate-x-0' : '-translate-x-full'"
         />
         <div class="xl:ml-[290px] flex-1 base-transition">
-            <AppHeader @toggleView="showMenu = !showMenu" />
+            <AppHeader
+                @toggleView="showMenu = !showMenu"
+                :name="clientInfoStore.clientInfo.full_name || 'user name'"
+            />
             <main class="bg-gray-100 min-h-screen h-fit p-5">
                 <div class="bg-white rounded-lg overflow-hidden">
                     <!-- <Transition name="fade" mode="out-in"> -->
