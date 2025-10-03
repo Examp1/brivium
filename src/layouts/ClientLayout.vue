@@ -8,7 +8,7 @@ const clientInfoStore = useClientInfoStore();
 const menu = ref([
     {
         title: "Профіль",
-        url: "/client/info",
+        url: "/client/profile",
         icon: "mdi-home-city",
     },
     {

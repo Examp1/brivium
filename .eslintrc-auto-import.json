@@ -35,6 +35,7 @@
     "useGalleryStore": true,
     "useLink": true,
     "useNotificationStore": true,
+    "useProjectStore": true,
     "useRoute": true,
     "useRouter": true,
     "withAuth": true
