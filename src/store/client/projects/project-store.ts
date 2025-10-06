@@ -43,6 +43,7 @@ export const useProjectStore = defineStore("project-store", () => {
 
     return {
         projects,
+        projectData,
         fetchProjects,
         getProjectById,
         addNewProject,

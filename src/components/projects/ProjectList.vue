@@ -1,38 +1,34 @@
 <script setup lang="ts">
 import ProjectCard from "./ProjectCard.vue";
+import ProjectInfo from "./ProjectInfo.vue";
 
 const projectStore = useProjectStore();
 
 defineProps(["projects"]);
 
-const isOpenAlbumInfo = ref<boolean>(false);
-// const openAlbumInfo = (albumId: number) => {
-//     projectStore.getProjectById(albumId);
-//     isOpenAlbumInfo.value = true;
-// };
+const isOpenProjectInfo = ref<boolean>(false);
+const openProjectInfo = (albumId: number) => {
+    projectStore.getProjectById(albumId);
+    isOpenProjectInfo.value = true;
+};
 </script>
 
 <template>
     <transition name="slide" mode="out-in">
-        <div class="mt-5" v-if="!isOpenAlbumInfo">
+        <div class="mt-5" v-if="!isOpenProjectInfo">
             <div class="grid grid-cols-4 gap-5">
                 <transition-group name="slide">
                     <ProjectCard
                         v-for="project in projects"
                         :key="project.id"
                         :project="project"
+                        @click="openProjectInfo(project.id)"
                     />
-                    <!-- <GalleryAlbum
-                        v-for="album in albums"
-                        :key="album.id"
-                        :album
-                        @click="openAlbumInfo(album.id)"
-                    /> -->
                 </transition-group>
             </div>
         </div>
         <div v-else>
-            <!-- <AlbumInfo @close="isOpenAlbumInfo = false" /> -->
+            <ProjectInfo @close="isOpenProjectInfo = false" />
         </div>
     </transition>
 </template>

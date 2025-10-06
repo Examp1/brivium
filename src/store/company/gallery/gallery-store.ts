@@ -52,28 +52,28 @@ export const useGalleryStore = defineStore("gallery-store", () => {
         await getAlbumInfoById(albumData.value.model.id);
     };
 
-    const uploadMedia = async (
-        selectedMedia: FileList,
-        mediaType: "video" | "image",
-    ) => {
-        const uploadApi =
-            mediaType === "image"
-                ? "api/profile/company/gallery/items/upload-image"
-                : "api/profile/company/gallery/items/upload-video";
-        const selectedMediaArray = Array.from(selectedMedia);
-        const uploadPromises = selectedMediaArray.map((file) =>
-            fetchMedia(file, uploadApi),
-        );
-        await Promise.all(uploadPromises);
-        await getAlbumInfoById(albumData.value.model.id);
-    };
+    // const uploadMedia = async (
+    //     selectedMedia: FileList,
+    //     mediaType: "video" | "image",
+    // ) => {
+    //     const uploadApi =
+    //         mediaType === "image"
+    //             ? "api/profile/company/gallery/items/upload-image"
+    //             : "api/profile/company/gallery/items/upload-video";
+    //     const selectedMediaArray = Array.from(selectedMedia);
+    //     const uploadPromises = selectedMediaArray.map((file) =>
+    //         fetchMedia(file, uploadApi),
+    //     );
+    //     await Promise.all(uploadPromises);
+    //     await getAlbumInfoById(albumData.value.model.id);
+    // };
 
-    const fetchMedia = async (file: File, uploadApi: string) => {
-        const formData = new FormData();
-        formData.append("gallery_id", albumData.value.model.id);
-        formData.append("file", file);
-        await fetchWrapper(uploadApi, ERequestMethods.POST, formData);
-    };
+    // const fetchMedia = async (file: File, uploadApi: string) => {
+    //     const formData = new FormData();
+    //     formData.append("gallery_id", albumData.value.model.id);
+    //     formData.append("file", file);
+    //     await fetchWrapper(uploadApi, ERequestMethods.POST, formData);
+    // };
 
     const updateMediaTitle = async (updData: { id: number; val: string }) => {
         await fetchWrapper(
@@ -104,7 +104,7 @@ export const useGalleryStore = defineStore("gallery-store", () => {
         addNewAlbum,
         getAlbumInfoById,
         deleteMediaFileById,
-        uploadMedia,
+        // uploadMedia,
         updateMediaTitle,
         updateAlbumInfo,
     };

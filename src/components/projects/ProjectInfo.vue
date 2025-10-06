@@ -1,21 +1,16 @@
 <script setup lang="ts">
 import BaseUpload from "../base/BaseUpload.vue";
-import AppModal from "../ui/AppModal.vue";
-import ImageListItem from "./ImageListItem.vue";
-import UploadMedia from "./modals/UploadMedia.vue";
 
-const galleryStore = useGalleryStore();
-const { albumData } = storeToRefs(galleryStore);
 const emit = defineEmits(["close"]);
+const projectStore = useProjectStore();
+const { projectData } = storeToRefs(projectStore);
 
 const openModal = ref<boolean>(false);
 </script>
 
 <template>
-    <AppModal v-if="openModal" @close="openModal = false">
-        <UploadMedia @close="openModal = false" :albumId="albumData.model.id" />
-    </AppModal>
-    <div v-if="albumData">
+    <div>
+        {{ projectData }}
         <div class="border-b border-gray-100 py-2.5 flex items-center gap-5">
             <div class="mr-auto flex items-center gap-4">
                 <button
@@ -25,19 +20,20 @@ const openModal = ref<boolean>(false);
                     Назад
                 </button>
                 <h2 class="text-2xl font-medium">
-                    Альбом: {{ albumData?.model.title }}
+                    Project: {{ projectData?.model.name }}
                 </h2>
             </div>
             <BaseUpload
-                :id="albumData?.model.id"
-                uploadType="inAlbum"
+                :id="projectData?.model.id"
+                uploadType="inProject"
                 @uploadComplete="
-                    galleryStore.getAlbumInfoById(albumData?.model.id)
+                    projectStore.getProjectById(projectData?.model.id)
                 "
                 @openModal="openModal = true"
             />
         </div>
-        <ImageListItem :mediaData="albumData" />
+
+        <!-- <ImageListItem :mediaData="albumData" /> -->
     </div>
 </template>
 
