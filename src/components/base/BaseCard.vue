@@ -35,10 +35,8 @@ const icon = computed(() => {
         >
             <span class="mdi mdi-loading text-6xl animate-spin"></span>
         </div>
-        <!-- dropdown -->
         <slot name="dropdown" />
 
-        <!-- main component -->
         <div class="px-2 pt-1 pb-2 flex items-center gap-3">
             <span class="mdi text-xl" :class="icon"></span>
             <h3 class="font-medium text-lg">{{ title }}</h3>

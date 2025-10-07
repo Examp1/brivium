@@ -106,15 +106,15 @@ const router = createRouter({
                     component: () =>
                         import("../views/admin/client/ProfilePage.vue"),
                 },
-                // {
-                //     path: "notifications",
-                //     name: "client-notifications-page",
-                //     component: () =>
-                //         import("../views/admin/company/NotificationsPage.vue"),
-                // },
                 {
                     path: "projects",
                     name: "projects-page",
+                    component: () =>
+                        import("../views/admin/client/ProjectsPage.vue"),
+                },
+                {
+                    path: "projects/:project",
+                    name: "project-page",
                     component: () =>
                         import("../views/admin/client/ProjectPage.vue"),
                 },

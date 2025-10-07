@@ -15,7 +15,9 @@ const showUpdModal = ref<boolean>(false);
 </script>
 
 <template>
-    <div>
+    <router-link
+        :to="{ name: 'project-page', params: { project: project.id } }"
+    >
         <BaseCard
             :title="project.name"
             :descrition="project.description"
@@ -37,7 +39,7 @@ const showUpdModal = ref<boolean>(false);
                 @close="showUpdModal = false"
             />
         </AppModal> -->
-    </div>
+    </router-link>
 </template>
 
 <style scoped></style>

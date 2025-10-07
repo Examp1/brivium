@@ -44,42 +44,61 @@ const selectMedia = (event, type: "video" | "image") => {
 </script>
 
 <template>
-    <div class="ml-auto flex gap-4">
-        <label
-            class="h-11 px-10 bg-blue-500 text-white rounded-lg cursor-pointer flex items-center"
-            for="image_upload"
-        >
-            Додати зображення
-        </label>
-        <label
-            class="h-11 px-10 bg-blue-500 text-white rounded-lg cursor-pointer flex items-center"
-            for="video_upload"
-        >
-            Додати відео файл
-        </label>
-        <button
-            class="h-11 px-10 bg-blue-500 text-white rounded-lg"
-            @click="emit('openModal')"
-        >
-            Додати відео за посиланням
-        </button>
+    <div v-if="uploadType === 'inAlbum'">
+        <div class="ml-auto flex gap-4">
+            <label
+                class="h-11 px-10 bg-blue-500 text-white rounded-lg cursor-pointer flex items-center"
+                for="image_upload"
+            >
+                Додати зображення
+            </label>
+            <label
+                class="h-11 px-10 bg-blue-500 text-white rounded-lg cursor-pointer flex items-center"
+                for="video_upload"
+            >
+                Додати відео файл
+            </label>
+            <button
+                class="h-11 px-10 bg-blue-500 text-white rounded-lg"
+                @click="emit('openModal')"
+            >
+                Додати відео за посиланням
+            </button>
+        </div>
+        <input
+            class="hidden"
+            @change="selectMedia($event, 'image')"
+            type="file"
+            id="image_upload"
+            multiple
+            accept="image/*,.png,.SVG,.jpg,.jpeg,.gif"
+        />
+        <input
+            class="hidden"
+            @change="selectMedia($event, 'video')"
+            type="file"
+            id="video_upload"
+            multiple
+            accept="video/*,.mp4,.webm,.avi,.mov,.mkv"
+        />
     </div>
-    <input
-        class="hidden"
-        @change="selectMedia($event, 'image')"
-        type="file"
-        id="image_upload"
-        multiple
-        accept="image/*,.png,.SVG,.jpg,.jpeg,.gif"
-    />
-    <input
-        class="hidden"
-        @change="selectMedia($event, 'video')"
-        type="file"
-        id="video_upload"
-        multiple
-        accept="video/*,.mp4,.webm,.avi,.mov,.mkv"
-    />
+    <div v-else>
+        <div class="ml-auto flex gap-4">
+            <label
+                class="h-11 px-10 bg-blue-500 text-white rounded-lg cursor-pointer flex items-center"
+                for="file_upload"
+            >
+                Додати файл
+            </label>
+        </div>
+        <input
+            class="hidden"
+            @change="selectMedia($event, 'image')"
+            type="file"
+            id="file_upload"
+            multiple
+        />
+    </div>
 </template>
 
 <style scoped></style>

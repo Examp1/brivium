@@ -41,7 +41,9 @@ declare global {
   const useGalleryStore: typeof import('./src/store/company/gallery/gallery-store')['useGalleryStore']
   const useLink: typeof import('vue-router')['useLink']
   const useNotificationStore: typeof import('./src/store/notifications/notifications-store')['useNotificationStore']
+  const useProjectFileStore: typeof import('./src/store/client/projects/project-files-store')['useProjectFileStore']
   const useProjectStore: typeof import('./src/store/client/projects/project-store')['useProjectStore']
+  const useProjectstageStore: typeof import('./src/store/client/projects/project-stages-store')['useProjectstageStore']
   const useRoute: typeof import('vue-router')['useRoute']
   const useRouter: typeof import('vue-router')['useRouter']
   const useclientInfo: typeof import('./src/store/client/profile/client-info-store')['useclientInfo']
@@ -104,7 +106,9 @@ declare module 'vue' {
     readonly useGalleryStore: UnwrapRef<typeof import('./src/store/company/gallery/gallery-store')['useGalleryStore']>
     readonly useLink: UnwrapRef<typeof import('vue-router')['useLink']>
     readonly useNotificationStore: UnwrapRef<typeof import('./src/store/notifications/notifications-store')['useNotificationStore']>
+    readonly useProjectFileStore: UnwrapRef<typeof import('./src/store/client/projects/project-files-store')['useProjectFileStore']>
     readonly useProjectStore: UnwrapRef<typeof import('./src/store/client/projects/project-store')['useProjectStore']>
+    readonly useProjectstageStore: UnwrapRef<typeof import('./src/store/client/projects/project-stages-store')['useProjectstageStore']>
     readonly useRoute: UnwrapRef<typeof import('vue-router')['useRoute']>
     readonly useRouter: UnwrapRef<typeof import('vue-router')['useRouter']>
     readonly withAuth: UnwrapRef<typeof import('./src/utils/withAuth')['withAuth']>

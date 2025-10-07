@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { useField } from "vee-validate";
 
+const emit = defineEmits(["blur"]);
+
 const props = defineProps<{
     label?: string;
     placeholder?: string;
@@ -56,6 +58,7 @@ switch (props.iconPosition) {
                 :name="name"
                 :placeholder="placeholder"
                 v-model="value"
+                @blur="emit('blur', value)"
             />
         </div>
         <span v-if="errors" class="text-red-400">{{ errors[0] }}</span>
