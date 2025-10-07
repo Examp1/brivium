@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import BaseBtn from "@/components/base/BaseBtn.vue";
+import BaseUpload from "@/components/base/BaseUpload.vue";
 import AddProjectStage from "@/components/gallery/modals/AddProjectStage.vue";
 import ProjectFiles from "@/components/projects/ProjectFiles.vue";
 import AppModal from "@/components/ui/AppModal.vue";
@@ -7,7 +8,6 @@ import { onMounted } from "vue";
 const projectStore = useProjectStore();
 const { projectData } = storeToRefs(projectStore);
 const projectFileStore = useProjectFileStore();
-const { projectFiles } = storeToRefs(projectFileStore);
 const projectStageStore = useProjectstageStore();
 const { projectStages } = storeToRefs(projectStageStore);
 
@@ -30,8 +30,6 @@ onMounted(async () => {
         />
     </AppModal>
     <div class="p-4 border-t border-gray-100">
-        {{ projectFiles }}
-        {{ projectData }}
         <div class="border-b border-gray-100 py-2.5 flex items-center gap-5">
             <div class="mr-auto flex items-center gap-4">
                 <router-link
@@ -44,9 +42,31 @@ onMounted(async () => {
                     Project: {{ projectData?.model.name }}
                 </h2>
             </div>
-            <BaseBtn title="Добавить этап" @click="showModal = true"></BaseBtn>
+            <div class="flex items-center gap-3">
+                <BaseBtn
+                    title="Додати етап"
+                    @click="showModal = true"
+                ></BaseBtn>
+                <BaseUpload
+                    :id="projectData?.model.id"
+                    uploadType="inProject"
+                    @uploadComplete="
+                        projectFileStore.fetchProjectFiles(
+                            projectData?.model.id,
+                        )
+                    "
+                />
+            </div>
         </div>
-        <ProjectFiles :fileList="projectFiles.items" />
+        <div class="border-b border-gray-100 py-5">
+            <h2 class="text-xl mb-5 font-medium">
+                Файли не прикріплені до етапу
+            </h2>
+            <ProjectFiles />
+        </div>
+        <div class="border-b border-gray-100 py-5">
+            <h2 class="text-xl mb-5 font-medium">Етапи проекту</h2>
+        </div>
     </div>
 </template>
 

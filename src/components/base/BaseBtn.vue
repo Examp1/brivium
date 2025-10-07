@@ -15,7 +15,7 @@ withDefaults(
 <template>
     <button
         type="submit"
-        class="h-11 px-10 text-white rounded-lg mb-3 ml-auto"
+        class="h-11 px-10 text-white rounded-lg ml-auto"
         :class="[color, customClasses]"
     >
         {{ title }}

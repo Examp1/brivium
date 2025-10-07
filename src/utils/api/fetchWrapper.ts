@@ -7,6 +7,7 @@ interface FetchResponse<T> {
     error: Ref<Error>;
     data: Ref<T | undefined>;
     loading: boolean;
+    refresh: () => Promise<void>;
 }
 
 export async function fetchWrapper<T>(
