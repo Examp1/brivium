@@ -5,6 +5,7 @@ import FormInput from "../../form/inputs/FormInput.vue";
 import FormLocationSearch from "@/components/form/inputs/FormLocationSearch.vue";
 import FormSelect from "@/components/form/inputs/FormSelect.vue";
 import { projectFormSchema } from "@/zod/modals/AddProjectStage";
+import FormDatepicker from "@/components/form/inputs/FormDatepicker.vue";
 
 const props = defineProps<{ projectId: number }>();
 const emit = defineEmits(["close"]);
@@ -13,7 +14,7 @@ const projectStageStore = useProjectstageStore();
 
 const validationSchema = toTypedSchema(projectFormSchema);
 
-const { handleSubmit } = useForm({
+const { handleSubmit, errors } = useForm({
     validationSchema,
 });
 
@@ -57,6 +58,7 @@ const statusSelect = ref([
 ]);
 
 const onSubmit = handleSubmit(async (values) => {
+    console.log(errors);
     const updatedValues = { stage_id: stageID.value, ...values };
     await projectStageStore.updateProjectStage(updatedValues);
     emit("close");
@@ -76,44 +78,29 @@ const trySaveStage = async (stageName: string) => {
     <div class="p-5 rounded-lg bg-white w-[540px]">
         <form @submit="onSubmit" class="flex flex-col gap-3">
             <FormInput
-                label="Name"
-                placeholder="enter name of project"
+                label="Назва етапу"
+                placeholder="Введіть назву етапу"
                 name="name"
                 @blur="trySaveStage"
             />
             <FormInput
-                label="Description"
-                placeholder="enter description of project"
+                label="Опис"
+                placeholder="Опис етапу"
                 name="description"
             />
             <!-- сразу подтянуть от клиента -->
             <FormLocationSearch
-                label="City id"
-                placeholder="city_id"
+                label="Місто"
+                placeholder="Почніть вводити назву міста"
                 name="city_id"
             />
             <div class="grid grid-cols-2 gap-2">
+                <FormDatepicker name="start_at" label="Початок етапу" />
+                <FormDatepicker name="finish_at" label="Кінець етапу" />
+                <FormDatepicker name="expired_at" label="Дійсна до" />
                 <FormInput
-                    label="Start at"
-                    placeholder="enter description of project"
-                    name="start_at"
-                    type="date"
-                />
-                <FormInput
-                    label="Finish at"
-                    placeholder="enter description of project"
-                    name="finish_at"
-                    type="date"
-                />
-                <FormInput
-                    label="Дійсна до"
-                    placeholder="enter description of project"
-                    name="expired_at"
-                    type="date"
-                />
-                <FormInput
-                    label="Budget"
-                    placeholder="enter budget of project"
+                    label="Бюджет"
+                    placeholder="Введіть бюджет на етап"
                     name="budget"
                     type="number"
                 />
