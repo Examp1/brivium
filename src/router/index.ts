@@ -118,12 +118,12 @@ const router = createRouter({
                     component: () =>
                         import("../views/admin/client/ProjectPage.vue"),
                 },
-                // {
-                //     path: "projects/project-:project/stage-:stage",
-                //     name: "project-page",
-                //     component: () =>
-                //         import("../views/admin/client/ProjectStagePage.vue"),
-                // },
+                {
+                    path: "projects/project-:project/stage-:stage",
+                    name: "project-stage-page",
+                    component: () =>
+                        import("../views/admin/client/ProjectStagePage.vue"),
+                },
             ],
             component: () => import("../views/ClientPage.vue"),
         },

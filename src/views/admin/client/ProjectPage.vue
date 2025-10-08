@@ -3,13 +3,13 @@ import BaseBtn from "@/components/base/BaseBtn.vue";
 import BaseUpload from "@/components/base/BaseUpload.vue";
 import AddProjectStage from "@/components/gallery/modals/AddProjectStage.vue";
 import ProjectFiles from "@/components/projects/ProjectFiles.vue";
+import ProjectStages from "@/components/projects/ProjectStages.vue";
 import AppModal from "@/components/ui/AppModal.vue";
 import { onMounted } from "vue";
 const projectStore = useProjectStore();
 const { projectData } = storeToRefs(projectStore);
 const projectFileStore = useProjectFileStore();
 const projectStageStore = useProjectstageStore();
-const { projectStages } = storeToRefs(projectStageStore);
 
 const route = useRoute();
 
@@ -66,7 +66,7 @@ onMounted(async () => {
         </div>
         <div class="border-b border-gray-100 py-5">
             <h2 class="text-xl mb-5 font-medium">Етапи проекту</h2>
-            {{ projectStages }}
+            <ProjectStages />
         </div>
     </div>
 </template>
