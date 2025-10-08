@@ -16,7 +16,7 @@ export const useProjectstageStore = defineStore("project-stage-store", () => {
         projectId: number,
         stageName: string,
     ) => {
-        await fetchWrapper(
+        const { data } = await fetchWrapper(
             "api/profile/client/project/stage/add-draft",
             ERequestMethods.POST,
             {
@@ -24,10 +24,22 @@ export const useProjectstageStore = defineStore("project-stage-store", () => {
                 name: stageName,
             },
         );
+        return data;
+    };
+
+    const updateProjectStage = async (
+        updateData: Record<string, string | number>,
+    ) => {
+        await fetchWrapper(
+            "api/profile/client/project/stage/update",
+            ERequestMethods.POST,
+            updateData,
+        );
     };
     return {
         projectStages,
         fetchProjectStages,
         addDraftStageToProject,
+        updateProjectStage,
     };
 });

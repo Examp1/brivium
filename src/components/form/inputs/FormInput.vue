@@ -10,9 +10,14 @@ const props = defineProps<{
     name: string;
     icon?: string;
     iconPosition?: string;
+    defaultValue?: string | number;
 }>();
 
-const { value, errors } = useField(props.name as string);
+const { value, errors, setValue } = useField(props.name as string);
+
+if (props.defaultValue) {
+    setValue(props.defaultValue);
+}
 
 const paddingClasses = ref("");
 switch (props.iconPosition) {

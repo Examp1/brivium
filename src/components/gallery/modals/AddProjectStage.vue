@@ -1,58 +1,80 @@
 <script setup lang="ts">
-import * as zod from "zod";
 import { toTypedSchema } from "@vee-validate/zod";
 import { useForm } from "vee-validate";
 import FormInput from "../../form/inputs/FormInput.vue";
+import FormLocationSearch from "@/components/form/inputs/FormLocationSearch.vue";
+import FormSelect from "@/components/form/inputs/FormSelect.vue";
+import { projectFormSchema } from "@/zod/modals/AddProjectStage";
 
 const props = defineProps<{ projectId: number }>();
 const emit = defineEmits(["close"]);
 
 const projectStageStore = useProjectstageStore();
 
-const validationSchema = toTypedSchema(
-    zod.object({
-        name: zod.string().min(1, { message: "This is required" }),
-        description: zod
-            .string()
-            .min(1, { message: "This is required" })
-            .min(8, { message: "Too short" }),
-    }),
-);
+const validationSchema = toTypedSchema(projectFormSchema);
 
-const { handleSubmit, errors } = useForm({
+const { handleSubmit } = useForm({
     validationSchema,
 });
 
+const stageID = ref();
+const customerSelect = ref([
+    {
+        value: 1,
+        title: "Власник",
+    },
+    {
+        value: 2,
+        title: "Підрядник",
+    },
+    {
+        value: 3,
+        title: "Посередник",
+    },
+]);
+
+const statusSelect = ref([
+    {
+        value: 1,
+        title: "Чернетка",
+    },
+    {
+        value: 2,
+        title: "Шукаю виконавця",
+    },
+    {
+        value: 3,
+        title: "Завершився",
+    },
+    {
+        value: 9,
+        title: "Видалено",
+    },
+    {
+        value: 10,
+        title: "Зроблено",
+    },
+]);
+
 const onSubmit = handleSubmit(async (values) => {
-    await projectStageStore.addNewProject(values);
+    const updatedValues = { stage_id: stageID.value, ...values };
+    await projectStageStore.updateProjectStage(updatedValues);
     emit("close");
 });
 
-const trySaveStage = (stageName: string) => {
+const trySaveStage = async (stageName: string) => {
     if (!stageName.length) return;
-    projectStageStore.addDraftStageToProject(props.projectId, stageName);
+    const stage = await projectStageStore.addDraftStageToProject(
+        props.projectId,
+        stageName,
+    );
+    stageID.value = stage?.value?.model.id;
 };
 </script>
 
-<!-- {
-    "stage_id": 4,
-    "name": "Кладка стін",
-    "description": "Опис",
-    "city_id": 25265,
-    "status": 2,
-    "start_at": "01.12.2000",
-    "finish_at": "11.12.2000",
-    "actual_start_at": "11.12.2000",
-    "actual_finish_at": "11.12.2000",
-    "expired_at": "",
-    "company_id":3,
-    "budget":20000,
-    "customer":2
-} -->
-
 <template>
     <div class="p-5 rounded-lg bg-white w-[540px]">
-        <form @submit="onSubmit" class="flex flex-col gap-5">
+        <form @submit="onSubmit" class="flex flex-col gap-3">
             <FormInput
                 label="Name"
                 placeholder="enter name of project"
@@ -64,6 +86,51 @@ const trySaveStage = (stageName: string) => {
                 placeholder="enter description of project"
                 name="description"
             />
+            <!-- сразу подтянуть от клиента -->
+            <FormLocationSearch
+                label="City id"
+                placeholder="city_id"
+                name="city_id"
+            />
+            <div class="grid grid-cols-2 gap-2">
+                <FormInput
+                    label="Start at"
+                    placeholder="enter description of project"
+                    name="start_at"
+                    type="date"
+                />
+                <FormInput
+                    label="Finish at"
+                    placeholder="enter description of project"
+                    name="finish_at"
+                    type="date"
+                />
+                <FormInput
+                    label="Дійсна до"
+                    placeholder="enter description of project"
+                    name="expired_at"
+                    type="date"
+                />
+                <FormInput
+                    label="Budget"
+                    placeholder="enter budget of project"
+                    name="budget"
+                    type="number"
+                />
+            </div>
+            <FormSelect
+                label="Замовник (роль)"
+                name="customer"
+                :list="customerSelect"
+                :default-value="1"
+            />
+            <FormSelect
+                label="Статус"
+                name="status"
+                :list="statusSelect"
+                :default-value="2"
+            />
+
             <button
                 type="submit"
                 class="h-11 px-10 bg-green-500 text-white rounded-lg mb-3 ml-auto"

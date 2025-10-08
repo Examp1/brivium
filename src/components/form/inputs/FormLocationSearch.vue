@@ -17,6 +17,7 @@ const props = defineProps<{
     name: string;
     icon?: string;
     iconPosition?: string;
+    defaultValue?: string | number;
 }>();
 
 const paddingClasses = ref("");
@@ -36,6 +37,10 @@ const searchQueryResult = ref();
 const searchResult = ref<ILocationSearchResponse[]>([]);
 
 const { setValue, errors } = useField(props.name as string);
+
+if (props.defaultValue) {
+    setValue(props.defaultValue);
+}
 
 const debouncedSearch = _debounce((event) => search(event), 700);
 

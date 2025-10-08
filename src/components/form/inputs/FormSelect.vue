@@ -12,10 +12,20 @@ const props = defineProps<{
     name: string;
     icon?: string;
     iconPosition?: string;
+    defaultValue?: string | number;
 }>();
 
 const placeholderValue = ref();
 const { setValue, errors } = useField(props.name as string);
+
+if (props.defaultValue) {
+    props.list.forEach((el) => {
+        if (el.value === props.defaultValue) {
+            setValue(el.value);
+            placeholderValue.value = el.title;
+        }
+    });
+}
 
 const paddingClasses = ref("");
 switch (props.iconPosition) {

@@ -66,6 +66,7 @@ onMounted(async () => {
         </div>
         <div class="border-b border-gray-100 py-5">
             <h2 class="text-xl mb-5 font-medium">Етапи проекту</h2>
+            {{ projectStages }}
         </div>
     </div>
 </template>
