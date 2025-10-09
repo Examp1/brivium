@@ -16,9 +16,9 @@ const route = useRoute();
 const showModal = ref<boolean>(false);
 
 onMounted(async () => {
-    await projectStore.getProjectById(+route.params.project);
-    await projectFileStore.fetchProjectFiles(+route.params.project);
-    await projectStageStore.fetchProjectStages(+route.params.project);
+    await projectStore.getProjectById(+route.params.project!);
+    await projectFileStore.fetchProjectFiles(+route.params.project!);
+    await projectStageStore.fetchProjectStages(+route.params.project!);
 });
 </script>
 

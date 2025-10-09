@@ -1,6 +1,8 @@
 export const useProjectstageStore = defineStore("project-stage-store", () => {
     const projectStages = ref();
+    const projectStage = ref();
     const _projectID = ref<number>();
+    const _stageID = ref<number>();
 
     const fetchProjectStages = async (projectId: number) => {
         _projectID.value = projectId;
@@ -12,6 +14,17 @@ export const useProjectstageStore = defineStore("project-stage-store", () => {
             },
         );
         projectStages.value = data.value;
+    };
+    const fetchProjectStagesById = async (stageId: number) => {
+        _stageID.value = stageId;
+        const { data } = await fetchWrapper(
+            "api/profile/client/project/stage/get-by-id",
+            ERequestMethods.POST,
+            {
+                id: stageId,
+            },
+        );
+        projectStage.value = data.value;
     };
 
     const addDraftStageToProject = async (
@@ -50,9 +63,11 @@ export const useProjectstageStore = defineStore("project-stage-store", () => {
     };
     return {
         projectStages,
+        projectStage,
         fetchProjectStages,
         addDraftStageToProject,
         updateProjectStage,
         deleteProjectStage,
+        fetchProjectStagesById,
     };
 });
