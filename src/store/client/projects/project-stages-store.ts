@@ -1,7 +1,9 @@
 export const useProjectstageStore = defineStore("project-stage-store", () => {
     const projectStages = ref();
+    const _projectID = ref<number>();
 
     const fetchProjectStages = async (projectId: number) => {
+        _projectID.value = projectId;
         const { data } = await fetchWrapper(
             "api/profile/client/project/stage/list",
             ERequestMethods.POST,
@@ -36,10 +38,21 @@ export const useProjectstageStore = defineStore("project-stage-store", () => {
             updateData,
         );
     };
+    const deleteProjectStage = async (id: number) => {
+        await fetchWrapper(
+            "api/profile/client/project/stage/delete",
+            ERequestMethods.POST,
+            {
+                id,
+            },
+        );
+        await fetchProjectStages(_projectID.value!);
+    };
     return {
         projectStages,
         fetchProjectStages,
         addDraftStageToProject,
         updateProjectStage,
+        deleteProjectStage,
     };
 });

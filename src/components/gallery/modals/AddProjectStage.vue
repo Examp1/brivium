@@ -16,6 +16,9 @@ const validationSchema = toTypedSchema(projectFormSchema);
 
 const { handleSubmit, errors } = useForm({
     validationSchema,
+    initialValues: {
+        name: "abama",
+    },
 });
 
 const stageID = ref();
@@ -58,7 +61,6 @@ const statusSelect = ref([
 ]);
 
 const onSubmit = handleSubmit(async (values) => {
-    console.log(errors);
     const updatedValues = { stage_id: stageID.value, ...values };
     await projectStageStore.updateProjectStage(updatedValues);
     emit("close");

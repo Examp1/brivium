@@ -17,11 +17,6 @@ export const projectFormSchema = z.object({
             invalid_type_error: "City ID must be a number",
         })
         .positive("City ID must be positive"),
-
-    //     expired_at: z.date({
-    //     required_error: "Expired date is required",
-    //     invalid_type_error: "Expired date must be valid",
-    // }),
     start_at: z.string().min(1, "Start date is required"),
     finish_at: z.string().min(1, "Finish date is required"),
     expired_at: z.string().min(1, "Expiration date is required"),
