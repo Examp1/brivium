@@ -1,6 +1,12 @@
 <script setup lang="ts">
+const emit = defineEmits(["changeCurrentTab"]);
 const tabList = ["Загальна інформація", "Ставки", "Файли", "Коментарі"];
 const activeTab = ref(tabList[0]);
+
+const changeActiveTab = (tab: string) => {
+    activeTab.value = tab;
+    emit("changeCurrentTab", tab);
+};
 </script>
 <template>
     <div class="flex my-3">
@@ -9,7 +15,7 @@ const activeTab = ref(tabList[0]);
             :key="tab"
             class="cursor-pointer py-3.5 px-4 rounded-lg"
             :class="{ activeTab: activeTab == tab }"
-            @click="activeTab = tab"
+            @click="changeActiveTab(tab)"
         >
             {{ tab }}
         </div>

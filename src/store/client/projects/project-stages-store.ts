@@ -1,6 +1,8 @@
 export const useProjectstageStore = defineStore("project-stage-store", () => {
     const projectStages = ref();
     const projectStage = ref();
+    const projectStageFiles = ref([]);
+    const projectStageComments = ref([]);
     const _projectID = ref<number>();
     const _stageID = ref<number>();
 
@@ -25,6 +27,28 @@ export const useProjectstageStore = defineStore("project-stage-store", () => {
             },
         );
         projectStage.value = data.value;
+    };
+
+    const fetchProjectStageFiles = async () => {
+        const { data } = await fetchWrapper(
+            "api/profile/client/project/stage/file/list",
+            ERequestMethods.POST,
+            {
+                stage_id: _stageID.value,
+            },
+        );
+        projectStageFiles.value = data.value;
+    };
+
+    const fetchProjectStageComments = async () => {
+        const { data } = await fetchWrapper(
+            "api/profile/client/project/stage/comment/list",
+            ERequestMethods.POST,
+            {
+                stage_id: _stageID.value,
+            },
+        );
+        projectStageComments.value = data.value;
     };
 
     const addDraftStageToProject = async (
@@ -64,10 +88,14 @@ export const useProjectstageStore = defineStore("project-stage-store", () => {
     return {
         projectStages,
         projectStage,
+        projectStageFiles,
+        projectStageComments,
         fetchProjectStages,
         addDraftStageToProject,
         updateProjectStage,
         deleteProjectStage,
         fetchProjectStagesById,
+        fetchProjectStageFiles,
+        fetchProjectStageComments,
     };
 });

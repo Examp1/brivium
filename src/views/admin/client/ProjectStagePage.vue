@@ -1,11 +1,18 @@
 <script setup lang="ts">
 import BaseBtn from "@/components/base/BaseBtn.vue";
+import StageComments from "@/components/projects/stages/stage-tabs/StageComments.vue";
+import StageFiles from "@/components/projects/stages/stage-tabs/StageFiles.vue";
+import StageInfo from "@/components/projects/stages/stage-tabs/StageInfo.vue";
 import StageTabs from "@/components/projects/stages/StageTabs.vue";
 import { onMounted } from "vue";
 const projectStageStore = useProjectstageStore();
 const { projectStage } = storeToRefs(projectStageStore);
 
 const route = useRoute();
+const currentTab = ref("Загальна інформація");
+const changeCurrentTab = (tab: string) => {
+    currentTab.value = tab;
+};
 
 onMounted(() => {
     projectStageStore.fetchProjectStagesById(+route.params.stage!);
@@ -44,8 +51,10 @@ onMounted(() => {
                 /> -->
             </div>
         </div>
-        <StageTabs />
-        {{ projectStage }}
+        <StageTabs @changeCurrentTab="changeCurrentTab" />
+        <StageInfo v-if="currentTab === 'Загальна інформація'" />
+        <StageFiles v-if="currentTab === 'Файли'" />
+        <StageComments v-if="currentTab === 'Коментарі'" />
     </div>
 </template>
 
