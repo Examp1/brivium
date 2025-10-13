@@ -85,6 +85,7 @@ export const useProjectstageStore = defineStore("project-stage-store", () => {
         );
         await fetchProjectStages(_projectID.value!);
     };
+
     return {
         projectStages,
         projectStage,

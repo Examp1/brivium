@@ -52,9 +52,11 @@ onMounted(() => {
             </div>
         </div>
         <StageTabs @changeCurrentTab="changeCurrentTab" />
-        <StageInfo v-if="currentTab === 'Загальна інформація'" />
-        <StageFiles v-if="currentTab === 'Файли'" />
-        <StageComments v-if="currentTab === 'Коментарі'" />
+        <div class="border-t border-gray-100 mt-4 pt-4">
+            <StageInfo v-if="currentTab === 'Загальна інформація'" />
+            <StageFiles v-if="currentTab === 'Файли'" />
+            <StageComments v-if="currentTab === 'Коментарі'" />
+        </div>
     </div>
 </template>
 

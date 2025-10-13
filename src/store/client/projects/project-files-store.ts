@@ -27,9 +27,21 @@ export const useProjectFileStore = defineStore("project-file-store", () => {
         await fetchProjectFiles(_projectID.value!);
     };
 
+    const deleteProjectStageFile = async (fileID: number) => {
+        await fetchWrapper(
+            "api/profile/client/project/stage/file/delete",
+            ERequestMethods.POST,
+            {
+                project_id: _projectID.value,
+                id: fileID,
+            },
+        );
+    };
+
     return {
         projectFiles,
         fetchProjectFiles,
         deleteProjectFile,
+        deleteProjectStageFile,
     };
 });

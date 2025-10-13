@@ -32,6 +32,7 @@ declare global {
   const setActivePinia: typeof import('pinia')['setActivePinia']
   const setMapStoreSuffix: typeof import('pinia')['setMapStoreSuffix']
   const storeToRefs: typeof import('pinia')['storeToRefs']
+  const uploadFile: typeof import('./src/utils/files/upload')['uploadFile']
   const useAuthStore: typeof import('./src/store/auth/auth-store')['useAuthStore']
   const useClientInfoStore: typeof import('./src/store/client/profile/client-info-store')['useClientInfoStore']
   const useCompanyCatalogStore: typeof import('./src/store/company/catalog/company-catalog-store')['useCompanyCatalogStore']
@@ -65,6 +66,9 @@ declare global {
   // @ts-ignore
   export type { IRequest } from './src/interfaces/IRequest'
   import('./src/interfaces/IRequest')
+  // @ts-ignore
+  export type { IPagination, IStageFile, IStageComment } from './src/interfaces/IResponses'
+  import('./src/interfaces/IResponses')
 }
 
 // for vue template auto import
@@ -97,6 +101,7 @@ declare module 'vue' {
     readonly setActivePinia: UnwrapRef<typeof import('pinia')['setActivePinia']>
     readonly setMapStoreSuffix: UnwrapRef<typeof import('pinia')['setMapStoreSuffix']>
     readonly storeToRefs: UnwrapRef<typeof import('pinia')['storeToRefs']>
+    readonly uploadFile: UnwrapRef<typeof import('./src/utils/files/upload')['uploadFile']>
     readonly useAuthStore: UnwrapRef<typeof import('./src/store/auth/auth-store')['useAuthStore']>
     readonly useClientInfoStore: UnwrapRef<typeof import('./src/store/client/profile/client-info-store')['useClientInfoStore']>
     readonly useCompanyCatalogStore: UnwrapRef<typeof import('./src/store/company/catalog/company-catalog-store')['useCompanyCatalogStore']>
