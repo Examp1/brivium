@@ -22,9 +22,7 @@ const deleteFile = async (fileID: number) => {
     await projectStageStore.fetchProjectStageFiles();
 };
 
-// if (!projectStageFiles.value) {
 projectStageStore.fetchProjectStageFiles();
-// }
 </script>
 
 <template>
@@ -36,7 +34,7 @@ projectStageStore.fetchProjectStageFiles();
             class="h-11 px-10 bg-blue-500 text-white rounded-lg cursor-pointer inline-flex items-center"
             @click="showModal = true"
         >
-            Додати файл
+            Додати файл в етап
         </div>
     </div>
     <div class="grid grid-cols-4 gap-4">

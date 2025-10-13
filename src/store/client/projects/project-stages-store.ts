@@ -1,8 +1,8 @@
 export const useProjectstageStore = defineStore("project-stage-store", () => {
     const projectStages = ref();
     const projectStage = ref();
-    const projectStageFiles = ref([]);
-    const projectStageComments = ref([]);
+    const projectStageFiles = ref<IStageFile>();
+    const projectStageComments = ref<IStageComment>();
     const _projectID = ref<number>();
     const _stageID = ref<number>();
 
@@ -30,18 +30,19 @@ export const useProjectstageStore = defineStore("project-stage-store", () => {
     };
 
     const fetchProjectStageFiles = async () => {
-        const { data } = await fetchWrapper(
+        const { data } = await fetchWrapper<IStageFile>(
             "api/profile/client/project/stage/file/list",
             ERequestMethods.POST,
             {
                 stage_id: _stageID.value,
             },
         );
+
         projectStageFiles.value = data.value;
     };
 
     const fetchProjectStageComments = async () => {
-        const { data } = await fetchWrapper(
+        const { data } = await fetchWrapper<IStageComment>(
             "api/profile/client/project/stage/comment/list",
             ERequestMethods.POST,
             {
@@ -85,6 +86,19 @@ export const useProjectstageStore = defineStore("project-stage-store", () => {
         );
         await fetchProjectStages(_projectID.value!);
     };
+    // TODO modules
+
+    const addStageComment = async (comment: string) => {
+        await fetchWrapper(
+            "api/profile/client/project/stage/comment/add",
+            ERequestMethods.POST,
+            {
+                stage_id: _stageID.value,
+                comment,
+            },
+        );
+        await fetchProjectStageComments();
+    };
 
     return {
         projectStages,
@@ -98,5 +112,6 @@ export const useProjectstageStore = defineStore("project-stage-store", () => {
         fetchProjectStagesById,
         fetchProjectStageFiles,
         fetchProjectStageComments,
+        addStageComment,
     };
 });
