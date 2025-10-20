@@ -16,7 +16,6 @@ export const useProjectFileStore = defineStore("project-file-store", () => {
         }
     };
 
-    // TODO переговорить с денисом насчет апишек ( они оинаковые данные принимают )
     const deleteProjectFile = async (fileID: number) => {
         await fetchWrapper(
             "api/profile/client/project/file/delete",
