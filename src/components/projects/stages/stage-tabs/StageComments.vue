@@ -13,7 +13,7 @@ projectStageStore.fetchProjectStageComments();
     </div>
     <ul>
         <li
-            v-for="comment in projectStageComments.items"
+            v-for="comment in projectStageComments?.items"
             :key="comment.id"
             class="border-b border-gray-100 pb-4"
         >

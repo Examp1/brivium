@@ -4,11 +4,14 @@ import ProjectList from "@/components/projects/ProjectList.vue";
 import AppModal from "@/components/ui/AppModal.vue";
 import { onMounted } from "vue";
 const projectStore = useProjectStore();
+const { projects } = storeToRefs(projectStore);
 
 const showModal = ref<boolean>(false);
 
 onMounted(() => {
-    projectStore.fetchProjects();
+    if (!projects.value) {
+        projectStore.fetchProjects();
+    }
 });
 </script>
 

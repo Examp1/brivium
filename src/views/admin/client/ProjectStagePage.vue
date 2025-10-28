@@ -9,9 +9,19 @@ const projectStageStore = useProjectstageStore();
 const { projectStage } = storeToRefs(projectStageStore);
 
 const route = useRoute();
+const router = useRouter();
 const currentTab = ref("Загальна інформація");
 const changeCurrentTab = (tab: string) => {
     currentTab.value = tab;
+};
+
+const deleteStage = () => {
+    projectStageStore.deleteProjectStage(+route.params.stage!).then(() => {
+        router.push({
+            name: "project-page",
+            params: { project: route.params.project },
+        });
+    });
 };
 
 onMounted(() => {
@@ -32,15 +42,15 @@ onMounted(() => {
                     Назад
                 </router-link>
                 <h2 class="text-2xl font-medium">
-                    Project: {{ projectStage?.model.name }}
+                    Етап: {{ projectStage?.model.name }}
                 </h2>
             </div>
-            <div class="flex items-center gap-3">
+            <!-- <div class="flex items-center gap-3">
                 <BaseBtn
                     title="Додати етап"
                     @click="showModal = true"
                 ></BaseBtn>
-                <!-- <BaseUpload
+                <BaseUpload
                     :id="projectData?.model.id"
                     uploadType="inProject"
                     @uploadComplete="
@@ -48,8 +58,8 @@ onMounted(() => {
                             projectData?.model.id,
                         )
                     "
-                /> -->
-            </div>
+                />
+            </div> -->
         </div>
         <StageTabs @changeCurrentTab="changeCurrentTab" />
         <div class="border-t border-gray-100 mt-4 pt-4">
@@ -57,6 +67,12 @@ onMounted(() => {
             <StageFiles v-if="currentTab === 'Файли'" />
             <StageComments v-if="currentTab === 'Коментарі'" />
         </div>
+        <BaseBtn
+            class="mt-10"
+            color="bg-red-500"
+            title="Видалити етап"
+            @click="deleteStage"
+        ></BaseBtn>
     </div>
 </template>
 

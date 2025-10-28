@@ -16,9 +16,6 @@ const validationSchema = toTypedSchema(projectFormSchema);
 
 const { handleSubmit, errors } = useForm({
     validationSchema,
-    initialValues: {
-        name: "abama",
-    },
 });
 
 const stageID = ref();

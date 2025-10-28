@@ -12,8 +12,15 @@ const projectFileStore = useProjectFileStore();
 const projectStageStore = useProjectstageStore();
 
 const route = useRoute();
+const router = useRouter();
 
 const showModal = ref<boolean>(false);
+
+const deleteProject = () => {
+    projectStore.deleteProjectById(+route.params.project!).then(() => {
+        router.push({ name: "projects-page" });
+    });
+};
 
 onMounted(async () => {
     await projectStore.getProjectById(+route.params.project!);
@@ -68,6 +75,12 @@ onMounted(async () => {
             <h2 class="text-xl mb-5 font-medium">Етапи проекту</h2>
             <StageList />
         </div>
+        <BaseBtn
+            class="mt-10"
+            color="bg-red-500"
+            title="Видалити проект"
+            @click="deleteProject"
+        ></BaseBtn>
     </div>
 </template>
 

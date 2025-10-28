@@ -17,7 +17,7 @@ onClickOutside(target, () => (openDropdown.value = false));
     >
         <span
             class="mdi mdi-dots-vertical flex items-center justify-center text-xl w-[30px] h-[30px] rounded-full hover:bg-gray-200 base-transition"
-            @click.stop="openDropdown = !openDropdown"
+            @click.stop.prevent="openDropdown = !openDropdown"
         ></span>
         <div
             v-if="openDropdown"
@@ -25,12 +25,12 @@ onClickOutside(target, () => (openDropdown.value = false));
         >
             <div
                 class="text-sm flex gap-2 py-1 px-3 hover:bg-gray-300"
-                @click.stop="emit('change')"
+                @click.stop.prevent="emit('change')"
             >
                 <span class="mdi mdi-pen"></span> Змінити
             </div>
             <div
-                @click.stop="emit('delete')"
+                @click.stop.prevent="emit('delete')"
                 class="text-sm flex gap-2 text-red-400 py-1 px-3 hover:bg-gray-300"
             >
                 <span class="mdi mdi-delete"></span> Видалити
