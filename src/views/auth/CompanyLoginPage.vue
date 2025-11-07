@@ -46,47 +46,42 @@ const checkToken = async (token: string) => {
 </script>
 
 <template>
-    <form
-        class="mx-auto w-full max-w-[400px] flex flex-col gap-3"
-        @submit.prevent="signIn"
-    >
-        <div>
-            <label
-                for="test"
-                class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
-                >login</label
-            >
-            <div class="relative">
+    <div class="flex flex-col items-center">
+        <h2 class="text-[28px] font-bold mb-[16px]">
+            Вхід в особистий кабінет
+        </h2>
+        <p class="text-base mb-[28px]">
+            Заповніть інформацію, яку ви надавали при реєстрації
+        </p>
+
+        <form
+            class="mx-auto w-full max-w-[400px] flex flex-col gap-3"
+            @submit.prevent="signIn"
+        >
+            <div class="grid gap-[28px]">
                 <input
                     v-model="loginInputs.login"
                     id="test"
-                    class="h-11 w-full rounded-lg border appearance-none px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-hidden focus:ring-3 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 bg-transparent text-gray-800 border-gray-300 focus:border-brand-300 focus:ring-brand-500/20 dark:border-gray-700 dark:text-white/90 dark:focus:border-brand-800"
+                    class="h-11 w-full rounded-sm border appearance-none px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-hidden focus:ring-3 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 bg-transparent text-gray-800 border-gray-300 focus:border-brand-300 focus:ring-brand-500/20 dark:border-gray-700 dark:text-white/90 dark:focus:border-brand-800"
                     type="text"
                 />
-            </div>
-        </div>
-        <div>
-            <label
-                for="test"
-                class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
-                >password</label
-            >
-            <div class="relative">
+
                 <input
                     v-model="loginInputs.password"
                     id="test"
-                    class="h-11 w-full rounded-lg border appearance-none px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-hidden focus:ring-3 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 bg-transparent text-gray-800 border-gray-300 focus:border-brand-300 focus:ring-brand-500/20 dark:border-gray-700 dark:text-white/90 dark:focus:border-brand-800"
+                    class="h-11 w-full rounded-sm border appearance-none px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-hidden focus:ring-3 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 bg-transparent text-gray-800 border-gray-300 focus:border-brand-300 focus:ring-brand-500/20 dark:border-gray-700 dark:text-white/90 dark:focus:border-brand-800"
                     type="password"
                 />
+
+                <button
+                    type="submit"
+                    class="bg-blue-500 text-white py-3 px-10 inline rounded-sm"
+                >
+                    Увійти
+                </button>
             </div>
-        </div>
-        <button
-            type="submit"
-            class="bg-blue-500 text-white py-3 px-10 inline w-fit rounded-xl"
-        >
-            sign in
-        </button>
-    </form>
+        </form>
+    </div>
 </template>
 
 <style scoped></style>

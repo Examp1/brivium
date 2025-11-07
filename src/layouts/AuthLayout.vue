@@ -35,10 +35,17 @@ const routeParams = computed(() => {
             };
     }
 });
+
+import clientImage from "@/assets/images/client.png";
+import companyImage from "@/assets/images/company.png";
+
+const bgImage = computed(() => {
+    return route.path.includes("client") ? clientImage : companyImage;
+});
 </script>
 
 <template>
-    <div class="grid grid-cols-2 h-screen w-full">
+    <div class="grid grid-cols-[0.4fr_0.6fr] h-screen w-full">
         <div class="flex items-center justify-center">
             <div class="flex flex-col">
                 <slot />
@@ -60,17 +67,17 @@ const routeParams = computed(() => {
                 </router-link>
             </div>
         </div>
-        <div
-            class="p-5 text-lg"
-            :class="
-                route.path.includes('client') ? 'bg-blue-200' : 'bg-green-200'
-            "
-        >
-            <router-link :to="routeParams.link">{{
-                routeParams.linkText
-            }}</router-link>
+        <div class="p-5 text-lg relative">
+            <img
+                class="object-cover absolute inset-0 w-full h-full"
+                :src="bgImage"
+                alt=""
+            />
+            <router-link
+                class="absolute t-[10px] left-[20px]"
+                :to="routeParams.link"
+                >{{ routeParams.linkText }}</router-link
+            >
         </div>
     </div>
 </template>
-
-<style scoped></style>
