@@ -21,7 +21,7 @@ export const useProjectStore = defineStore("project-store", () => {
 
     const deleteProjectById = async (projectId: number) => {
         await fetchWrapper(
-            "api/profile/client/project/delete",!
+            "api/profile/client/project/delete",
             ERequestMethods.POST,
             {
                 id: projectId,

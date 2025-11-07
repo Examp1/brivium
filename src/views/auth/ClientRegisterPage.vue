@@ -28,7 +28,7 @@ const onSubmit = handleSubmit(async (values) => {
 
 <template>
     <div class="flex flex-col items-center">
-        <h2 class="text-[28px] font-bold mb-[16px]">Реестрація в клієнта</h2>
+        <h2 class="text-[28px] font-bold mb-[16px]">Реестрація клієнта</h2>
         <form @submit.prevent="onSubmit" class="w-[400px] grid gap-5">
             <FormInput placeholder="email" name="email" />
             <FormInput placeholder="Name" name="name" />

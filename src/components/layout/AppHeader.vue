@@ -8,7 +8,7 @@ const emit = defineEmits(["toggleView"]);
 <template>
     <header class="sticky top-0">
         <menu
-            class="h-[70px] bg-white w-full p-4 border-b border-gray-200 flex justify-between"
+            class="z-100 h-[70px] bg-white w-full p-4 border-b border-gray-200 flex justify-between"
         >
             <button
                 @click="emit('toggleView')"
