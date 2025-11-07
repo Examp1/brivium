@@ -27,31 +27,20 @@ const onSubmit = handleSubmit(async (values) => {
 </script>
 
 <template>
-    <form @submit.prevent="onSubmit" class="w-[400px] grid gap-5">
-        <FormInput label="Email" placeholder="email" name="email" />
-        <FormInput label="Name" placeholder="Name" name="name" />
-        <FormInput label="Lastname" placeholder="Lastname" name="lastname" />
-        <FormInput label="Surname" placeholder="Surname" name="surname" />
-        <FormInput label="Position" placeholder="Position" name="position" />
-        <FormInput
-            label="Phone"
-            placeholder="Phone"
-            name="phone"
-            type="phone"
-        />
-        <FormLocationSearch
-            label="City id"
-            placeholder="city_id"
-            name="city_id"
-        />
-        <FormInput
-            label="Password"
-            placeholder="Password"
-            name="password"
-            type="password"
-        />
-        <BaseBtn @click="onSubmit" title="Зареєструватися" />
-    </form>
+    <div class="flex flex-col items-center">
+        <h2 class="text-[28px] font-bold mb-[16px]">Реестрація в клієнта</h2>
+        <form @submit.prevent="onSubmit" class="w-[400px] grid gap-5">
+            <FormInput placeholder="email" name="email" />
+            <FormInput placeholder="Name" name="name" />
+            <FormInput placeholder="Lastname" name="lastname" />
+            <FormInput placeholder="Surname" name="surname" />
+            <FormInput placeholder="Position" name="position" />
+            <FormInput placeholder="Phone" name="phone" type="phone" />
+            <FormLocationSearch placeholder="city_id" name="city_id" />
+            <FormInput placeholder="Password" name="password" type="password" />
+            <BaseBtn class="w-full" @click="onSubmit" title="Зареєструватися" />
+        </form>
+    </div>
 </template>
 
 <style scoped></style>

@@ -43,34 +43,32 @@ const onSubmit = handleSubmit(async (values) => {
 </script>
 
 <template>
-    <form @submit.prevent="onSubmit" class="w-[400px] grid gap-5">
-        <FormInput label="Email" placeholder="email" name="email" />
-        <FormInput label="Name" placeholder="Name" name="name" />
-        <FormInput
-            label="Phone"
-            placeholder="Phone"
-            name="phone"
-            type="phone"
-        />
-        <FormInput
-            label="Password"
-            placeholder="Password"
-            name="password"
-            type="password"
-        />
-        <FormSelect
-            label="type"
-            name="type"
-            :list="companyType"
-            placeholder="выбреите тип компании"
-        />
-        <FormLocationSearch
-            label="City id"
-            placeholder="city_id"
-            name="city_id"
-        />
-        <BaseBtn @click="onSubmit" title="Зареєструватися" />
-    </form>
+    <div class="flex flex-col items-center">
+        <h2 class="text-[28px] font-bold mb-[16px]">Реестрація в компанії</h2>
+        <form @submit.prevent="onSubmit" class="w-[400px] grid gap-5">
+            <div class="grid gap-[28px]">
+                <FormInput placeholder="email" name="email" />
+                <FormInput placeholder="Name" name="name" />
+                <FormInput placeholder="Phone" name="phone" type="phone" />
+                <FormInput
+                    placeholder="Password"
+                    name="password"
+                    type="password"
+                />
+                <FormSelect
+                    name="type"
+                    :list="companyType"
+                    placeholder="выбреите тип компании"
+                />
+                <FormLocationSearch placeholder="city_id" name="city_id" />
+                <BaseBtn
+                    class="w-full"
+                    @click="onSubmit"
+                    title="Зареєструватися"
+                />
+            </div>
+        </form>
+    </div>
 </template>
 
 <style scoped></style>
