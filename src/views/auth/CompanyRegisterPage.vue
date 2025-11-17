@@ -7,6 +7,7 @@ import BaseBtn from "@/components/base/BaseBtn.vue";
 import FormLocationSearch from "@/components/form/inputs/FormLocationSearch.vue";
 import { showError } from "@/composables/toast-notification";
 import { useFetch } from "@/composables/useFetch";
+import AppModal from "@/components/ui/AppModal.vue";
 
 const companyType = [
     {
@@ -27,6 +28,8 @@ const { handleSubmit } = useForm({
     validationSchema: companyValidateScheme,
 });
 
+const showSuccess = ref<boolean>(false);
+
 const onSubmit = handleSubmit(async (values) => {
     const companyData = {
         ...values,
@@ -36,9 +39,13 @@ const onSubmit = handleSubmit(async (values) => {
     useFetch(`${APP_ENUM.BASE_API_URL}/api/auth/company/register`, {
         method: ERequestMethods.POST,
         data: companyData,
-    }).catch((err) => {
-        showError(err);
-    });
+    })
+        .then(() => {
+            showSuccess.value = true;
+        })
+        .catch((err) => {
+            showError(err);
+        });
 });
 </script>
 
@@ -69,6 +76,22 @@ const onSubmit = handleSubmit(async (values) => {
             </div>
         </form>
     </div>
+    <AppModal v-if="showSuccess" @close="showSuccess = false">
+        <div
+            class="p-6 bg-white rounded-lg w-[400px] flex flex-col items-center"
+        >
+            <h2 class="text-2xl font-bold mb-4">Успіх!</h2>
+            <p class="mb-6">
+                компанія успішно зареєстрована , перевірте вашу пошту, щоб
+                активувати профіль.
+            </p>
+            <BaseBtn
+                class="w-full"
+                @click="showSuccess = false"
+                title="Закрити"
+            />
+        </div>
+    </AppModal>
 </template>
 
 <style scoped></style>
