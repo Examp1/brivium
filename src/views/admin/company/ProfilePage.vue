@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import BaseBtn from "@/components/base/BaseBtn.vue";
 import BaseInput from "@/components/base/BaseInput.vue";
+import ContactsList from "@/components/contacts/ContactsList.vue";
 import { storeToRefs } from "pinia";
 const companyInfoStore = useCompanyInfoStore();
 const { companyInfo } = storeToRefs(companyInfoStore);
@@ -32,9 +33,10 @@ const { companyInfo } = storeToRefs(companyInfoStore);
                 <span class="text-sm text-[#364A63]">Телефон</span>
                 <BaseInput v-model="companyInfo.phone" placeholder="Телефон" />
             </div>
+            <ContactsList />
             <BaseBtn title="Зберегти" />
         </div>
-        <pre>{{ companyInfo }}</pre>
+        <!-- <pre>{{ companyInfo }}</pre> -->
     </div>
 </template>
 

@@ -6,7 +6,7 @@ const emit = defineEmits(["toggleView"]);
 </script>
 
 <template>
-    <header class="sticky top-0">
+    <header class="sticky top-0 z-100">
         <menu
             class="z-100 h-[70px] bg-white w-full p-4 border-b border-gray-200 flex justify-between"
         >

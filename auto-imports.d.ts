@@ -39,6 +39,7 @@ declare global {
   const useCompanyInfoStore: typeof import('./src/store/company/profile/company-info-store')['useCompanyInfoStore']
   const useCompanyPricesStore: typeof import('./src/store/company/catalog/company-prices-store')['useCompanyPricesStore']
   const useCompanyReviewsStore: typeof import('./src/store/company/reviews/reviews-store')['useCompanyReviewsStore']
+  const useContactsStore: typeof import('./src/store/contacts/contacts-store')['useContactsStore']
   const useGalleryStore: typeof import('./src/store/company/gallery/gallery-store')['useGalleryStore']
   const useLink: typeof import('vue-router')['useLink']
   const useNotificationStore: typeof import('./src/store/notifications/notifications-store')['useNotificationStore']
@@ -108,6 +109,7 @@ declare module 'vue' {
     readonly useCompanyInfoStore: UnwrapRef<typeof import('./src/store/company/profile/company-info-store')['useCompanyInfoStore']>
     readonly useCompanyPricesStore: UnwrapRef<typeof import('./src/store/company/catalog/company-prices-store')['useCompanyPricesStore']>
     readonly useCompanyReviewsStore: UnwrapRef<typeof import('./src/store/company/reviews/reviews-store')['useCompanyReviewsStore']>
+    readonly useContactsStore: UnwrapRef<typeof import('./src/store/contacts/contacts-store')['useContactsStore']>
     readonly useGalleryStore: UnwrapRef<typeof import('./src/store/company/gallery/gallery-store')['useGalleryStore']>
     readonly useLink: UnwrapRef<typeof import('vue-router')['useLink']>
     readonly useNotificationStore: UnwrapRef<typeof import('./src/store/notifications/notifications-store')['useNotificationStore']>

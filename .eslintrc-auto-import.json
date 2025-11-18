@@ -36,6 +36,7 @@
     "useCompanyInfoStore": true,
     "useCompanyPricesStore": true,
     "useCompanyReviewsStore": true,
+    "useContactsStore": true,
     "useGalleryStore": true,
     "useLink": true,
     "useNotificationStore": true,
