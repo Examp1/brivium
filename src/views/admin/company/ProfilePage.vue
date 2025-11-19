@@ -8,33 +8,42 @@ const { companyInfo } = storeToRefs(companyInfoStore);
 </script>
 
 <template>
-    <div class="p-4">
+    <div class="p-4 min-h-screen">
         <h2 class="text-[28px] font-bold">Особиста інформація</h2>
-        <div class="max-w-[500px] grid gap-5 mt-5">
-            <div class="grid grid-cols-[0.5fr_1fr] items-center">
-                <span class="text-sm text-[#364A63]">Повне ім’я</span>
-                <BaseInput
-                    v-model="companyInfo.name"
-                    placeholder="Введіть повне ім’я"
-                />
-            </div>
-            <div class="grid grid-cols-[0.5fr_1fr] items-center">
-                <span class="text-sm text-[#364A63]">email</span>
-                <BaseInput
-                    v-model="companyInfo.email"
-                    placeholder="Введіть повне ім’я"
-                />
-            </div>
-            <div class="grid grid-cols-[0.5fr_1fr] items-center">
-                <span class="text-sm text-[#364A63]">Місто</span>
-                <BaseInput v-model="companyInfo.city_id" placeholder="Місто" />
-            </div>
-            <div class="grid grid-cols-[0.5fr_1fr] items-center">
-                <span class="text-sm text-[#364A63]">Телефон</span>
-                <BaseInput v-model="companyInfo.phone" placeholder="Телефон" />
+        <div class="grid grid-cols-2 gap-10">
+            <div class="grid gap-5 mt-5 h-fit">
+                <div class="grid grid-cols-[0.5fr_1fr] items-center">
+                    <span class="text-sm text-[#364A63]">Повне ім’я</span>
+                    <BaseInput
+                        v-model="companyInfo.name"
+                        placeholder="Введіть повне ім’я"
+                    />
+                </div>
+                <div class="grid grid-cols-[0.5fr_1fr] items-center">
+                    <span class="text-sm text-[#364A63]">email</span>
+                    <BaseInput
+                        v-model="companyInfo.email"
+                        placeholder="Введіть повне ім’я"
+                    />
+                </div>
+                <div class="grid grid-cols-[0.5fr_1fr] items-center">
+                    <span class="text-sm text-[#364A63]">Місто</span>
+                    <BaseInput
+                        v-model="companyInfo.city_id"
+                        placeholder="Місто"
+                    />
+                </div>
+                <div class="grid grid-cols-[0.5fr_1fr] items-center">
+                    <span class="text-sm text-[#364A63]">Телефон</span>
+                    <BaseInput
+                        v-model="companyInfo.phone"
+                        placeholder="Телефон"
+                    />
+                </div>
+                <h3 class="text-sm text-[#364A63]">Контактна інформація</h3>
+                <BaseBtn title="Зберегти" />
             </div>
             <ContactsList />
-            <BaseBtn title="Зберегти" />
         </div>
         <!-- <pre>{{ companyInfo }}</pre> -->
     </div>

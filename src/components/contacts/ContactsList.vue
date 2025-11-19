@@ -1,67 +1,32 @@
 <script lang="ts" setup>
-import FormInput from "../form/inputs/FormInput.vue";
-import FormSelect from "../form/inputs/FormSelect.vue";
+import BaseBtn from "../base/BaseBtn.vue";
+import BaseInput from "../base/BaseInput.vue";
+import AddContactsForm from "./AddContactsForm.vue";
 
 const contactsStore = useContactsStore();
 const { contacts } = storeToRefs(contactsStore);
-
 contactsStore.fetchContactsList("company");
 
-const contactData = ref({
-    value: "000000000",
-    label: "dfgdfsdf",
-    status: 1,
-    type: 1,
-    order: 1,
-    is_primary: 1,
-    permission_id: 1,
-});
-
-const addNewContact = async () => {
-    await contactsStore.addContact(contactData, "company");
-
-    // {
-    // "value": "000000000",
-    // "label": "dfgdfsdf",
-    // "status": 1,
-    // "type": 1,
-    // "order": 1,
-    // "is_primary": 1,
-    // "permission_id":1
-    // }
-};
-
-const contactType = ref([
-    { value: 1, title: "Phone" },
-    { value: 2, title: "Email" },
-    { value: 3, title: "Address" },
-    { value: 4, title: "Site" },
-    { value: 5, title: "Telegram" },
-    { value: 6, title: "Viber" },
-    { value: 7, title: "Instagram" },
-    { value: 8, title: "Facebook" },
-    { value: 9, title: "Youtube" },
-    { value: 10, title: "Tiktok" },
-]);
+const showAddContactForm = ref(false);
 </script>
 
 <template>
     <div>
-        {{ contacts }}
-        123
-        <FormInput
-            label="Бюджет"
-            placeholder="Введіть бюджет на етап"
-            name="budget"
-            type="number"
-        />
-
-        <FormSelect
-            label="Тип контакту"
-            name="contactType"
-            :list="contactType"
-            :default-value="1"
-        />
+        <!-- <pre>{{ contacts }}</pre> -->
+        <div class="grid gap-5 h-fit">
+            <div
+                v-for="contact in contacts?.items"
+                :key="contact.id"
+                class="grid grid-cols-[0.5fr_1fr] items-center"
+            >
+                <span class="text-sm text-[#364A63]">{{
+                    contact.type_text
+                }}</span>
+                <BaseInput v-model="contact.value" />
+            </div>
+        </div>
+        <BaseBtn title="Додати контакт" @click="showAddContactForm = true" />
+        <AddContactsForm class="mt-5" v-if="showAddContactForm" />
     </div>
 </template>
 
