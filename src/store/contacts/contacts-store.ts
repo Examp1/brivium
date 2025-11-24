@@ -10,6 +10,18 @@ export const useContactsStore = defineStore("contacts-store", () => {
         }
     }
 
+    const getGroupedContacts = computed(() => {
+        if (!contacts.value.items) return [];
+        return contacts.value.items.reduce((acc, contact) => {
+            const key = contact.type_text;
+            if (!acc[key]) {
+                acc[key] = [];
+            }
+            acc[key].push(contact);
+            return acc;
+        }, {});
+    });
+
     // case Phone = 1;
     // case Email = 2;
     // case Address = 3;
@@ -33,5 +45,6 @@ export const useContactsStore = defineStore("contacts-store", () => {
         contacts,
         fetchContactsList,
         addContact,
+        getGroupedContacts,
     };
 });

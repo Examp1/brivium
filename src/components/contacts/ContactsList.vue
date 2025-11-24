@@ -4,7 +4,7 @@ import BaseInput from "../base/BaseInput.vue";
 import AddContactsForm from "./AddContactsForm.vue";
 
 const contactsStore = useContactsStore();
-const { contacts } = storeToRefs(contactsStore);
+const { getGroupedContacts } = storeToRefs(contactsStore);
 contactsStore.fetchContactsList("company");
 
 const showAddContactForm = ref(false);
@@ -12,18 +12,22 @@ const showAddContactForm = ref(false);
 
 <template>
     <div>
-        <!-- <pre>{{ contacts }}</pre> -->
         <div class="grid gap-5 h-fit">
-            <div
-                v-for="contact in contacts?.items"
-                :key="contact.id"
-                class="grid grid-cols-[0.5fr_1fr] items-center"
+            <template
+                v-for="contactGroup in getGroupedContacts"
+                :key="contactGroup.id"
             >
-                <span class="text-sm text-[#364A63]">{{
-                    contact.type_text
-                }}</span>
-                <BaseInput v-model="contact.value" />
-            </div>
+                <div
+                    v-for="contact in contactGroup"
+                    :key="contact.id"
+                    class="grid grid-cols-[0.5fr_1fr] items-center"
+                >
+                    <span class="text-sm text-[#364A63]">{{
+                        contact.type_text
+                    }}</span>
+                    <BaseInput v-model="contact.value" />
+                </div>
+            </template>
         </div>
         <BaseBtn title="Додати контакт" @click="showAddContactForm = true" />
         <AddContactsForm class="mt-5" v-if="showAddContactForm" />
