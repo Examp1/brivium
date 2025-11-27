@@ -1,19 +1,25 @@
 <script setup lang="ts">
 import { useField } from "vee-validate";
 
-const props = defineProps<{
-    list: {
-        value: number | string;
-        title: string;
-    }[];
-    label?: string;
-    placeholder?: string;
-    type?: string;
-    name: string;
-    icon?: string;
-    iconPosition?: string;
-    defaultValue?: string | number;
-}>();
+const props = withDefaults(
+    defineProps<{
+        list: {
+            value: number | string;
+            title: string;
+        }[];
+        label?: string;
+        placeholder?: string;
+        type?: string;
+        name: string;
+        icon?: string;
+        iconPosition?: string;
+        defaultValue?: string | number;
+    }>(),
+    {
+        icon: "mdi mdi-chevron-down",
+        iconPosition: "right",
+    },
+);
 
 const placeholderValue = ref();
 const { setValue, errors } = useField(props.name as string);

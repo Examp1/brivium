@@ -1,13 +1,10 @@
 <script lang="ts" setup>
-import BaseBtn from "../base/BaseBtn.vue";
 import BaseInput from "../base/BaseInput.vue";
-import AddContactsForm from "./AddContactsForm.vue";
 
 const contactsStore = useContactsStore();
 const { getGroupedContacts } = storeToRefs(contactsStore);
-contactsStore.fetchContactsList("company");
 
-const showAddContactForm = ref(false);
+contactsStore.fetchContactsList();
 </script>
 
 <template>
@@ -29,8 +26,6 @@ const showAddContactForm = ref(false);
                 </div>
             </template>
         </div>
-        <BaseBtn title="Додати контакт" @click="showAddContactForm = true" />
-        <AddContactsForm class="mt-5" v-if="showAddContactForm" />
     </div>
 </template>
 

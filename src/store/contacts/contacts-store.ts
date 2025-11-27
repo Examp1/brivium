@@ -1,14 +1,24 @@
 export const useContactsStore = defineStore("contacts-store", () => {
     const contacts = ref({});
-    async function fetchContactsList(type: "client" | "company") {
+    async function fetchContactsList() {
         const { data } = await fetchWrapper(
-            `api/profile/${type}/contacts/list`,
+            `api/profile/${porfileType.value}/contacts/list`,
             ERequestMethods.POST,
         );
         if (data.value) {
             contacts.value = data.value;
         }
     }
+
+    const porfileType = computed(() => {
+        const path = useRoute().path;
+        if (path.includes("company")) {
+            return "company";
+        } else if (path.includes("client")) {
+            return "client";
+        }
+        return "company";
+    });
 
     const getGroupedContacts = computed(() => {
         if (!contacts.value.items) return [];
@@ -22,24 +32,13 @@ export const useContactsStore = defineStore("contacts-store", () => {
         }, {});
     });
 
-    // case Phone = 1;
-    // case Email = 2;
-    // case Address = 3;
-    // case Site = 4;
-    // case Telegram = 5;
-    // case Viber = 6;
-    // case Instagram = 7;
-    // case Facebook = 8;
-    // case Youtube = 9;
-    // case Tiktok = 10;
-
-    async function addContact(contact, type: "client" | "company") {
+    async function addContact(contact) {
         await fetchWrapper(
-            `api/profile/${type}/contacts/add`,
+            `api/profile/${porfileType.value}/contacts/add`,
             ERequestMethods.POST,
             contact,
         );
-        await fetchContactsList(type);
+        await fetchContactsList(porfileType.value);
     }
     return {
         contacts,

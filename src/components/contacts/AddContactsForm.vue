@@ -6,22 +6,12 @@ import FormSelect from "../form/inputs/FormSelect.vue";
 
 const contactsStore = useContactsStore();
 
-// const contactData = ref({
-//     value: "000000000",
-//     label: "dfgdfsdf",
-//     status: 1,
-//     type: 1,
-//     order: 1,
-//     is_primary: 1,
-//     permission_id: 1,
-// });
-
 const { handleSubmit } = useForm({});
 
 const addNewContact = handleSubmit(async (values) => {
     console.log(values);
     const contactData = { status: 1, ...values };
-    await contactsStore.addContact(contactData, "company");
+    await contactsStore.addContact(contactData);
 });
 
 const contactType = ref([
@@ -44,24 +34,27 @@ const permisionType = ref([
 </script>
 
 <template>
-    <form @submit="addNewContact" class="mt-5 grid grid-cols-2 gap-4">
-        <FormInput label="Ваш контакт" name="value" type="text" />
-        <FormSelect
-            label="Тип контакту"
-            name="type"
-            :list="contactType"
-            :default-value="1"
-        />
-        <FormSelect
-            label="Тип відображення"
-            name="permission_id"
-            :list="permisionType"
-            :default-value="1"
-            a
-        />
-        <FormInput label="Опис" name="label" type="text" />
-    </form>
-    <BaseBtn class="mt-5" title="Зберегти контакт" @click="addNewContact" />
+    <div>
+        <h2 class="text-lg font-semibold">Додати контакт</h2>
+        <form @submit="addNewContact" class="mt-5 grid grid-cols-2 gap-4">
+            <FormInput label="Ваш контакт" name="value" type="text" />
+            <FormSelect
+                label="Тип контакту"
+                name="type"
+                :list="contactType"
+                :default-value="1"
+            />
+            <FormSelect
+                label="Тип відображення"
+                name="permission_id"
+                :list="permisionType"
+                :default-value="1"
+                a
+            />
+            <FormInput label="Опис" name="label" type="text" />
+        </form>
+        <BaseBtn class="mt-5" title="Зберегти контакт" @click="addNewContact" />
+    </div>
 </template>
 
 <style lang="scss" scoped></style>
