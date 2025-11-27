@@ -46,6 +46,7 @@ declare global {
   const useProjectFileStore: typeof import('./src/store/client/projects/project-files-store')['useProjectFileStore']
   const useProjectStore: typeof import('./src/store/client/projects/project-store')['useProjectStore']
   const useProjectstageStore: typeof import('./src/store/client/projects/project-stages-store')['useProjectstageStore']
+  const useReviewsStore: typeof import('./src/store/reviews/reviews-store')['useReviewsStore']
   const useRoute: typeof import('vue-router')['useRoute']
   const useRouter: typeof import('vue-router')['useRouter']
   const useclientInfo: typeof import('./src/store/client/profile/client-info-store')['useclientInfo']
@@ -116,6 +117,7 @@ declare module 'vue' {
     readonly useProjectFileStore: UnwrapRef<typeof import('./src/store/client/projects/project-files-store')['useProjectFileStore']>
     readonly useProjectStore: UnwrapRef<typeof import('./src/store/client/projects/project-store')['useProjectStore']>
     readonly useProjectstageStore: UnwrapRef<typeof import('./src/store/client/projects/project-stages-store')['useProjectstageStore']>
+    readonly useReviewsStore: UnwrapRef<typeof import('./src/store/reviews/reviews-store')['useReviewsStore']>
     readonly useRoute: UnwrapRef<typeof import('vue-router')['useRoute']>
     readonly useRouter: UnwrapRef<typeof import('vue-router')['useRouter']>
     readonly withAuth: UnwrapRef<typeof import('./src/utils/withAuth')['withAuth']>

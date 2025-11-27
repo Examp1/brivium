@@ -38,7 +38,7 @@ export const useContactsStore = defineStore("contacts-store", () => {
             ERequestMethods.POST,
             contact,
         );
-        await fetchContactsList(porfileType.value);
+        await fetchContactsList();
     }
     return {
         contacts,

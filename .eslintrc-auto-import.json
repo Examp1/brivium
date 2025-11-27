@@ -43,6 +43,7 @@
     "useProjectFileStore": true,
     "useProjectStore": true,
     "useProjectstageStore": true,
+    "useReviewsStore": true,
     "useRoute": true,
     "useRouter": true,
     "withAuth": true
