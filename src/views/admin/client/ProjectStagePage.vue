@@ -3,6 +3,7 @@ import BaseBtn from "@/components/base/BaseBtn.vue";
 import StageComments from "@/components/projects/stages/stage-tabs/StageComments.vue";
 import StageFiles from "@/components/projects/stages/stage-tabs/StageFiles.vue";
 import StageInfo from "@/components/projects/stages/stage-tabs/StageInfo.vue";
+import StageBid from "@/components/projects/stages/stage-tabs/StageBid.vue";
 import StageTabs from "@/components/projects/stages/StageTabs.vue";
 import { onMounted } from "vue";
 const projectStageStore = useProjectstageStore();
@@ -64,6 +65,7 @@ onMounted(() => {
         <StageTabs @changeCurrentTab="changeCurrentTab" />
         <div class="border-t border-gray-100 mt-4 pt-4">
             <StageInfo v-if="currentTab === 'Загальна інформація'" />
+            <StageBid v-if="currentTab === 'Ставки'" />
             <StageFiles v-if="currentTab === 'Файли'" />
             <StageComments v-if="currentTab === 'Коментарі'" />
         </div>

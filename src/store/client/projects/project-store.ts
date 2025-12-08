@@ -41,6 +41,8 @@ export const useProjectStore = defineStore("project-store", () => {
         projectData.value = data.value;
     };
 
+    const chooseCompany = async () => {};
+
     return {
         projects,
         projectData,
@@ -48,5 +50,6 @@ export const useProjectStore = defineStore("project-store", () => {
         addNewProject,
         deleteProjectById,
         getProjectById,
+        chooseCompany,
     };
 });

@@ -43,6 +43,7 @@ declare global {
   const useGalleryStore: typeof import('./src/store/company/gallery/gallery-store')['useGalleryStore']
   const useLink: typeof import('vue-router')['useLink']
   const useNotificationStore: typeof import('./src/store/notifications/notifications-store')['useNotificationStore']
+  const useProjectBideStore: typeof import('./src/store/client/projects/project-bids-store')['useProjectBideStore']
   const useProjectFileStore: typeof import('./src/store/client/projects/project-files-store')['useProjectFileStore']
   const useProjectStore: typeof import('./src/store/client/projects/project-store')['useProjectStore']
   const useProjectstageStore: typeof import('./src/store/client/projects/project-stages-store')['useProjectstageStore']

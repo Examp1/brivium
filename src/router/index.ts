@@ -89,6 +89,12 @@ const router = createRouter({
                     component: () =>
                         import("../views/admin/company/ReviewsPage.vue"),
                 },
+                {
+                    path: "tasks",
+                    name: "tasks-page",
+                    component: () =>
+                        import("../views/admin/company/TasksPage.vue"),
+                },
             ],
             component: () => import("../views/CompanyPage.vue"),
         },

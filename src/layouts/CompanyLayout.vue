@@ -36,6 +36,11 @@ const menu = ref([
         url: "/company/notifications",
         icon: "mdi mdi-bell",
     },
+    {
+        title: "TASKS",
+        url: "/company/tasks",
+        icon: "mdi mdi-book-open-variant",
+    },
 ]);
 
 const showMenu = ref<boolean>(false);
