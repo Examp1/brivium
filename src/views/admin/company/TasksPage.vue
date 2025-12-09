@@ -42,11 +42,14 @@ const bid = async (task) => {
 <template>
     <div class="p-4 border-t border-gray-100">
         <ul v-if="tasks?.items.length">
-            <li class="mb-4" v-for="task in tasks.items" :key="task.id">
-                {{ task.name }} <br />
-                Опис: {{ task.description }}
-                <br />
-                бюджет: {{ task.budget }}
+            <li
+                class="flex items-center gap-5 border-b border-gray-200 mb-4 pb-4"
+                v-for="task in tasks.items"
+                :key="task.id"
+            >
+                <div>{{ task.name }}</div>
+                <div><b>Опис:</b> {{ task.description }}</div>
+                <div><b>бюджет:</b> {{ task.budget }}</div>
                 <BaseBtn title="сделать ставку" @click="bid(task)" />
             </li>
         </ul>
