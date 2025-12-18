@@ -1,15 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
-@import "tailwindcss";
-
-.base-transition {
-    @apply transition-all duration-300 ease-in-out;
-}
-.activeTab {
-    @apply bg-green-400 text-white;
-}
-
 html {
-    font-family: "Roboto", sans-serif !important;
+    font-family: "Outfit", sans-serif !important;
     font-optical-sizing: auto;
 }
 

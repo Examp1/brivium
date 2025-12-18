@@ -6,54 +6,54 @@
 // biome-ignore lint: disable
 export {}
 declare global {
-  const APP_ENUM: typeof import('./src/enums/app_enums')['APP_ENUM']
+  const APP_ENUM: typeof import('./src/enums/app_enums').APP_ENUM
   const BASE_URL: (typeof import("./src/utils/constants"))["BASE_URL"]
-  const EMediaPath: typeof import('./src/enums/EMediaPath')['EMediaPath']
-  const ERequestMethods: typeof import('./src/enums/ERequestMethod')['ERequestMethods']
-  const _debounce: typeof import('./src/utils/_debounce')['_debounce']
-  const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
-  const computed: typeof import('vue')['computed']
-  const createPinia: typeof import('pinia')['createPinia']
-  const defineStore: typeof import('pinia')['defineStore']
-  const delay: typeof import('./src/utils/helpers')['delay']
-  const fetchWrapper: typeof import('./src/utils/api/fetchWrapper')['fetchWrapper']
-  const getActivePinia: typeof import('pinia')['getActivePinia']
-  const getBearer: typeof import('./src/utils/api/getBearer')['getBearer']
-  const getPath: typeof import('./src/utils/getPath')['getPath']
-  const mapActions: typeof import('pinia')['mapActions']
-  const mapGetters: typeof import('pinia')['mapGetters']
-  const mapState: typeof import('pinia')['mapState']
-  const mapStores: typeof import('pinia')['mapStores']
-  const mapWritableState: typeof import('pinia')['mapWritableState']
-  const onBeforeRouteLeave: typeof import('vue-router')['onBeforeRouteLeave']
-  const onBeforeRouteUpdate: typeof import('vue-router')['onBeforeRouteUpdate']
-  const ref: typeof import('vue')['ref']
-  const retry: typeof import('./src/utils/_retry')['retry']
-  const setActivePinia: typeof import('pinia')['setActivePinia']
-  const setMapStoreSuffix: typeof import('pinia')['setMapStoreSuffix']
-  const storeToRefs: typeof import('pinia')['storeToRefs']
-  const uploadFile: typeof import('./src/utils/files/upload')['uploadFile']
-  const useAuthStore: typeof import('./src/store/auth/auth-store')['useAuthStore']
-  const useClientInfoStore: typeof import('./src/store/client/profile/client-info-store')['useClientInfoStore']
-  const useCompanyCatalogStore: typeof import('./src/store/company/catalog/company-catalog-store')['useCompanyCatalogStore']
-  const useCompanyInfoStore: typeof import('./src/store/company/profile/company-info-store')['useCompanyInfoStore']
-  const useCompanyPricesStore: typeof import('./src/store/company/catalog/company-prices-store')['useCompanyPricesStore']
-  const useCompanyReviewsStore: typeof import('./src/store/company/reviews/reviews-store')['useCompanyReviewsStore']
-  const useContactsStore: typeof import('./src/store/contacts/contacts-store')['useContactsStore']
-  const useGalleryStore: typeof import('./src/store/company/gallery/gallery-store')['useGalleryStore']
-  const useLink: typeof import('vue-router')['useLink']
-  const useNotificationStore: typeof import('./src/store/notifications/notifications-store')['useNotificationStore']
+  const EMediaPath: typeof import('./src/enums/EMediaPath').EMediaPath
+  const ERequestMethods: typeof import('./src/enums/ERequestMethod').ERequestMethods
+  const _debounce: typeof import('./src/utils/_debounce')._debounce
+  const acceptHMRUpdate: typeof import('pinia').acceptHMRUpdate
+  const computed: typeof import('vue').computed
+  const createPinia: typeof import('pinia').createPinia
+  const defineStore: typeof import('pinia').defineStore
+  const delay: typeof import('./src/utils/helpers').delay
+  const fetchWrapper: typeof import('./src/utils/api/fetchWrapper').fetchWrapper
+  const getActivePinia: typeof import('pinia').getActivePinia
+  const getBearer: typeof import('./src/utils/api/getBearer').getBearer
+  const getPath: typeof import('./src/utils/getPath').getPath
+  const mapActions: typeof import('pinia').mapActions
+  const mapGetters: typeof import('pinia').mapGetters
+  const mapState: typeof import('pinia').mapState
+  const mapStores: typeof import('pinia').mapStores
+  const mapWritableState: typeof import('pinia').mapWritableState
+  const onBeforeRouteLeave: typeof import('vue-router').onBeforeRouteLeave
+  const onBeforeRouteUpdate: typeof import('vue-router').onBeforeRouteUpdate
+  const ref: typeof import('vue').ref
+  const retry: typeof import('./src/utils/_retry').retry
+  const setActivePinia: typeof import('pinia').setActivePinia
+  const setMapStoreSuffix: typeof import('pinia').setMapStoreSuffix
+  const storeToRefs: typeof import('pinia').storeToRefs
+  const uploadFile: typeof import('./src/utils/files/upload').uploadFile
+  const useAuthStore: typeof import('./src/store/auth/auth-store').useAuthStore
+  const useClientInfoStore: typeof import('./src/store/client/profile/client-info-store').useClientInfoStore
+  const useCompanyCatalogStore: typeof import('./src/store/company/catalog/company-catalog-store').useCompanyCatalogStore
+  const useCompanyInfoStore: typeof import('./src/store/company/profile/company-info-store').useCompanyInfoStore
+  const useCompanyPricesStore: typeof import('./src/store/company/catalog/company-prices-store').useCompanyPricesStore
+  const useCompanyReviewsStore: typeof import('./src/store/company/reviews/reviews-store').useCompanyReviewsStore
+  const useContactsStore: typeof import('./src/store/contacts/contacts-store').useContactsStore
+  const useGalleryStore: typeof import('./src/store/company/gallery/gallery-store').useGalleryStore
+  const useLink: typeof import('vue-router').useLink
+  const useNotificationStore: typeof import('./src/store/notifications/notifications-store').useNotificationStore
   const useProjectBideStore: typeof import('./src/store/client/projects/project-bids-store')['useProjectBideStore']
-  const useProjectFileStore: typeof import('./src/store/client/projects/project-files-store')['useProjectFileStore']
-  const useProjectStore: typeof import('./src/store/client/projects/project-store')['useProjectStore']
-  const useProjectstageStore: typeof import('./src/store/client/projects/project-stages-store')['useProjectstageStore']
-  const useReviewsStore: typeof import('./src/store/reviews/reviews-store')['useReviewsStore']
-  const useRoute: typeof import('vue-router')['useRoute']
-  const useRouter: typeof import('vue-router')['useRouter']
+  const useProjectFileStore: typeof import('./src/store/client/projects/project-files-store').useProjectFileStore
+  const useProjectStore: typeof import('./src/store/client/projects/project-store').useProjectStore
+  const useProjectstageStore: typeof import('./src/store/client/projects/project-stages-store').useProjectstageStore
+  const useReviewsStore: typeof import('./src/store/reviews/reviews-store').useReviewsStore
+  const useRoute: typeof import('vue-router').useRoute
+  const useRouter: typeof import('vue-router').useRouter
   const useclientInfo: typeof import('./src/store/client/profile/client-info-store')['useclientInfo']
   const useclientInfoStore: typeof import('./src/store/client/profile/client-info-store')['useclientInfoStore']
   const withAtuh: (typeof import("./src/utils/withAuth"))["withAtuh"]
-  const withAuth: typeof import('./src/utils/withAuth')['withAuth']
+  const withAuth: typeof import('./src/utils/withAuth').withAuth
 }
 // for type re-export
 declare global {

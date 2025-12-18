@@ -1,4 +1,4 @@
-import { useCookies } from "@vueuse/integrations/useCookies.mjs";
+import { useCookies } from "@vueuse/integrations/useCookies";
 const cookies = useCookies(["ComapnyAccessToken"]);
 
 export function getBearer(
