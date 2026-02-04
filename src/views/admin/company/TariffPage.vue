@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { useCookies } from "@vueuse/integrations/useCookies";
-const cookies = useCookies(["ComapnyAccessToken"]);
+const cookies = useCookies(["CompanyAccessToken"]);
 
 const myHeaders = new Headers();
 myHeaders.append(
     "Authorization",
-    `Bearer ${cookies.get("ComapnyAccessToken")}`,
+    `Bearer ${cookies.get("CompanyAccessToken")}`,
 );
 const requestOptions = {
     method: "POST",

@@ -5,12 +5,12 @@ import { useCookies } from "@vueuse/integrations/useCookies";
 // import { hashStr } from "@/composables/bcrypt";
 
 export const useAuthStore = defineStore("auth-store", () => {
-    const cookies = useCookies(["ComapnyAccessToken"]);
-    const ComapnyAccessToken = ref(cookies.get("ComapnyAccessToken") || null);
+    const cookies = useCookies(["CompanyAccessToken"]);
+    const CompanyAccessToken = ref(cookies.get("CompanyAccessToken") || null);
 
-    watch(ComapnyAccessToken, (newVal, oldVal) => {
+    watch(CompanyAccessToken, (newVal, oldVal) => {
         if (newVal !== oldVal) {
-            cookies.set("ComapnyAccessToken", newVal);
+            cookies.set("CompanyAccessToken", newVal);
         }
     });
 
@@ -22,12 +22,12 @@ export const useAuthStore = defineStore("auth-store", () => {
         if (userType === "client") {
             cookies.remove("ClientAccessToken");
         } else {
-            cookies.remove("ComapnyAccessToken");
+            cookies.remove("CompanyAccessToken");
         }
         window.location.href = "/";
     };
     return {
-        ComapnyAccessToken,
+        CompanyAccessToken,
         logout,
     };
 });

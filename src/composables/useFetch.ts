@@ -1,136 +1,140 @@
-import axios, { AxiosError, type AxiosResponse } from "axios";
-import { showError, successMsg } from "@/composables/toast-notification";
-export const useFetch = async <T = unknown>(url: string, config: IRequest) => {
-    const data = ref<T | null>(null);
-    const response = ref<AxiosResponse>();
-    const error = ref<AxiosError | unknown>(null);
-    const loading = ref<boolean>(false);
+import { APP_ENUM } from "@/enums/app_enums";
+import { ref } from "vue";
 
-    const fetch = async () => {
+type QueryParams = Record<string, string | number | boolean | null | undefined>;
+
+export type UseFetchOptions = RequestInit & {
+    baseURL?: string;
+    params?: QueryParams;
+    skip?: boolean; // аналог твоего "не запускать сразу"
+    parseAs?: "json" | "text"; // по умолчанию json
+    timeoutMs?: number;
+};
+
+export type FetchHttpError = {
+    name: "FetchHttpError";
+    url: string;
+    status: number;
+    statusText: string;
+    data?: unknown; // тело ответа (если смогли распарсить)
+};
+
+const buildUrl = (
+    url: string,
+    baseURL: string = APP_ENUM.BASE_API_URL,
+    params?: QueryParams,
+) => {
+    const full = baseURL
+        ? new URL(url, baseURL)
+        : new URL(url, window.location.origin);
+    if (params) {
+        Object.entries(params).forEach(([k, v]) => {
+            if (v === undefined || v === null) return;
+            full.searchParams.set(k, String(v));
+        });
+    }
+    return baseURL ? full.toString() : full.pathname + full.search + full.hash;
+};
+
+const tryParseJson = async (res: Response) => {
+    const text = await res.text();
+    if (!text) return null;
+    try {
+        return JSON.parse(text);
+    } catch {
+        return text;
+    }
+};
+
+export const useFetch = async <T = unknown>(
+    url: string,
+    options: UseFetchOptions = {},
+) => {
+    const data = ref<T | null>(null);
+    const response = ref<Response | null>(null);
+    const error = ref<unknown>(null);
+    const loading = ref(false);
+
+    const controller = new AbortController();
+
+    const refresh = async () => {
         loading.value = true;
+        error.value = null;
+
+        let timeoutId: number | undefined;
         try {
-            const result = await axios.request({
-                url,
-                ...config,
-            });
-            response.value = result;
-            data.value = result.data;
-            successMsg(`Success ${url}`);
-        } catch (ex) {
-            if (axios.isAxiosError(ex)) {
-                error.value = ex;
-                showError(
-                    ex.response?.data?.message ||
-                        ex.message ||
-                        "Ошибка запроса",
+            if (options.timeoutMs) {
+                timeoutId = window.setTimeout(
+                    () => controller.abort(),
+                    options.timeoutMs,
                 );
-            } else if (ex instanceof Error) {
-                showError(ex.message);
-                error.value = ex;
-            } else {
-                showError("Что-то пошло не так");
-                error.value = null;
             }
-            error.value = ex;
+
+            const finalUrl = buildUrl(url, options.baseURL, options.params);
+
+            // Удобство: если body = plain object, отправим как JSON (как это часто делают с axios)
+            const headers = new Headers(options.headers);
+            let body = options.body;
+
+            const isFormData =
+                typeof FormData !== "undefined" && body instanceof FormData;
+            const isPlainObject =
+                body != null &&
+                typeof body === "object" &&
+                !isFormData &&
+                !(body instanceof Blob) &&
+                !(body instanceof ArrayBuffer);
+
+            if (isPlainObject && !headers.has("Content-Type")) {
+                headers.set("Content-Type", "application/json");
+                body = JSON.stringify(body);
+            }
+
+            const res = await fetch(finalUrl, {
+                ...options,
+                headers,
+                body,
+                signal: controller.signal,
+            });
+
+            response.value = res;
+
+            if (!res.ok) {
+                const errData = await tryParseJson(res);
+                const httpError: FetchHttpError = {
+                    name: "FetchHttpError",
+                    url: finalUrl,
+                    status: res.status,
+                    statusText: res.statusText,
+                    data: errData,
+                };
+                throw httpError;
+            }
+
+            const parseAs = options.parseAs ?? "json";
+            const parsed = (
+                parseAs === "text" ? await res.text() : await res.json()
+            ) as T;
+            data.value = parsed;
+        } catch (e) {
+            error.value = e;
+            data.value = null;
         } finally {
+            if (timeoutId) window.clearTimeout(timeoutId);
             loading.value = false;
         }
     };
 
-    // !config?.skip &&
+    if (!options.skip) {
+        await refresh();
+    }
 
-    await fetch();
-
-    return { response, error, data, loading, refresh: fetch };
+    return {
+        response,
+        error,
+        data,
+        loading,
+        refresh,
+        abort: () => controller.abort(),
+    };
 };
-
-// import { showError, successMsg } from "@/composables/toast-notification";
-
-// export const useFetch = <T = unknown>(url: string, config?: IRequest) => {
-//     const data = ref<T | null>(null);
-//     const response = ref<Response | null>(null);
-//     const error = ref<Error | unknown>(null);
-//     const loading = ref<boolean>(false);
-
-//     const finalUrl = APP_ENUM.BASE_API_URL + url;
-
-//     const fetchData = async () => {
-//         loading.value = true;
-//         try {
-//             const result = await fetch(finalUrl, {
-//                 method: config?.method || "GET",
-//                 headers: {
-//                     "Content-Type": "application/json",
-//                     ...(config?.headers || {}),
-//                 },
-//                 body:
-//                     config?.body && config.method !== "GET"
-//                         ? JSON.stringify(config.body)
-//                         : undefined,
-//             });
-
-//             response.value = result;
-
-//             if (!result.ok) {
-//                 const errText = await result.text();
-//                 throw new Error(
-//                     `Request failed (${result.status}): ${errText || result.statusText}`,
-//                 );
-//             }
-
-//             const resultData = (await result.json()) as T;
-//             data.value = resultData;
-
-//             successMsg(`Success ${url}`);
-//         } catch (ex) {
-//             if (ex instanceof Error) {
-//                 showError(ex.message || "Ошибка запроса");
-//                 error.value = ex;
-//             } else {
-//                 showError("Что-то пошло не так");
-//                 error.value = null;
-//             }
-//         } finally {
-//             loading.value = false;
-//         }
-//     };
-
-//     // запускаем загрузку сразу
-//     const promise = fetchData();
-
-//     const result = {
-//         data,
-//         error,
-//         loading,
-//         response,
-//         refresh: fetchData,
-//         // сделал thenable-объект, как у Nuxt
-//         then(onFulfilled: any, onRejected: any) {
-//             return promise.then(() => onFulfilled(result), onRejected);
-//         },
-//     };
-
-//     return result;
-// };
-
-// export const useFetchCache = (key, url, config) => {
-//     const info = useFetch(url, { skip: true, ...config });
-
-//     const update = () => cacheMap.set(key, info.response.value);
-//     const clear = () => cacheMap.set(key, undefined);
-
-//     const fetch = async () => {
-//         try {
-//             await info.fetch();
-//             update();
-//         } catch {
-//             clear();
-//         }
-//     };
-
-//     const responce = computed(() => cacheMap.get(key));
-//     const data = computed(() => responce.value?.data);
-
-//     if (responce.value == null) fetch();
-//     return { ...info, fetch, data, responce, clear };
-// };

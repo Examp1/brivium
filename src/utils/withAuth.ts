@@ -3,12 +3,12 @@
 import { showError } from "@/composables/toast-notification";
 
 const authStore = useAuthStore();
-const { ComapnyAccessToken } = storeToRefs(authStore);
+const { CompanyAccessToken } = storeToRefs(authStore);
 const router = useRouter();
 export const withAuth = async <T>(
     callback: () => Promise<T> | T,
 ): Promise<T | void> => {
-    if (!ComapnyAccessToken.value) {
+    if (!CompanyAccessToken.value) {
         showError("Проблемы с токеном авторизации");
         router.push("/");
         return;
