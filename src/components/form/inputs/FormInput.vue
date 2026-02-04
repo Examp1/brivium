@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<!-- <script setup lang="ts">
 import { useField } from "vee-validate";
 
 const emit = defineEmits(["blur"]);
@@ -68,4 +68,12 @@ switch (props.iconPosition) {
         </div>
         <span v-if="errors" class="text-red-400">{{ errors[0] }}</span>
     </div>
+</template> -->
+
+<template>
+    <div>form input</div>
 </template>
+
+<script setup lang="ts"></script>
+
+<style scoped></style>

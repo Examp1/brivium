@@ -1,42 +1,40 @@
 import { fileURLToPath, URL } from "node:url";
-
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import vueDevTools from "vite-plugin-vue-devtools";
-import tailwindcss from "@tailwindcss/vite";
+import ui from "@nuxt/ui/vite";
 
-import AutoImport from "unplugin-auto-import/vite";
-
-// https://vite.dev/config/
 export default defineConfig({
-    plugins: [
-        vue(),
-        vueDevTools(),
-        tailwindcss(),
-        AutoImport({
-            eslintrc: {
-                enabled: true,
-            },
-            dts: "./auto-imports.d.ts",
-            dirs: [
-                "./src/store/**",
-                "./src/enums",
-                "./src/interfaces",
-                "./src/utils/**",
-            ],
-            vueTemplate: true,
-            imports: [
-                "vue-router",
-                "pinia",
-                {
-                    vue: ["ref", "computed"],
-                },
-            ],
-        }),
-    ],
     resolve: {
         alias: {
             "@": fileURLToPath(new URL("./src", import.meta.url)),
         },
+        conditions: [
+            "import",
+            "module",
+            "browser",
+            "default",
+            "development",
+            "production",
+        ],
     },
+
+    plugins: [
+        vue(),
+        vueDevTools(),
+
+        ui({
+            autoImport: {
+                eslintrc: { enabled: true },
+                dts: "./auto-imports.d.ts",
+                dirs: ["./src/stores/**", "./src/enums", "./src/interfaces"],
+                vueTemplate: true,
+                imports: [
+                    "vue-router",
+                    "pinia",
+                    { vue: ["ref", "computed", "reactive"] },
+                ],
+            },
+        }),
+    ],
 });

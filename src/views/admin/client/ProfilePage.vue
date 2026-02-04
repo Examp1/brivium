@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import BaseBtn from "@/components/base/BaseBtn.vue";
 import BaseInput from "@/components/base/BaseInput.vue";
-import AddContactsForm from "@/components/contacts/AddContactsForm.vue";
+// import AddContactsForm from "@/components/contacts/AddContactsForm.vue";
 import ContactsList from "@/components/contacts/ContactsList.vue";
 import { storeToRefs } from "pinia";
 const clientInfoStore = useClientInfoStore();
@@ -44,7 +44,7 @@ const { clientInfo } = storeToRefs(clientInfoStore);
                 <ContactsList />
                 <BaseBtn title="Зберегти" />
             </div>
-            <AddContactsForm />
+            <!-- <AddContactsForm /> -->
         </div>
     </div>
 </template>

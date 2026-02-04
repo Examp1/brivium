@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<!-- <script setup lang="ts">
 import { ref } from "vue";
 import { useFetch } from "@/composables/useFetch";
 import { useCookies } from "@vueuse/integrations/useCookies";
@@ -43,6 +43,90 @@ const checkToken = async (token: string) => {
     cookies.set("CompanyAccessToken", data?.value?.token);
     router.push("/company/profile");
 };
+</script> -->
+
+<script setup lang="ts">
+import { useCookies } from "@vueuse/integrations/useCookies";
+import type { FormSubmitEvent } from "@nuxt/ui";
+import * as z from "zod";
+
+import { useFetch, type FetchHttpError } from "@/composables/useFetch";
+import { companyLoginScheme } from "../../zod/auth/shemes";
+
+type Schema = z.infer<typeof companyLoginScheme>;
+
+type LoginResponse = { one_time_token: string };
+type GetTokenResponse = { token: string };
+
+const schema = companyLoginScheme;
+const router = useRouter();
+const toast = useToast?.();
+
+const cookies = useCookies(["ClientAccessToken"]);
+const pending = ref(false);
+
+const state = reactive<Schema>({
+    login: "budcraft@gmail.com",
+    password: "00000000",
+});
+
+function getErrorMessage(e: unknown) {
+    if (e && typeof e === "object" && (e as any).name === "FetchHttpError") {
+        const fe = e as FetchHttpError;
+        const apiMsg = (fe.data as any)?.message;
+        return apiMsg ?? `HTTP ${fe.status} ${fe.statusText}`;
+    }
+    if (e instanceof Error) return e.message;
+    return "Помилка запиту. Спробуйте ще раз.";
+}
+
+async function onSubmit(event: FormSubmitEvent<Schema>) {
+    pending.value = true;
+    try {
+        // 1) login
+        const loginReq = await useFetch<LoginResponse>(
+            "/api/auth/company/login",
+            {
+                method: "POST",
+                body: event.data as any,
+            },
+        );
+
+        if (loginReq.error.value) throw loginReq.error.value;
+        const oneTimeToken = loginReq.data.value?.one_time_token;
+        if (!oneTimeToken) throw new Error("Не отримано one_time_token");
+
+        // 2) get token
+        const tokenReq = await useFetch<GetTokenResponse>(
+            "/api/auth/company/get-token",
+            {
+                method: "POST",
+                body: { one_time_token: oneTimeToken } as any,
+            },
+        );
+
+        if (tokenReq.error.value) throw tokenReq.error.value;
+        const token = tokenReq.data.value?.token;
+        if (!token) throw new Error("Не отримано token");
+
+        cookies.set("CompanyAccessToken", token, { path: "/" });
+        toast.add({
+            title: "Успіх",
+            description: "Ви увійшли в систему.",
+            color: "success",
+        });
+
+        await router.push("/company/profile");
+    } catch (e) {
+        toast.add({
+            title: "Помилка",
+            description: getErrorMessage(e),
+            color: "error",
+        });
+    } finally {
+        pending.value = false;
+    }
+}
 </script>
 
 <template>
@@ -54,7 +138,7 @@ const checkToken = async (token: string) => {
             Заповніть інформацію, яку ви надавали при реєстрації
         </p>
 
-        <form
+        <!-- <form
             class="mx-auto w-full max-w-[400px] flex flex-col gap-3"
             @submit.prevent="signIn"
         >
@@ -80,7 +164,28 @@ const checkToken = async (token: string) => {
                     Увійти
                 </button>
             </div>
-        </form>
+        </form> -->
+
+        <UForm
+            :schema="schema"
+            :state="state"
+            class="space-y-4"
+            @submit="onSubmit"
+        >
+            <UFormField label="Email" name="login">
+                <UInput v-model="state.login" autocomplete="email" />
+            </UFormField>
+            <UFormField label="Password" name="password">
+                <UInput
+                    v-model="state.password"
+                    type="password"
+                    autocomplete="current-password"
+                />
+            </UFormField>
+            <UButton type="submit" :loading="pending" :disabled="pending" block>
+                Увійти
+            </UButton>
+        </UForm>
     </div>
 </template>
 

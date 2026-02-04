@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<!-- <script setup lang="ts">
 import { useField } from "vee-validate";
 import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
@@ -52,4 +52,12 @@ watch(date, () => {
 .dp__input {
     --dp-border-color: var(--color-gray-400);
 }
-</style>
+</style> -->
+
+<template>
+    <div>datapicker</div>
+</template>
+
+<script setup lang="ts"></script>
+
+<style scoped></style>

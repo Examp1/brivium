@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<!-- <script setup lang="ts">
 import { useFetch } from "@/composables/useFetch";
 import { APP_ENUM } from "@/enums/app_enums";
 import { ERequestMethods } from "@/enums/ERequestMethod";
@@ -115,4 +115,12 @@ const changeValue = (item: ILocationSearchResponse) => {
         </div>
         <span v-if="errors" class="text-red-400">{{ errors[0] }}</span>
     </div>
+</template> -->
+
+<template>
+    <div>location search</div>
 </template>
+
+<script setup lang="ts"></script>
+
+<style scoped></style>

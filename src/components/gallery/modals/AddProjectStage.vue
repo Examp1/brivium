@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<!-- <script setup lang="ts">
 import { toTypedSchema } from "@vee-validate/zod";
 import { useForm } from "vee-validate";
 import FormInput from "../../form/inputs/FormInput.vue";
@@ -87,7 +87,6 @@ const trySaveStage = async (stageName: string) => {
                 placeholder="Опис етапу"
                 name="description"
             />
-            <!-- сразу подтянуть от клиента -->
             <FormLocationSearch
                 label="Місто"
                 placeholder="Почніть вводити назву міста"
@@ -127,4 +126,12 @@ const trySaveStage = async (stageName: string) => {
     </div>
 </template>
 
-<style scoped></style>
+<style scoped></style> -->
+
+<template>
+    <div>add project stage</div>
+</template>
+
+<script setup></script>
+
+<style lang="scss" scoped></style>

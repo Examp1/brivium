@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<!-- <script setup lang="ts">
 import { useField } from "vee-validate";
 
 const props = withDefaults(
@@ -95,4 +95,12 @@ const changeValue = (item) => {
         </div>
         <span v-if="errors" class="text-red-400">{{ errors[0] }}</span>
     </div>
+</template> -->
+
+<template>
+    <div>form select</div>
 </template>
+
+<script setup lang="ts"></script>
+
+<style scoped></style>

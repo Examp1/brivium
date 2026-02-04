@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<!-- <script setup lang="ts">
 import * as zod from "zod";
 import { toTypedSchema } from "@vee-validate/zod";
 import { useForm } from "vee-validate";
@@ -51,4 +51,12 @@ const onSubmit = handleSubmit(async (values) => {
     </div>
 </template>
 
-<style scoped></style>
+<style scoped></style> -->
+
+<template>
+    <div>gallery modal</div>
+</template>
+
+<script setup></script>
+
+<style lang="scss" scoped></style>

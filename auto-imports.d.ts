@@ -12,14 +12,30 @@ declare global {
   const ERequestMethods: typeof import('./src/enums/ERequestMethod').ERequestMethods
   const _debounce: typeof import('./src/utils/_debounce')._debounce
   const acceptHMRUpdate: typeof import('pinia').acceptHMRUpdate
+  const avatarGroupInjectionKey: typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useAvatarGroup.js').avatarGroupInjectionKey
   const computed: typeof import('vue').computed
   const createPinia: typeof import('pinia').createPinia
+  const defineLocale: typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/defineLocale.js').defineLocale
+  const defineShortcuts: typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/defineShortcuts.js').defineShortcuts
   const defineStore: typeof import('pinia').defineStore
   const delay: typeof import('./src/utils/helpers').delay
+  const extendLocale: typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/defineLocale.js').extendLocale
+  const extractShortcuts: typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/defineShortcuts.js').extractShortcuts
   const fetchWrapper: typeof import('./src/utils/api/fetchWrapper').fetchWrapper
+  const fieldGroupInjectionKey: typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useFieldGroup.js').fieldGroupInjectionKey
+  const formBusInjectionKey: typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useFormField.js').formBusInjectionKey
+  const formErrorsInjectionKey: typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useFormField.js').formErrorsInjectionKey
+  const formFieldInjectionKey: typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useFormField.js').formFieldInjectionKey
+  const formInputsInjectionKey: typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useFormField.js').formInputsInjectionKey
+  const formLoadingInjectionKey: typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useFormField.js').formLoadingInjectionKey
+  const formOptionsInjectionKey: typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useFormField.js').formOptionsInjectionKey
+  const formStateInjectionKey: typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useFormField.js').formStateInjectionKey
   const getActivePinia: typeof import('pinia').getActivePinia
   const getBearer: typeof import('./src/utils/api/getBearer').getBearer
   const getPath: typeof import('./src/utils/getPath').getPath
+  const inputIdInjectionKey: typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useFormField.js').inputIdInjectionKey
+  const kbdKeysMap: typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useKbd.js').kbdKeysMap
+  const localeContextInjectionKey: typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useLocale.js').localeContextInjectionKey
   const mapActions: typeof import('pinia').mapActions
   const mapGetters: typeof import('pinia').mapGetters
   const mapState: typeof import('pinia').mapState
@@ -27,29 +43,47 @@ declare global {
   const mapWritableState: typeof import('pinia').mapWritableState
   const onBeforeRouteLeave: typeof import('vue-router').onBeforeRouteLeave
   const onBeforeRouteUpdate: typeof import('vue-router').onBeforeRouteUpdate
+  const portalTargetInjectionKey: typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/usePortal.js').portalTargetInjectionKey
+  const reactive: typeof import('vue').reactive
   const ref: typeof import('vue').ref
   const retry: typeof import('./src/utils/_retry').retry
   const setActivePinia: typeof import('pinia').setActivePinia
   const setMapStoreSuffix: typeof import('pinia').setMapStoreSuffix
   const storeToRefs: typeof import('pinia').storeToRefs
+  const toastMaxInjectionKey: typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useToast.js').toastMaxInjectionKey
   const uploadFile: typeof import('./src/utils/files/upload').uploadFile
+  const useAppConfig: typeof import('./node_modules/@nuxt/ui/dist/runtime/vue/composables/useAppConfig.js').useAppConfig
   const useAuthStore: typeof import('./src/store/auth/auth-store').useAuthStore
+  const useAvatarGroup: typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useAvatarGroup.js').useAvatarGroup
   const useClientInfoStore: typeof import('./src/store/client/profile/client-info-store').useClientInfoStore
   const useCompanyCatalogStore: typeof import('./src/store/company/catalog/company-catalog-store').useCompanyCatalogStore
   const useCompanyInfoStore: typeof import('./src/store/company/profile/company-info-store').useCompanyInfoStore
   const useCompanyPricesStore: typeof import('./src/store/company/catalog/company-prices-store').useCompanyPricesStore
   const useCompanyReviewsStore: typeof import('./src/store/company/reviews/reviews-store').useCompanyReviewsStore
+  const useComponentIcons: typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useComponentIcons.js').useComponentIcons
   const useContactsStore: typeof import('./src/store/contacts/contacts-store').useContactsStore
+  const useContentSearch: typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useContentSearch.js').useContentSearch
+  const useEditorMenu: typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useEditorMenu.js').useEditorMenu
+  const useFieldGroup: typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useFieldGroup.js').useFieldGroup
+  const useFileUpload: typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useFileUpload.js').useFileUpload
+  const useFormField: typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useFormField.js').useFormField
   const useGalleryStore: typeof import('./src/store/company/gallery/gallery-store').useGalleryStore
+  const useKbd: typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useKbd.js').useKbd
   const useLink: typeof import('vue-router').useLink
+  const useLocale: typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useLocale.js').useLocale
   const useNotificationStore: typeof import('./src/store/notifications/notifications-store').useNotificationStore
+  const useOverlay: typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useOverlay.js').useOverlay
+  const usePortal: typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/usePortal.js').usePortal
   const useProjectBideStore: typeof import('./src/store/client/projects/project-bids-store')['useProjectBideStore']
   const useProjectFileStore: typeof import('./src/store/client/projects/project-files-store').useProjectFileStore
   const useProjectStore: typeof import('./src/store/client/projects/project-store').useProjectStore
   const useProjectstageStore: typeof import('./src/store/client/projects/project-stages-store').useProjectstageStore
+  const useResizable: typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useResizable.js').useResizable
   const useReviewsStore: typeof import('./src/store/reviews/reviews-store').useReviewsStore
   const useRoute: typeof import('vue-router').useRoute
   const useRouter: typeof import('vue-router').useRouter
+  const useScrollspy: typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useScrollspy.js').useScrollspy
+  const useToast: typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useToast.js').useToast
   const useclientInfo: typeof import('./src/store/client/profile/client-info-store')['useclientInfo']
   const useclientInfoStore: typeof import('./src/store/client/profile/client-info-store')['useclientInfoStore']
   const withAtuh: (typeof import("./src/utils/withAuth"))["withAtuh"]
@@ -72,6 +106,30 @@ declare global {
   // @ts-ignore
   export type { IPagination, IStageFile, IStageComment } from './src/interfaces/IResponses'
   import('./src/interfaces/IResponses')
+  // @ts-ignore
+  export type { ShortcutConfig, ShortcutsConfig, ShortcutsOptions } from './node_modules/@nuxt/ui/dist/runtime/composables/defineShortcuts.d'
+  import('./node_modules/@nuxt/ui/dist/runtime/composables/defineShortcuts.d')
+  // @ts-ignore
+  export type { UseComponentIconsProps } from './node_modules/@nuxt/ui/dist/runtime/composables/useComponentIcons.d'
+  import('./node_modules/@nuxt/ui/dist/runtime/composables/useComponentIcons.d')
+  // @ts-ignore
+  export type { EditorMenuOptions } from './node_modules/@nuxt/ui/dist/runtime/composables/useEditorMenu.d'
+  import('./node_modules/@nuxt/ui/dist/runtime/composables/useEditorMenu.d')
+  // @ts-ignore
+  export type { UseFileUploadOptions } from './node_modules/@nuxt/ui/dist/runtime/composables/useFileUpload.d'
+  import('./node_modules/@nuxt/ui/dist/runtime/composables/useFileUpload.d')
+  // @ts-ignore
+  export type { KbdKey, KbdKeySpecific } from './node_modules/@nuxt/ui/dist/runtime/composables/useKbd.d'
+  import('./node_modules/@nuxt/ui/dist/runtime/composables/useKbd.d')
+  // @ts-ignore
+  export type { OverlayOptions, Overlay } from './node_modules/@nuxt/ui/dist/runtime/composables/useOverlay.d'
+  import('./node_modules/@nuxt/ui/dist/runtime/composables/useOverlay.d')
+  // @ts-ignore
+  export type { UseResizableProps, UseResizableReturn } from './node_modules/@nuxt/ui/dist/runtime/composables/useResizable.d'
+  import('./node_modules/@nuxt/ui/dist/runtime/composables/useResizable.d')
+  // @ts-ignore
+  export type { Toast } from './node_modules/@nuxt/ui/dist/runtime/composables/useToast.d'
+  import('./node_modules/@nuxt/ui/dist/runtime/composables/useToast.d')
 }
 
 // for vue template auto import
@@ -82,16 +140,27 @@ declare module 'vue' {
     readonly APP_ENUM: UnwrapRef<typeof import('./src/enums/app_enums')['APP_ENUM']>
     readonly EMediaPath: UnwrapRef<typeof import('./src/enums/EMediaPath')['EMediaPath']>
     readonly ERequestMethods: UnwrapRef<typeof import('./src/enums/ERequestMethod')['ERequestMethods']>
-    readonly _debounce: UnwrapRef<typeof import('./src/utils/_debounce')['_debounce']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
+    readonly avatarGroupInjectionKey: UnwrapRef<typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useAvatarGroup.js')['avatarGroupInjectionKey']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly createPinia: UnwrapRef<typeof import('pinia')['createPinia']>
+    readonly defineLocale: UnwrapRef<typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/defineLocale.js')['defineLocale']>
+    readonly defineShortcuts: UnwrapRef<typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/defineShortcuts.js')['defineShortcuts']>
     readonly defineStore: UnwrapRef<typeof import('pinia')['defineStore']>
-    readonly delay: UnwrapRef<typeof import('./src/utils/helpers')['delay']>
-    readonly fetchWrapper: UnwrapRef<typeof import('./src/utils/api/fetchWrapper')['fetchWrapper']>
+    readonly extendLocale: UnwrapRef<typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/defineLocale.js')['extendLocale']>
+    readonly extractShortcuts: UnwrapRef<typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/defineShortcuts.js')['extractShortcuts']>
+    readonly fieldGroupInjectionKey: UnwrapRef<typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useFieldGroup.js')['fieldGroupInjectionKey']>
+    readonly formBusInjectionKey: UnwrapRef<typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useFormField.js')['formBusInjectionKey']>
+    readonly formErrorsInjectionKey: UnwrapRef<typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useFormField.js')['formErrorsInjectionKey']>
+    readonly formFieldInjectionKey: UnwrapRef<typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useFormField.js')['formFieldInjectionKey']>
+    readonly formInputsInjectionKey: UnwrapRef<typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useFormField.js')['formInputsInjectionKey']>
+    readonly formLoadingInjectionKey: UnwrapRef<typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useFormField.js')['formLoadingInjectionKey']>
+    readonly formOptionsInjectionKey: UnwrapRef<typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useFormField.js')['formOptionsInjectionKey']>
+    readonly formStateInjectionKey: UnwrapRef<typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useFormField.js')['formStateInjectionKey']>
     readonly getActivePinia: UnwrapRef<typeof import('pinia')['getActivePinia']>
-    readonly getBearer: UnwrapRef<typeof import('./src/utils/api/getBearer')['getBearer']>
-    readonly getPath: UnwrapRef<typeof import('./src/utils/getPath')['getPath']>
+    readonly inputIdInjectionKey: UnwrapRef<typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useFormField.js')['inputIdInjectionKey']>
+    readonly kbdKeysMap: UnwrapRef<typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useKbd.js')['kbdKeysMap']>
+    readonly localeContextInjectionKey: UnwrapRef<typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useLocale.js')['localeContextInjectionKey']>
     readonly mapActions: UnwrapRef<typeof import('pinia')['mapActions']>
     readonly mapGetters: UnwrapRef<typeof import('pinia')['mapGetters']>
     readonly mapState: UnwrapRef<typeof import('pinia')['mapState']>
@@ -99,28 +168,30 @@ declare module 'vue' {
     readonly mapWritableState: UnwrapRef<typeof import('pinia')['mapWritableState']>
     readonly onBeforeRouteLeave: UnwrapRef<typeof import('vue-router')['onBeforeRouteLeave']>
     readonly onBeforeRouteUpdate: UnwrapRef<typeof import('vue-router')['onBeforeRouteUpdate']>
+    readonly portalTargetInjectionKey: UnwrapRef<typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/usePortal.js')['portalTargetInjectionKey']>
+    readonly reactive: UnwrapRef<typeof import('vue')['reactive']>
     readonly ref: UnwrapRef<typeof import('vue')['ref']>
-    readonly retry: UnwrapRef<typeof import('./src/utils/_retry')['retry']>
     readonly setActivePinia: UnwrapRef<typeof import('pinia')['setActivePinia']>
     readonly setMapStoreSuffix: UnwrapRef<typeof import('pinia')['setMapStoreSuffix']>
     readonly storeToRefs: UnwrapRef<typeof import('pinia')['storeToRefs']>
-    readonly uploadFile: UnwrapRef<typeof import('./src/utils/files/upload')['uploadFile']>
-    readonly useAuthStore: UnwrapRef<typeof import('./src/store/auth/auth-store')['useAuthStore']>
-    readonly useClientInfoStore: UnwrapRef<typeof import('./src/store/client/profile/client-info-store')['useClientInfoStore']>
-    readonly useCompanyCatalogStore: UnwrapRef<typeof import('./src/store/company/catalog/company-catalog-store')['useCompanyCatalogStore']>
-    readonly useCompanyInfoStore: UnwrapRef<typeof import('./src/store/company/profile/company-info-store')['useCompanyInfoStore']>
-    readonly useCompanyPricesStore: UnwrapRef<typeof import('./src/store/company/catalog/company-prices-store')['useCompanyPricesStore']>
-    readonly useCompanyReviewsStore: UnwrapRef<typeof import('./src/store/company/reviews/reviews-store')['useCompanyReviewsStore']>
-    readonly useContactsStore: UnwrapRef<typeof import('./src/store/contacts/contacts-store')['useContactsStore']>
-    readonly useGalleryStore: UnwrapRef<typeof import('./src/store/company/gallery/gallery-store')['useGalleryStore']>
+    readonly toastMaxInjectionKey: UnwrapRef<typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useToast.js')['toastMaxInjectionKey']>
+    readonly useAppConfig: UnwrapRef<typeof import('./node_modules/@nuxt/ui/dist/runtime/vue/composables/useAppConfig.js')['useAppConfig']>
+    readonly useAvatarGroup: UnwrapRef<typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useAvatarGroup.js')['useAvatarGroup']>
+    readonly useComponentIcons: UnwrapRef<typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useComponentIcons.js')['useComponentIcons']>
+    readonly useContentSearch: UnwrapRef<typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useContentSearch.js')['useContentSearch']>
+    readonly useEditorMenu: UnwrapRef<typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useEditorMenu.js')['useEditorMenu']>
+    readonly useFieldGroup: UnwrapRef<typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useFieldGroup.js')['useFieldGroup']>
+    readonly useFileUpload: UnwrapRef<typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useFileUpload.js')['useFileUpload']>
+    readonly useFormField: UnwrapRef<typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useFormField.js')['useFormField']>
+    readonly useKbd: UnwrapRef<typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useKbd.js')['useKbd']>
     readonly useLink: UnwrapRef<typeof import('vue-router')['useLink']>
-    readonly useNotificationStore: UnwrapRef<typeof import('./src/store/notifications/notifications-store')['useNotificationStore']>
-    readonly useProjectFileStore: UnwrapRef<typeof import('./src/store/client/projects/project-files-store')['useProjectFileStore']>
-    readonly useProjectStore: UnwrapRef<typeof import('./src/store/client/projects/project-store')['useProjectStore']>
-    readonly useProjectstageStore: UnwrapRef<typeof import('./src/store/client/projects/project-stages-store')['useProjectstageStore']>
-    readonly useReviewsStore: UnwrapRef<typeof import('./src/store/reviews/reviews-store')['useReviewsStore']>
+    readonly useLocale: UnwrapRef<typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useLocale.js')['useLocale']>
+    readonly useOverlay: UnwrapRef<typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useOverlay.js')['useOverlay']>
+    readonly usePortal: UnwrapRef<typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/usePortal.js')['usePortal']>
+    readonly useResizable: UnwrapRef<typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useResizable.js')['useResizable']>
     readonly useRoute: UnwrapRef<typeof import('vue-router')['useRoute']>
     readonly useRouter: UnwrapRef<typeof import('vue-router')['useRouter']>
-    readonly withAuth: UnwrapRef<typeof import('./src/utils/withAuth')['withAuth']>
+    readonly useScrollspy: UnwrapRef<typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useScrollspy.js')['useScrollspy']>
+    readonly useToast: UnwrapRef<typeof import('./node_modules/@nuxt/ui/dist/runtime/composables/useToast.js')['useToast']>
   }
 }
