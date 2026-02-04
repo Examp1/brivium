@@ -1,0 +1,11 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+@layer components {
+    .base-title {
+        @apply font-bold text-[28px] leading-[140%] tracking-[0];
+    }
+    .base-text {
+        @apply font-normal text-base leading-[150%] tracking-[0];
+    }
+}

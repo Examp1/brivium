@@ -58,6 +58,7 @@ declare module 'vue' {
     StageItem: typeof import('./src/components/projects/stages/StageItem.vue')['default']
     StageList: typeof import('./src/components/projects/stages/StageList.vue')['default']
     StageTabs: typeof import('./src/components/projects/stages/StageTabs.vue')['default']
+    UApp: typeof import('./node_modules/@nuxt/ui/dist/runtime/components/App.vue')['default']
     UButton: typeof import('./node_modules/@nuxt/ui/dist/runtime/components/Button.vue')['default']
     UForm: typeof import('./node_modules/@nuxt/ui/dist/runtime/components/Form.vue')['default']
     UFormField: typeof import('./node_modules/@nuxt/ui/dist/runtime/components/FormField.vue')['default']

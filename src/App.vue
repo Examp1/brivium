@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<!-- <script setup lang="ts">
 import { RouterView, useRoute } from "vue-router";
 import { computed } from "vue";
 import EmptyLayout from "./layouts/EmptyLayout.vue";
@@ -27,4 +27,15 @@ const layout = computed(() => {
     </component>
 </template>
 
-<style scoped></style>
+<style scoped></style> -->
+
+<script setup lang="ts"></script>
+
+<template>
+    <UApp>
+        <RouterView />
+        <UNotifications />
+    </UApp>
+</template>
+
+<style scoped lang="scss"></style>

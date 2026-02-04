@@ -1,137 +1,149 @@
 import { createRouter, createWebHistory } from "vue-router";
-// import HomeView from "../views/login-page.vue";
+
+const AuthLayout = () => import("../layouts/AuthLayout.vue");
+const ErrorLayout = () => import("../layouts/ErrorLayout.vue");
+const CompanyLayout = () => import("../layouts/CompanyLayout.vue");
+const ClientLayout = () => import("../layouts/ClientLayout.vue");
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
+    scrollBehavior(to, from, savedPosition) {
+        if (savedPosition) return savedPosition;
+        return { top: 0 };
+    },
     routes: [
         {
             path: "/",
-            name: "home",
-            component: () => import("../views/auth/CompanyLoginPage.vue"),
-            meta: {
-                layout: "auth",
-            },
+            redirect: { name: "auth-company-signin" }, // или динамический редирект
         },
+
+        // AUTH (layout as route component)
         {
             path: "/auth",
-            name: "auth",
-            meta: {
-                layout: "auth",
-            },
+            component: AuthLayout,
+            meta: { guestOnly: true },
             children: [
+                { path: "", redirect: { name: "auth-company-signin" } },
                 {
                     path: "client-signin",
-                    name: "client-login-page",
+                    name: "auth-client-signin",
                     component: () =>
                         import("../views/auth/ClientLoginPage.vue"),
                 },
                 {
                     path: "client-signup",
-                    name: "client-register-page",
+                    name: "auth-client-signup",
                     component: () =>
                         import("../views/auth/ClientRegisterPage.vue"),
                 },
                 {
                     path: "company-signin",
-                    name: "company-login-page",
+                    name: "auth-company-signin",
                     component: () =>
                         import("../views/auth/CompanyLoginPage.vue"),
                 },
                 {
                     path: "company-signup",
-                    name: "company-register-page",
+                    name: "auth-company-signup",
                     component: () =>
                         import("../views/auth/CompanyRegisterPage.vue"),
                 },
             ],
         },
 
+        // // COMPANY
         {
             path: "/company",
-            name: "company-page",
-            meta: {
-                layout: "company",
-            },
+            component: CompanyLayout,
+            meta: { requiresAuth: true, role: "company" },
             children: [
+                { path: "", redirect: { name: "company-profile" } },
                 {
                     path: "profile",
-                    name: "company-profile-page",
+                    name: "company-profile",
                     component: () =>
                         import("../views/admin/company/ProfilePage.vue"),
                 },
                 {
                     path: "tariff",
-                    name: "tariff-page",
+                    name: "company-tariff",
                     component: () =>
                         import("../views/admin/company/TariffPage.vue"),
                 },
                 {
                     path: "catalog",
-                    name: "catalog-page",
+                    name: "company-catalog",
                     component: () =>
                         import("../views/admin/company/CatalogPage.vue"),
                 },
                 {
                     path: "notifications",
-                    name: "company-notifications-page",
+                    name: "company-notifications",
                     component: () =>
                         import("../views/admin/company/NotificationsPage.vue"),
                 },
                 {
                     path: "gallery",
-                    name: "gallery-page",
+                    name: "company-gallery",
                     component: () =>
                         import("../views/admin/company/GalleryPage.vue"),
                 },
                 {
                     path: "reviews",
-                    name: "reviews-page",
+                    name: "company-reviews",
                     component: () =>
                         import("../views/admin/company/ReviewsPage.vue"),
                 },
                 {
                     path: "tasks",
-                    name: "tasks-page",
+                    name: "company-tasks",
                     component: () =>
                         import("../views/admin/company/TasksPage.vue"),
                 },
             ],
-            component: () => import("../views/CompanyPage.vue"),
         },
-        // client
+
+        // CLIENT
         {
             path: "/client",
-            name: "client-page",
-            meta: {
-                layout: "client",
-            },
+            component: ClientLayout,
+            meta: { requiresAuth: true, role: "client" },
             children: [
+                { path: "", redirect: { name: "client-profile" } },
                 {
                     path: "profile",
-                    name: "client-profile-page",
+                    name: "client-profile",
                     component: () =>
                         import("../views/admin/client/ProfilePage.vue"),
                 },
                 {
                     path: "projects",
-                    name: "projects-page",
+                    name: "client-projects",
                     component: () =>
                         import("../views/admin/client/ProjectsPage.vue"),
                 },
                 {
-                    path: "projects/project-:project",
-                    name: "project-page",
+                    path: "projects/:projectId",
+                    name: "client-project",
+                    props: true,
                     component: () =>
                         import("../views/admin/client/ProjectPage.vue"),
                 },
                 {
-                    path: "projects/project-:project/stage-:stage",
-                    name: "project-stage-page",
+                    path: "projects/:projectId/stages/:stageId",
+                    name: "client-project-stage",
+                    props: true,
                     component: () =>
                         import("../views/admin/client/ProjectStagePage.vue"),
                 },
             ],
-            component: () => import("../views/ClientPage.vue"),
+        },
+
+        // 404
+        {
+            path: "/:pathMatch(.*)*",
+            name: "not-found",
+            component: ErrorLayout,
         },
     ],
 });

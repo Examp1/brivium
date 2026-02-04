@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<!-- <script setup lang="ts">
 const route = useRoute();
 
 const routeParams = computed(() => {
@@ -80,4 +80,27 @@ const bgImage = computed(() => {
             >
         </div>
     </div>
+</template> -->
+
+<script setup lang="ts"></script>
+
+<template>
+    <div class="grid grid-cols-[0.4fr_0.6fr] h-screen w-full">
+        <div class="m-[100px]">
+            <img src="@/assets/images/main-logo.svg" alt="" />
+            <RouterView class="mt-[100px]" />
+        </div>
+        <div class="p-5 text-lg relative">
+            <img
+                class="object-cover absolute inset-0 w-full h-full"
+                src="https://placehold.co/900x1920"
+                alt=""
+            />
+            <router-link class="absolute t-[10px] left-[20px]" to="#">
+                #
+            </router-link>
+        </div>
+    </div>
 </template>
+
+<style scoped></style>
