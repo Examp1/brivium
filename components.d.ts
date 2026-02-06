@@ -68,6 +68,7 @@ declare module 'vue' {
     UpdateAlbumModal: typeof import('./src/components/gallery/modals/UpdateAlbumModal.vue')['default']
     UpdateMediaModal: typeof import('./src/components/gallery/modals/UpdateMediaModal.vue')['default']
     UploadMedia: typeof import('./src/components/gallery/modals/UploadMedia.vue')['default']
+    USelect: typeof import('./node_modules/@nuxt/ui/dist/runtime/components/Select.vue')['default']
     USlideover: typeof import('./node_modules/@nuxt/ui/dist/runtime/components/Slideover.vue')['default']
   }
 }
