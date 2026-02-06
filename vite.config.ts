@@ -27,7 +27,12 @@ export default defineConfig({
             autoImport: {
                 eslintrc: { enabled: true },
                 dts: "./auto-imports.d.ts",
-                dirs: ["./src/stores/**", "./src/enums", "./src/interfaces"],
+                dirs: [
+                    { glob: "./src/store/**", types: true },
+                    "./src/enums",
+                    "./src/composables",
+                    "./src/interfaces",
+                ],
                 vueTemplate: true,
                 imports: [
                     "vue-router",

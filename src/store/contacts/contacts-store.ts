@@ -1,9 +1,11 @@
 export const useContactsStore = defineStore("contacts-store", () => {
     const contacts = ref({});
     async function fetchContactsList() {
-        const { data } = await fetchWrapper(
+        const { data } = await useAuthorizedFetch(
             `api/profile/${porfileType.value}/contacts/list`,
-            ERequestMethods.POST,
+            {
+                method: ERequestMethods.POST,
+            },
         );
         if (data.value) {
             contacts.value = data.value;
@@ -33,10 +35,12 @@ export const useContactsStore = defineStore("contacts-store", () => {
     });
 
     async function addContact(contact) {
-        await fetchWrapper(
+        await useAuthorizedFetch(
             `api/profile/${porfileType.value}/contacts/add`,
-            ERequestMethods.POST,
-            contact,
+            {
+                method: ERequestMethods.POST,
+                body: contact,
+            },
         );
         await fetchContactsList();
     }

@@ -60,11 +60,14 @@ declare module 'vue' {
     StageTabs: typeof import('./src/components/projects/stages/StageTabs.vue')['default']
     UApp: typeof import('./node_modules/@nuxt/ui/dist/runtime/components/App.vue')['default']
     UButton: typeof import('./node_modules/@nuxt/ui/dist/runtime/components/Button.vue')['default']
+    UCard: typeof import('./node_modules/@nuxt/ui/dist/runtime/components/Card.vue')['default']
     UForm: typeof import('./node_modules/@nuxt/ui/dist/runtime/components/Form.vue')['default']
     UFormField: typeof import('./node_modules/@nuxt/ui/dist/runtime/components/FormField.vue')['default']
     UInput: typeof import('./node_modules/@nuxt/ui/dist/runtime/components/Input.vue')['default']
+    UNavigationMenu: typeof import('./node_modules/@nuxt/ui/dist/runtime/components/NavigationMenu.vue')['default']
     UpdateAlbumModal: typeof import('./src/components/gallery/modals/UpdateAlbumModal.vue')['default']
     UpdateMediaModal: typeof import('./src/components/gallery/modals/UpdateMediaModal.vue')['default']
     UploadMedia: typeof import('./src/components/gallery/modals/UploadMedia.vue')['default']
+    USlideover: typeof import('./node_modules/@nuxt/ui/dist/runtime/components/Slideover.vue')['default']
   }
 }
